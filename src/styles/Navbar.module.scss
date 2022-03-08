@@ -5,7 +5,8 @@
 	position: relative;
 	justify-content: space-between;
 	align-items: center;
-	background-color: variables.$containerBackground;
+	background-color: variables.$navbarBackground;
+	border-bottom: 2px solid variables.$containerBorder;
 
 	.navLogoBox {
 		display: flex;

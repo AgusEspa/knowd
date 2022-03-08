@@ -6,7 +6,8 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  background-color: #713770;
+  background-color: #0a0a0a;
+	border-bottom: 1px solid #5200cc;
 }
 .tools-menu {
   height: 100%;
