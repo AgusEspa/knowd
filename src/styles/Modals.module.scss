@@ -1,0 +1,59 @@
+@use './variables';
+
+.backdrop {
+	background-color: rgba(0, 0, 0, 0.4);
+	width: 100vw;
+	height: 100vh;
+	z-index: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+.modalContainer {
+	z-index: 10;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	.deleteModalBox {
+		background-color: variables.$backgroundGray;
+		border-radius: .5rem;
+		border: 2px solid variables.$errorDarkRed;
+		padding: 1rem;
+	
+		h3 {
+			font-family: variables.$fonts;
+			font-size: 1.2rem;
+			margin: 0;
+			color: variables.$textDarkGray;
+			text-align: left;
+		}
+		  
+		p {
+			font-family: variables.$fonts;
+			font-size: 1rem;
+			margin-top: .5rem;
+			color: variables.$textDarkGray;
+			text-align: left;
+		}
+
+		.buttonsContainer {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		  
+			button {
+				margin: 1rem 2rem 0 2rem;
+			}
+
+			.delete {
+				background-color: variables.$errorDarkRed;
+			}
+		}
+	}
+}
+
+

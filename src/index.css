@@ -1,0 +1,170 @@
+@use './variables';
+
+/* TOOLBAR */
+.toolbar {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background-color: #713770;
+}
+.tools-menu {
+  height: 100%;
+}
+.tools-menu ul {
+  display: flex;
+  margin: 0.7rem;
+}
+.tools-menu li {
+  display: block;
+  margin-right: 2rem;
+  padding: 0;
+}
+.tools-menu input {
+  font-size: 1rem;
+  background-color: #eeeeee;
+  border: none;
+  height: 1.8rem;
+  border-radius: 0.3rem;
+  padding: .3rem .5rem .3rem .5rem;
+}
+.tools-menu button {
+  cursor: pointer;
+  background-color: #eeeeee;
+  border-radius: 0.3rem;
+  padding: .3rem .5rem .3rem .5rem;
+  border: none;
+  transition: all 0.1s ease-out;
+}
+.tools-menu button:hover {
+  background-color: #dbdbdb;
+}
+.tools-menu-item {
+  list-style-type: none;
+  text-decoration: none;
+  color: rgb(22, 22, 22);
+  font-family: 'Asap', sans-serif;
+  font-size: 1rem;
+}
+
+/* OBJECTIVES */
+.dashboard-container {
+  margin: 0;
+  padding: 0;
+}
+.objectives-container {
+  background-color: #432f70;
+  margin: 0;
+}
+.objective-box {
+  display: inline-block;  
+  border: 1px solid #3a3a3a;
+  border-radius: 0.5rem;
+  margin: 2rem 0 0 2rem;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+.objective-box textarea {
+  display: inline-block;
+  border: none;
+  border-radius: .5rem .5rem 0 0;
+  outline: none;
+  color: black;
+  font-family: 'Asap', sans-serif;
+  font-size: 1.5rem;
+  resize: none;
+  background-color: white;
+  height: fit-content;
+  min-height: 5rem;
+  width: 14rem;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+}
+.save-changes {
+  position: absolute;
+  color:red;
+}
+.objective-box label {
+  font-family: 'Asap', sans-serif;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+}
+.objective-box input {
+  font-size: 1.2rem;
+  border: none;
+  outline: none;
+  width: 2.5rem;
+  background-color: transparent;
+  margin-left: 0.3rem;
+}
+
+/* KEY RESULTS */
+.key-result-box {
+  display: flex;
+  position: relative;
+  margin-top: 0.5rem;
+  margin-bottom: 0.3rem;
+  margin-left: 1rem;
+}
+.key-result-box h3 {
+  font-family: 'Asap', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin: 0;
+}
+.key-result-box span {
+  font-size: 1.2rem;
+  margin-left: .4rem;
+  display: inline;
+}
+.key-result-box ul {
+  margin: 0rem;
+}
+.key-result-box button {
+  margin: 0 0 0 .5rem;
+  background-color: #e8e8ee;
+  border-radius: 4rem;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.key-result-box img {
+  margin: auto;
+  width: 1.2rem;
+}
+.key-result-items {
+  display: block;
+}
+.key-result-items ul {
+  margin: 0;
+  padding: 0;
+}
+.key-result-items button {
+  margin: 0;
+}
+.key-result-item {
+  list-style-type: none;
+  text-decoration: none;
+  display: block;
+  margin-left: 0;
+}
+.checkbox {
+  margin: 0;
+  padding: 0;
+}
+.key-result-item textarea {
+  display: inline-block;
+  border: none;
+  border-radius: 0.3rem;
+  outline: none;
+  color: black;
+  font-family: 'Asap', sans-serif;
+  font-size: 1rem;
+  resize: none;
+  background-color: #cacaca;
+  min-height: 1rem;
+  padding: 0.3rem;
+  margin: 0;
+  width: 12rem;
+}
