@@ -13,10 +13,10 @@ const Subjects = (props) => {
 	const handleCreateSubject = async () => {
 
 		const newSubjectTemplate = {
-			title: "Title", 
+			title: "New Subject", 
 			field: "Title",
 			area: "Title",
-			relevance: 5,
+			relevance: 1,
 			progress: 1,
 			status: "wish",
 			needsAttention: false,
@@ -71,7 +71,7 @@ const Subjects = (props) => {
 						area={subject.area}
 						topics={subject.topics}
 						relations={subject.relations}
-						relavance={subject.relavance}
+						relevance={subject.relevance}
 						progress={subject.progress}
 						status={subject.status}
 						needsAttention={subject.needsAttention}

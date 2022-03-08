@@ -44,6 +44,7 @@ const Subject = (props) => {
 					.concat(response.data)));
 
 			setSubjectIsChanged(false);
+			setEditWindowIsOpen(false);
 
         } catch (error) {
             if (!error.response || error.response.status >= 500) {
@@ -61,7 +62,9 @@ const Subject = (props) => {
 		try {
             await api.delete(`/subjects/${props.id}`);
 			
-			props.setSubjects(prevState => ( prevState.filter(Subject => Subject.id !== props.id)));
+			props.setSubjects(prevState => ( prevState.filter(subject => subject.id !== props.id)));
+
+			setEditWindowIsOpen(false);
             
         } catch (error) {
             if (!error.response || error.response.status >= 500) {
@@ -75,8 +78,8 @@ const Subject = (props) => {
 	}
 
 	const setStyleStatus = () => {
-		if (props.status === "LEARNING") return styles.subjectBoxLearning;
-		if (props.status === "MASTERED") return styles.subjectBoxMastered;
+		if (props.status === "Learning") return styles.subjectBoxLearning;
+		if (props.status === "Mastered") return styles.subjectBoxMastered;
 		else return styles.subjectBoxWish;
 	}
 
@@ -91,7 +94,7 @@ const Subject = (props) => {
 		const currentMonth = newDate.getMonth() + 1;
 		const currentYear = newDate.getFullYear();
 		const currentDate = `${currentYear}-${currentMonth<10 ?`0${currentMonth}`:`${currentMonth}`}-${currentDay<10?`0${currentDay}`:`${currentDay}`}`
-		editSubjectFormData( prevState => ( {
+		setEditSubjectFormData( prevState => ( {
 			...prevState,
 			dueDate: currentDate
 		}));
@@ -181,15 +184,13 @@ const Subject = (props) => {
 							/>}
 						</div>
 						<div className={styles.buttonsContainer}>
-							<button className={styles.delete} onClick={handleDeleteSubject}>Delete</button>
+							<button type ="button" className={styles.delete} onClick={handleDeleteSubject}>Delete</button>
 							{subjectIsChanged ? 
 							<button>Save changes</button> :
 							<button disabled>Save changes</button>}
 							
 						</div>
-						
 					</form>
-					
 					
 				</div>
 			</div>

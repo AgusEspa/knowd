@@ -2,6 +2,8 @@
 
 .loginContainer {
 	background-color: variables.$background;
+	background-image: url("../../public/background-sky.jpg");
+	background-size: cover;
 	padding: 3rem;
 	display: flex;
 	justify-content: center;
