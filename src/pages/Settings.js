@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import useAxios from "../utils/useAxios";
-import NavBar from "../components/Dashboard/Navbar/Navbar";
+import Navbar from "../components/Dashboard/Navbar/Navbar";
 import Notification from "../components/Dashboard/Notification";
 import DeleteModal from "../components/Settings/DeleteModal";
 import styles from "../styles/Settings.module.scss";
@@ -313,7 +313,7 @@ const Settings = () => {
 
     return (
         <div>
-            <NavBar />
+            <Navbar />
             <main className={styles.settingsContainer}>
                 <div className={styles.settingsBox}>
                     <h2>Account Settings</h2>

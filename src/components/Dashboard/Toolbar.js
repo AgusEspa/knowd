@@ -1,5 +1,5 @@
 
-const ToolBar = (props) => {
+const Toolbar = (props) => {
 
 
 	const handleSearchTermChange = (event) => {
@@ -25,7 +25,7 @@ const ToolBar = (props) => {
 					</li>
 
 					<li>
-						<button onClick={props.handleCreateObjective}><span className="tools-menu-item">New Objective</span></button>
+						<button onClick={props.handleCreateSubject}><span className="tools-menu-item">New Subject</span></button>
 					</li>
 				 
 				</ul>
@@ -36,4 +36,4 @@ const ToolBar = (props) => {
 
 }
 
-export default ToolBar;
+export default Toolbar;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import UserMenu from "./UserMenu";
 import styles from "../../../styles/Navbar.module.scss"
 
-const NavBar = (props) => {
+const Navbar = (props) => {
 
 	const { userAuth, logout } = useContext(AuthContext);
 	const [responsiveNavDisplay, setResponsiveNavDisplay] = useState(false);
@@ -41,4 +41,4 @@ const NavBar = (props) => {
 	);
 }
 
-export default NavBar;
+export default Navbar;

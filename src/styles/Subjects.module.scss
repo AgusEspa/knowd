@@ -1,0 +1,46 @@
+@use './variables';
+
+.subjectsContainer {
+	display: flex;
+	margin: 0;
+	padding: 1rem;
+	background-color: variables.$background;
+
+	div {
+		background-color: variables.$containerBackground;
+		border-radius: .2rem;
+		padding: .5rem;
+		margin: .5rem;
+	}
+
+	h3 {
+		font-family: variables.$fonts;
+		font-size: 1rem;
+		font-weight: 400;
+		padding: 0;
+		margin: 0;
+	}
+
+	.needsAttentionFalse {
+		color: variables.$textLightGray;
+	}
+
+	.needsAttentionTrue {
+		color: variables.$attention;
+		font-weight: 500;
+	}
+
+	.subjectBoxWish {
+		border: 1px solid variables.$wish;
+		border-bottom: 2px solid variables.$wish;
+	}
+	.subjectBoxLearning {
+		border: 1px solid variables.$learning;
+		border-bottom: 2px solid variables.$learning;
+	}
+	.subjectBoxMastered {
+		border: 1px solid variables.$mastered;
+		border-bottom: 2px solid variables.$mastered;
+	}
+	
+}

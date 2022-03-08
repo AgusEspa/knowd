@@ -1,14 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import useAxios from "../utils/useAxios";
-import NavBar from "../components/Dashboard/Navbar/Navbar";
-import Objectives from "../components/Dashboard/Objectives";
+import Navbar from "../components/Dashboard/Navbar/Navbar";
 import Notification from "../components/Dashboard/Notification";
+import Subjects from "../components/Dashboard/Subjects";
 
 const Dashboard = () => {
 
-    const [objectives, setObjectives] = useState([]);
 	const { setUserAuth, logout } = useContext(AuthContext);
+
+    const [subjects, setSubjects] = useState([]);
     const [networkError, setNetworkError] = useState("");
 
     const api = useAxios();
@@ -37,14 +38,14 @@ const Dashboard = () => {
     }
 
     useEffect( () => {
-        getObjectives();
+        getSubjects();
     }, []);
 
-    const getObjectives = async () => {
+    const getSubjects = async () => {
 
         try {
-            const response = await api.get("/objectives");
-			setObjectives(response.data);
+            const response = await api.get("/subjects");
+			setSubjects(response.data);
             
         } catch (error) {
             if (!error.response || error.response.status >= 500) {
@@ -58,15 +59,13 @@ const Dashboard = () => {
     }
 
     return (
-        <div>
-			<NavBar />
-            <main className="dashboard-container">
-                <Objectives 
-                    objectives={objectives}
-                    setObjectives={setObjectives}
-                    setNetworkError={setNetworkError}
-                />
-            </main>
+        <>
+			<Navbar />
+
+            <Subjects 
+                subjects={subjects}
+                setSubjects={setSubjects} 
+            />
             
             {(networkError !== "") &&
             <Notification 
@@ -74,7 +73,7 @@ const Dashboard = () => {
                 type={"error"}
             />}
             
-        </div>
+        </>
     )
 }
  
