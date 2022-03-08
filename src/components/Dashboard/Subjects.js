@@ -14,12 +14,19 @@ const Subjects = (props) => {
 
 		const newSubjectTemplate = {
 			title: "Title", 
-			importance: "1" }
+			field: "Title",
+			area: "Title",
+			relevance: 5,
+			progress: 1,
+			status: "wish",
+			needsAttention: false,
+			dueDate: ""
+		}
 
 		try {
             const response = await api.post("/subjects", newSubjectTemplate);
 			
-			props.setSubjects(props.Subjects.concat(response.data));
+			props.setSubjects(props.subjects.concat(response.data));
             
         } catch (error) {
             if (!error.response || error.response.status >= 500) {

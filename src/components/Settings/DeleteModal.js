@@ -10,7 +10,7 @@ const DeleteModal = (props) => {
 		<>
 		<div className={styles.backdrop} onClick={() => props.setModalIsOpen(false)} />
 		<div className={styles.modalContainer}>
-			<div className={styles.deleteModalBox}>
+			<div className={styles.editWindow}>
 				<div>
 					<h3>Are you sure you want to delete your account?</h3>
 					<p>All your data will be permanently lost.</p>

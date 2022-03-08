@@ -1,14 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
+import modalStyles from "../../styles/Modals.module.scss";
 
 const Subject = (props) => {
 
 	const [ editSubjectFormData, setEditSubjectFormData ] = useState( () => ({
-		title: props.title, 
-		importance: props.importance } 
+			title: props.title, 
+			field: props.field,
+			area: props.area,
+			relevance: props.relevance,
+			progress: props.progress,
+			status: props.status,
+			needsAttention: props.needsAttention,
+			dueDate: props.dueDate } 
 	));
-	const [ SubjectIsChanged, setSubjectIsChanged ] = useState(false);
+	const [ editWindowIsOpen, setEditWindowIsOpen ] = useState(false);
+	const [ subjectIsChanged, setSubjectIsChanged ] = useState(false);
 	
 	const api = useAxios();
 
@@ -16,11 +24,11 @@ const Subject = (props) => {
 
 		setSubjectIsChanged(true);
 
-		const { name, value } = event.target;
+		const { name, type, value, checked } = event.target;
 
 		setEditSubjectFormData( prevState => ( {
 			...prevState,
-			[name]: value
+			[name]: type === "checkbox" ? checked : value
 		}));
 	}
 
@@ -77,36 +85,116 @@ const Subject = (props) => {
 		else return styles.needsAttentionFalse;
 	}
 
+	const handleNewDueDate = () => {
+		const newDate = new Date();
+		const currentDay = newDate.getDate();
+		const currentMonth = newDate.getMonth() + 1;
+		const currentYear = newDate.getFullYear();
+		const currentDate = `${currentYear}-${currentMonth<10 ?`0${currentMonth}`:`${currentMonth}`}-${currentDay<10?`0${currentDay}`:`${currentDay}`}`
+		editSubjectFormData( prevState => ( {
+			...prevState,
+			dueDate: currentDate
+		}));
+	}
+
 	return (
 		<>
-		<div className={setStyleStatus()}>
+		<div className={setStyleStatus()} onClick={()=>setEditWindowIsOpen(true)}>
 			<h3 className={setStyleAttention()}>{props.title}</h3>
 		</div>
 
-			{/* <div>
-				<form onSubmit={handleEditSubject}>
-					<textarea 
-						type="text" 
-						placeholder="Title"
-						name="title"
-						value={editSubjectFormData.title}
-						onChange={handleEditSubjectFormChange}
-					/>
-					<div>
-						<label>Importance: </label>
-						<input
-							type="number" 
-							placeholder="Importance (1 to 5)"
-							name="importance"
-							value={editSubjectFormData.importance}
-							min="1" max="5"
+		{editWindowIsOpen &&
+			<>
+			<div className={modalStyles.backdrop} onClick={() => setEditWindowIsOpen(false)} />
+			<div className={modalStyles.modalContainer}>
+				<div className={styles.editWindow}>
+					<form onSubmit={handleEditSubject}>
+						<textarea 
+							type="text" 
+							name="title"
+							value={editSubjectFormData.title}
 							onChange={handleEditSubjectFormChange}
 						/>
-					</div>	
-					{SubjectIsChanged && <button className="save-changes">Save changes</button>}
-				</form>
-				<button onClick={handleDeleteSubject}>Delete Subject</button>
-			</div> */}
+						<div>
+							<label>Field: </label>
+							<input
+								type="text" 
+								name="field"
+								value={editSubjectFormData.field}
+								onChange={handleEditSubjectFormChange}
+							/>
+						</div>
+						<div>
+							<label>Area: </label>
+							<input
+								type="text" 
+								name="area"
+								value={editSubjectFormData.area}
+								onChange={handleEditSubjectFormChange}
+							/>
+						</div>
+						<div>
+							<label>Relevance: </label>
+							<input
+								type="number" 
+								name="relevance"
+								value={editSubjectFormData.relevance}
+								min="1" max="10"
+								onChange={handleEditSubjectFormChange}
+							/>
+						</div>	
+						<div>
+							<label>Progress: </label>
+							<input
+								type="number" 
+								name="progress"
+								value={editSubjectFormData.progress}
+								min="1" max="100"
+								onChange={handleEditSubjectFormChange}
+							/>
+						</div>
+						<div>
+							<label>Status: </label>
+							<input
+								type="text" 
+								name="status"
+								value={editSubjectFormData.status}
+								onChange={handleEditSubjectFormChange}
+							/>
+						</div>
+						<div>
+							<label>Needs attention? </label>
+							<input type="checkbox"
+							name="needsAttention"
+							checked={editSubjectFormData.needsAttention}
+							onChange={handleEditSubjectFormChange}
+							/>
+						</div>
+						<div>
+							<label>Due date: </label>
+							{(editSubjectFormData.dueDate === "" || editSubjectFormData.dueDate === null) ? 
+							<button onClick={handleNewDueDate}>add due date</button> : 
+							<input type="date" 
+							name="dueDate"
+							value={editSubjectFormData.dueDate}
+							onChange={handleEditSubjectFormChange}
+							/>}
+						</div>
+						<div className={styles.buttonsContainer}>
+							<button className={styles.delete} onClick={handleDeleteSubject}>Delete</button>
+							{subjectIsChanged ? 
+							<button>Save changes</button> :
+							<button disabled>Save changes</button>}
+							
+						</div>
+						
+					</form>
+					
+					
+				</div>
+			</div>
+			</>
+		}
 
 		</>
 	)

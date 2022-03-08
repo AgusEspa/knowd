@@ -1,46 +1,96 @@
 @use './variables';
 
+@mixin subjectDiv {
+	background-color: variables.$containerBackground;
+	border-radius: .2rem;
+	padding: .5rem;
+	margin: .5rem;
+	cursor: pointer;
+	width: 11rem;
+}
+
+@mixin subjectTitle {
+	font-family: variables.$fonts;
+	font-size: 1rem;
+	font-weight: 400;
+	padding: 0;
+	margin: 0;
+}
+
 .subjectsContainer {
 	display: flex;
 	margin: 0;
 	padding: 1rem;
 	background-color: variables.$background;
 
-	div {
-		background-color: variables.$containerBackground;
-		border-radius: .2rem;
-		padding: .5rem;
-		margin: .5rem;
-	}
-
-	h3 {
-		font-family: variables.$fonts;
-		font-size: 1rem;
-		font-weight: 400;
-		padding: 0;
-		margin: 0;
-	}
-
 	.needsAttentionFalse {
+		@include subjectDiv();
 		color: variables.$textLightGray;
+		h3 {
+			@include subjectTitle();
+		}
 	}
 
 	.needsAttentionTrue {
+		@include subjectDiv();
 		color: variables.$attention;
 		font-weight: 500;
+		h3 {
+			@include subjectTitle();
+		}
 	}
 
 	.subjectBoxWish {
+		@include subjectDiv();
 		border: 1px solid variables.$wish;
 		border-bottom: 2px solid variables.$wish;
+		h3 {
+			@include subjectTitle();
+		}
 	}
 	.subjectBoxLearning {
+		@include subjectDiv();
 		border: 1px solid variables.$learning;
 		border-bottom: 2px solid variables.$learning;
+		h3 {
+			@include subjectTitle();
+		}
 	}
 	.subjectBoxMastered {
+		@include subjectDiv();
 		border: 1px solid variables.$mastered;
 		border-bottom: 2px solid variables.$mastered;
+		h3 {
+			@include subjectTitle();
+		}
+	}	
+}
+
+.editWindow {
+	background-color: variables.$containerBackground;
+	border-radius: .5rem;
+	border: 1px solid variables.$containerBorder;
+	padding: 1rem;
+	  
+	p, label {
+		font-family: variables.$fonts;
+		font-size: 1rem;
+		margin-top: .5rem;
+		color: variables.$textLightGray;
+		text-align: left;
 	}
-	
+
+	.buttonsContainer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	  
+		button {
+			margin: 1rem 2rem 0 2rem;
+		}
+
+		.delete {
+			background-color: variables.$errorDarkRed;
+		}
+	}
 }
