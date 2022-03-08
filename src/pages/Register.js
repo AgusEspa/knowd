@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BsInfoCircle } from "react-icons/bs";
 import styles from "../styles/Login.module.scss";
 import resources from "../styles/Resources.module.scss";
 

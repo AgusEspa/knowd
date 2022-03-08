@@ -161,7 +161,7 @@ const Login = () => {
                         <p>{networkError}</p>
                     </div>}
                 <div className={styles.loginLink}><p>Forgot your password? <Link to="/forgot_password">Reset</Link></p></div>
-                <div className={styles.loginLink}><p>New to self.OKRs? <Link to="/register">Register</Link></p></div>
+                <div className={styles.loginLink}><p>New to knowd? <Link to="/register">Create account</Link></p></div>
             </div>
         </main>
 	)

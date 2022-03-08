@@ -1,21 +1,23 @@
 // CONTAINERS & BOXES
 $background: black;
 $containerBackground: #161616;
-$containerBorder: #252525;
+$containerBorder: #5200cc;
 
 // TEXT
 $textLightGray: #bbbbbb;
+$textDarkGray: #161616;
 $fonts: 'Roboto Mono', monospace;
+$links: #8533ff;
 
 // INPUTS
 $inputBackground: #e2e2e2;
-$inputBorder: #b6b6b6;
+$inputBorder: #5200cc;
 $placeholderGray: #999999;
 
 // BUTTONS
-$buttonBackground: #7e7e7e;
+$buttonBackground: #5200cc;
 $buttonText: white;
-$buttonHover: #5e5e5e;
+$buttonHover: #6600ff;
 $selectorButtonBackground: #f3f3f3;
 $selectorButtonHover: #ebebeb;
 $errorButtonHover: #b40000;
@@ -25,3 +27,10 @@ $errorDarkRed: #cc0000;
 $errorLightRed: #ffe3e3;
 $successDarkGreen: #058f00;
 $successLightGreen: #e3ffe3;
+
+
+// STATUS COLORS
+$wish: #b3cccc;
+$learning: #ff66b3;
+$mastered: #66ffc2;
+$attention: #e6ac00;
