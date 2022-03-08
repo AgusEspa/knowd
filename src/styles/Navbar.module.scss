@@ -5,7 +5,7 @@
 	position: relative;
 	justify-content: space-between;
 	align-items: center;
-	background-color: variables.$lightPink;
+	background-color: variables.$containerBackground;
 
 	.navLogoBox {
 		display: flex;
@@ -48,7 +48,7 @@
 				margin: 0;
 				padding: 0;
 				display: block;
-				background-color: variables.$backgroundDarkGray;
+				background-color: variables.$containerBackground;
 			}
 			
 			li {
@@ -146,7 +146,7 @@
 			border-radius: 0.7rem;
 			transition: background-color 0.1s ease-out;
 			&:hover {
-			background-color: variables.$lighterPink;
+			background-color: variables.$containerBackground;
 			}
 	  	}
 	  	span, a {
@@ -174,7 +174,7 @@
 			padding-top: .7rem;
 			
 			.dropdownMenuBox {
-				background-color: variables.$backgroundDarkGray;
+				background-color: variables.$containerBackground;
 				margin: 0;
 				border-radius: 0.7rem;
 		  	

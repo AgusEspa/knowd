@@ -1,20 +1,16 @@
 // CONTAINERS & BOXES
-$darkPurple: #432f70;
-$lightPink: #b34270;
-$lighterPink: #c75884;
-$backgroundGray: #e2e2e2;
-$backgroundDarkGray: #292929;
-$borderGray: #3a3a3a;
+$background: black;
+$containerBackground: #161616;
+$containerBorder: #252525;
 
 // TEXT
-$textDarkGray: #1f1f1f;
-$textGray: #414141;
-$fonts: 'Asap', sans-serif;
+$textLightGray: #bbbbbb;
+$fonts: 'Roboto Mono', monospace;
 
 // INPUTS
-$inputBackground: #f3f3f3;
-$inputBorder: #c4c4c4;
-$placeholderGray: #a5a5a5;
+$inputBackground: #e2e2e2;
+$inputBorder: #b6b6b6;
+$placeholderGray: #999999;
 
 // BUTTONS
 $buttonBackground: #7e7e7e;
@@ -26,6 +22,6 @@ $errorButtonHover: #b40000;
 
 // NOTIFICATIONS
 $errorDarkRed: #cc0000;
-$errorLightRed: #ffd3d3;
+$errorLightRed: #ffe3e3;
 $successDarkGreen: #058f00;
-$successLightGreen: #bbddbb;
+$successLightGreen: #e3ffe3;

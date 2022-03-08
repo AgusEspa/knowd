@@ -19,7 +19,7 @@
 	transform: translate(-50%, -50%);
 
 	.deleteModalBox {
-		background-color: variables.$backgroundGray;
+		background-color: variables.$containerBackground;
 		border-radius: .5rem;
 		border: 2px solid variables.$errorDarkRed;
 		padding: 1rem;
@@ -28,7 +28,7 @@
 			font-family: variables.$fonts;
 			font-size: 1.2rem;
 			margin: 0;
-			color: variables.$textDarkGray;
+			color: variables.$textLightGray;
 			text-align: left;
 		}
 		  
@@ -36,7 +36,7 @@
 			font-family: variables.$fonts;
 			font-size: 1rem;
 			margin-top: .5rem;
-			color: variables.$textDarkGray;
+			color: variables.$textLightGray;
 			text-align: left;
 		}
 

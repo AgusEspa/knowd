@@ -4,7 +4,7 @@ p {
 	display: block;
 	font-family: variables.$fonts;
 	font-size: 1rem;
-	color: variables.$textDarkGray;
+	color: variables.$textLightGray;
 	margin: 0;
 }
 
@@ -14,7 +14,7 @@ p {
 	right: 0;
 	z-index: 1;
 	border-right: 5px solid variables.$errorDarkRed;
-	background-color: variables.$backgroundGray;
+	background-color: variables.$containerBackground;
 	margin: 2rem;
 	padding: 1rem;
 	width: 14rem;
@@ -28,7 +28,7 @@ p {
 	right: 0;
 	z-index: 1;
 	border-right: 5px solid variables.$successDarkGreen;
-	background-color: variables.$backgroundGray;
+	background-color: variables.$containerBackground;
 	margin: 2rem;
 	padding: 1rem;
 	width: 14rem;

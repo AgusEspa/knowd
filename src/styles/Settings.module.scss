@@ -1,22 +1,22 @@
 @use './variables';
 
 .settingsContainer {
-	background-color: variables.$darkPurple;
+	background-color: variables.$containerBackground;
 	margin: 0;
 	padding: 2rem;
 
 	.settingsBox {
 		padding: 2rem;
 		display: block;
-		background-color: variables.$backgroundGray;
-		border: 1px solid variables.$borderGray;
+		background-color: variables.$containerBackground;
+		border: 1px solid variables.$containerBorder;
 		border-radius: 0.5rem;
 		margin: 0;
 	
 		h2 {
 			font-family: variables.$fonts;
 			font-size: 1.5rem;
-			color: variables.$textDarkGray;
+			color: variables.$textLightGray;
 			margin-top: 0;
 			margin-bottom: 1rem;
 			margin-left: 1rem;
@@ -57,7 +57,7 @@
 						label {
 							font-family: variables.$fonts;
 							font-size: 1.1rem;
-							color: variables.$textDarkGray;
+							color: variables.$textLightGray;
 							text-align: left;
 							border: none;
 							background-color: transparent;
@@ -82,7 +82,7 @@
 					font-family: variables.$fonts;
 					font-size: 1.2rem;
 					margin: 0rem 0rem 0rem 0.2rem;
-					color: variables.$textDarkGray;
+					color: variables.$textLightGray;
 					text-align: left;
 				}
 				.delete {
@@ -93,7 +93,7 @@
 					display: block;
 					font-family: variables.$fonts;
 					font-size: 1rem;
-					color: variables.$textDarkGray;
+					color: variables.$textLightGray;
 					margin: 1.5rem 0rem 0rem 0.2rem;
 				}
 
@@ -131,7 +131,7 @@
 				p {
 					font-family: variables.$fonts;
 					font-size: 1rem;
-					color: variables.$textDarkGray;
+					color: variables.$textLightGray;
 					margin: 0;
 				}
 

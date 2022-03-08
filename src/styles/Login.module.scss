@@ -1,7 +1,7 @@
 @use './variables';
 
 .loginContainer {
-	background-color: variables.$darkPurple;
+	background-color: variables.$background;
 	padding: 3rem;
 	display: flex;
 	justify-content: center;
@@ -9,8 +9,8 @@
 }
   
 .loginBox {
-	background-color: variables.$backgroundGray;
-	border: 1px solid variables.$borderGray;
+	background-color: variables.$containerBackground;
+	border: 1px solid variables.$containerBorder;
 	border-radius: 0.5rem;
 	padding: 3rem;
 	margin: 1rem 0 0 0;
@@ -22,7 +22,7 @@
 	h3 {
 		font-family: variables.$fonts;
 		font-size: 1.2rem;
-		color: variables.$textDarkGray;
+		color: variables.$textLightGray;
 		margin-top: 0;
 		margin-bottom: 1rem;
 	}
@@ -43,16 +43,18 @@
 	button {
 		display: block;
 		width: 16rem;
-		margin: 2rem 3rem 1rem 3rem;
+		margin: 2.5rem 3rem 2rem 3rem;
 		border-radius: 1.2rem; 
 		text-align: center; 
 		padding: 0.5rem 1rem;
-		background-color: variables.$buttonBackground; 
+		background-color: variables.$buttonBackground;
+		font-family: variables.$fonts;
 		color: variables.$buttonText; 
 		font-size: 1rem;
 		border: none;
 		outline: 0;
 		transition: all 0.1s ease-out;
+		cursor: pointer;
 		&:hover {
 			background-color: variables.$buttonHover;
 	  	}
@@ -62,7 +64,7 @@
 		display: block;
 		font-family: variables.$fonts;
 		font-size: 1rem;
-		color: variables.$textDarkGray;
+		color: variables.$textLightGray;
 		margin: 0 0 0 3rem;
 	}
 
@@ -70,7 +72,7 @@
 		display: block;
 		font-family: variables.$fonts;
 		font-size: 1rem;
-		color: variables.$textDarkGray;
+		color: variables.$textLightGray;
 		margin: 1.5rem 3rem 0 3.2rem;
 	}
 
@@ -84,7 +86,7 @@
 			display: block;
 			font-family: variables.$fonts;
 			font-size: 1rem;
-			color: variables.$textDarkGray;
+			color: variables.$textLightGray;
 			margin: 0;
 		}
 		span {
@@ -103,14 +105,14 @@
 			right: 1.2rem;
 			z-index: 1;
 			width: 7rem;
-			border: 1px solid variables.$borderGray;
+			border: 1px solid variables.$containerBorder;
 			border-radius: 0.5rem;
 			padding: 0.5rem;
 			margin: 0 0.5rem 0 0;
 		
 			p {
 				font-size: 0.9rem;
-				color: variables.$textGray;
+				color: variables.$textLightGray;
 				margin: 0;
 				padding: 0;
 			}
@@ -118,7 +120,7 @@
 	}
 
 	.validationError {
-		border: 1px solid variables.$errorDarkRed;
+		border-bottom: 2px solid variables.$errorDarkRed;
 	}
 	
 	.validationErrorMessage {
@@ -129,15 +131,15 @@
 	}
 
 	.logoBox {
-		width: 43%;
-		margin-left: auto;
-		margin-right: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		margin-top: 1rem;
-		margin-bottom: 3rem;
+		margin-bottom: 5rem;
 	}
 	  
 	.logo {
-		width: 9.4rem;
+		width: 10rem;
 	}
 	
 	.loginLink {
@@ -163,7 +165,7 @@
 			display: block;
 			font-family: variables.$fonts;
 			font-size: 1rem;
-			color: variables.$textDarkGray;
+			color: variables.$textLightGray;
 			margin: 0;
 		}
 	}
@@ -187,7 +189,7 @@
 			display: block;
 			font-family: variables.$fonts;
 			font-size: 1rem;
-			color: variables.$textDarkGray;
+			color: variables.$textLightGray;
 			margin: 0;
 		}
 	}
