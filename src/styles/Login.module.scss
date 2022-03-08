@@ -80,6 +80,7 @@
 		display: flex;
 		position: relative;
 		justify-content: space-between;
+		align-items: center;
 		margin: 1.5rem 3rem 0rem 3.2rem;
 	
 		label, span {
@@ -94,14 +95,21 @@
 			margin-right: 0.3rem;
 		}
 	
-		img {
-			width: 1.1rem;
-			margin-right: 0.3rem;
+		.helperIcon {
+			display: flex;
+			align-items: center;
+			svg {
+				width: 1.1rem;
+				margin-right: 0.3rem;
+				fill: variables.$textLightGray;
+			}
 		}
+		
 	
 		.passwordHelper {
-			background-color: white;
 			position: absolute;
+			align-self: start;
+			background-color: white;
 			right: 1.2rem;
 			z-index: 1;
 			width: 7rem;

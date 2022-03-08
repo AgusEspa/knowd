@@ -146,9 +146,11 @@ const Register = () => {
 
                     <div className={styles.labelBox}>
                         <label>Password:</label>
-                        <img src={"./info.png"} alt="information icon"
+                        <div className={styles.helperIcon}
                             onMouseEnter={() => setPasswordHelperDisplay(true)}
-        				    onMouseLeave={() => setPasswordHelperDisplay(false)} />
+        				    onMouseLeave={() => setPasswordHelperDisplay(false)}>
+                            <BsInfoCircle />
+                        </div>
                         {passwordHelperDisplay && <div className={styles.passwordHelper}><p>Password must have at least 8 characters</p></div>}
                     </div>
                     {formValidationErrors.password !== "" ?
@@ -186,7 +188,7 @@ const Register = () => {
                     
                     {buttonIsEnabled ? 
                         <button>Create account</button> :
-                        <button disabled>Creating account...</button>
+                        <button disabled>Creating...</button>
                     }
 
                     {isLoading &&

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BsInfoCircle } from "react-icons/bs";
 import styles from "../styles/Login.module.scss";
 import resources from "../styles/Resources.module.scss";
 
@@ -98,11 +99,13 @@ const ResetPassword = () => {
 
                 <form onSubmit={handlePasswordReset} noValidate>
 
-                    <div className={styles.labelBox}>
-                        <label>New password:</label>
-                        <img src={"./info.png"} alt="information icon"
+                <div className={styles.labelBox}>
+                        <label>Password:</label>
+                        <div className={styles.helperIcon}
                             onMouseEnter={() => setPasswordHelperDisplay(true)}
-        				    onMouseLeave={() => setPasswordHelperDisplay(false)} />
+        				    onMouseLeave={() => setPasswordHelperDisplay(false)}>
+                            <BsInfoCircle />
+                        </div>
                         {passwordHelperDisplay && <div className={styles.passwordHelper}><p>Password must have at least 8 characters</p></div>}
                     </div>
                     {formValidationErrors.newPassword !== "" ?
@@ -139,8 +142,8 @@ const ResetPassword = () => {
                     }
                     
                     {buttonIsEnabled ? 
-                        <button>Create account</button> :
-                        <button disabled>Creating account...</button>
+                        <button>Reset password</button> :
+                        <button disabled>Resetting...</button>
                     }
 
                     {isLoading &&
