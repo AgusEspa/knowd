@@ -1,0 +1,46 @@
+@use './variables';
+
+p {
+	display: block;
+	font-family: variables.$fonts;
+	font-size: 1rem;
+	color: variables.$textDarkGray;
+	margin: 0;
+}
+
+.errorNotification {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+	border-right: 5px solid variables.$errorDarkRed;
+	background-color: variables.$backgroundGray;
+	margin: 2rem;
+	padding: 1rem;
+	width: 14rem;
+	border-radius: .5rem 0 0 .5rem;
+	animation: showMe 0.5s normal;
+}
+
+.successNotification {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+	border-right: 5px solid variables.$successDarkGreen;
+	background-color: variables.$backgroundGray;
+	margin: 2rem;
+	padding: 1rem;
+	width: 14rem;
+	border-radius: .5rem 0 0 .5rem;
+	animation: showMe 0.5s normal;
+}
+
+@keyframes showMe{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
