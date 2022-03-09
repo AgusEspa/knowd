@@ -38,10 +38,11 @@
 		
 		button {
 			cursor: pointer;
-			background-color: transparent;
+			background-color: variables.$inputDarkBackground;
 			border-radius: 0.3rem;
 			padding: .3rem .5rem .3rem .5rem;
-			border: none;
+			height: 1.8rem;
+			border: 1px solid variables.$inputDarkBorder;
 			text-decoration: none;
 			color: variables.$textLightGray;
 			font-family: variables.$fonts;
@@ -49,6 +50,7 @@
 			transition: all 0.1s ease-out;
 			&:hover {
 				color: variables.$buttonText;
+				border: 1px solid variables.$textLightGray;
 		  	}
 		}
   	}
