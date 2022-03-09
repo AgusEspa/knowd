@@ -340,7 +340,7 @@ const Settings = () => {
                             <h3>Edit username and email address</h3>
                             <form onSubmit={handleEditUserDetails} noValidate>
                                 
-                                <label>New username:</label>
+                                <label>Username:</label>
                                 {formValidationErrors.username !== "" ?
                                 <div>
                                 <input autoComplete="new-password" className={styles.validationError} type="text" 
@@ -357,7 +357,7 @@ const Settings = () => {
                                     />
                                 }
 
-                                <label>New email address:</label>
+                                <label>Email address:</label>
                                 {formValidationErrors.emailAddress !== "" ?
                                 <div>
                                     <input autoComplete="new-password" className={styles.validationError} type="email"
@@ -397,6 +397,7 @@ const Settings = () => {
                                         <button>Save changes</button> :
                                         <button disabled>Saving changes...</button>
                                     }
+
                                     {isLoading &&
                                     <div className={styles.loadingSpinnerContainer}>
                                         <div className={resources.spinner}></div>
@@ -414,7 +415,8 @@ const Settings = () => {
                                 <label>Current password:</label>
                                 {formValidationErrors.oldPassword !== "" ?
                                 <div> 
-                                    <input className={styles.validationError} type="password" 
+                                    <input className={styles.validationError} type="password"
+                                    autoComplete="new-password" 
                                     name="oldPassword"
                                     value={formData.oldPassword}
                                     onChange={handleFormChange}
@@ -422,6 +424,7 @@ const Settings = () => {
                                     <p className={styles.validationErrorMessage}>{formValidationErrors.oldPassword}</p>
                                 </div> :
                                 <input type="password" 
+                                autoComplete="new-password"
                                 name="oldPassword"
                                 value={formData.oldPassword}
                                 onChange={handleFormChange}
@@ -431,7 +434,8 @@ const Settings = () => {
                                 <label>New password:</label>
                                 {formValidationErrors.newPassword !== "" ?
                                 <div> 
-                                    <input className={styles.validationError} type="password" 
+                                    <input className={styles.validationError} type="password"
+                                    autoComplete="new-password" 
                                     name="newPassword"
                                     value={formData.newPassword}
                                     onChange={handleFormChange}
@@ -439,6 +443,7 @@ const Settings = () => {
                                     <p className={styles.validationErrorMessage}>{formValidationErrors.newPassword}</p>
                                 </div> :
                                 <input type="password" 
+                                autoComplete="new-password"
                                 name="newPassword"
                                 value={formData.newPassword}
                                 onChange={handleFormChange}
@@ -449,6 +454,7 @@ const Settings = () => {
                                 {formValidationErrors.passwordVerification !== "" ?
                                 <div> 
                                     <input className={styles.validationError} type="password" 
+                                    autoComplete="new-password"
                                     name="passwordVerification"
                                     value={formData.passwordVerification}
                                     onChange={handleFormChange}
@@ -456,6 +462,7 @@ const Settings = () => {
                                     <p className={styles.validationErrorMessage}>{formValidationErrors.passwordVerification}</p>
                                 </div> :
                                 <input type="password" 
+                                autoComplete="new-password"
                                 name="passwordVerification"
                                 value={formData.passwordVerification}
                                 onChange={handleFormChange}
@@ -481,7 +488,7 @@ const Settings = () => {
                         <div className={styles.userBox}>
                             <h3 className={styles.delete}>Permanently Delete Your Account</h3>
                             <form onSubmit={handleDeleteUser} autoComplete="off" noValidate>
-                                <label>Type yor email address to confirm:</label>
+                                <label>Type your email address to confirm:</label>
                                 {formValidationErrors.emailAddress !== "" ?
                                 <div>
                                     <input className={styles.validationError} type="email"
@@ -508,11 +515,12 @@ const Settings = () => {
                                     />
                                     <p className={styles.validationErrorMessage}>{formValidationErrors.oldPassword}</p>
                                 </div> :
-                                <input type="password" 
-                                name="oldPassword"
-                                value={deleteFormData.oldPassword}
-                                onChange={handleDeleteFormChange}
-                                />
+                                    <input type="password"
+                                    autoComplete="new-password"
+                                    name="oldPassword"
+                                    value={deleteFormData.oldPassword}
+                                    onChange={handleDeleteFormChange}
+                                    />
                                 }
 
                                 {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}

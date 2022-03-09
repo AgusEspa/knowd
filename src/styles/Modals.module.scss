@@ -1,7 +1,7 @@
 @use './variables';
 
 .backdrop {
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.5);
 	width: 100vw;
 	height: 100vh;
 	z-index: 0;
@@ -9,6 +9,8 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
+	padding: 0;
+	margin: 0;
 }
 
 .modalContainer {
@@ -17,43 +19,7 @@
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
-	.deleteModalBox {
-		background-color: variables.$containerBackground;
-		border-radius: .5rem;
-		border: 2px solid variables.$errorDarkRed;
-		padding: 1rem;
-	
-		h3 {
-			font-family: variables.$fonts;
-			font-size: 1.2rem;
-			margin: 0;
-			color: variables.$textLightGray;
-			text-align: left;
-		}
-		  
-		p {
-			font-family: variables.$fonts;
-			font-size: 1rem;
-			margin-top: .5rem;
-			color: variables.$textLightGray;
-			text-align: left;
-		}
-
-		.buttonsContainer {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		  
-			button {
-				margin: 1rem 2rem 0 2rem;
-			}
-
-			.delete {
-				background-color: variables.$errorDarkRed;
-			}
-		}
-	}
+	margin: 0;
 }
 
 

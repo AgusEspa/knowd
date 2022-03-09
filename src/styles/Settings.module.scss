@@ -1,14 +1,14 @@
 @use './variables';
 
 .settingsContainer {
-	background-color: variables.$containerBackground;
+	background-color: transparent;
 	margin: 0;
 	padding: 2rem;
 
 	.settingsBox {
 		padding: 2rem;
 		display: block;
-		background-color: variables.$containerBackground;
+		background-color: variables.$toolbarBackground;
 		border: 1px solid variables.$containerBorder;
 		border-radius: 0.5rem;
 		margin: 0;
@@ -70,9 +70,9 @@
 			}
 
 			.userBox {
-				background-color: #ffffff;
+				background-color: variables.$containerBackground;
 				border-radius: 0.5rem;
-				border: 1px solid #c9c9c9;
+				border: 1px solid variables.$toolbarBorder;
 				padding: 1.5rem;
 				margin: 0rem 1rem 0rem 0rem;
 				grid-column: 2;
@@ -81,7 +81,7 @@
 				h3 {
 					font-family: variables.$fonts;
 					font-size: 1.2rem;
-					margin: 0rem 0rem 0rem 0.2rem;
+					margin: 0rem 0rem 0rem 0.3rem;
 					color: variables.$textLightGray;
 					text-align: left;
 				}
@@ -94,20 +94,20 @@
 					font-family: variables.$fonts;
 					font-size: 1rem;
 					color: variables.$textLightGray;
-					margin: 1.5rem 0rem 0rem 0.2rem;
+					margin: 1.5rem 0rem 0rem .3rem;
 				}
 
 				input {
 					display: block;
-					width: 15rem;
-					margin: .3rem 0rem .3rem 0rem;
+					width: 16rem;
+					margin: .5rem 0 .3rem 0rem;
 					border: 0;
 					font-size: 1rem;
 					font-family: variables.$fonts;
 					padding: 0.5rem;
 					background-color: variables.$inputBackground;
-					border-bottom: 1px solid variables.$inputBorder;
 					border-radius: 0.5rem;
+					outline: 0;
 				}
 
 				button {
@@ -161,6 +161,77 @@
 						background-color: variables.$errorDarkRed;
 					}
 				}
+
+				
+
+					.deleteModalBox {
+						background-color: variables.$containerBackground;
+						border-radius: .5rem;
+						border: 2px solid variables.$errorDarkRed;
+						padding: 1rem;
+						margin: 0;
+					
+						h4 {
+							font-family: variables.$fonts;
+							font-size: 1.2rem;
+							margin: 0;
+							padding: 0.5rem;
+							color: variables.$textLightGray;
+							text-align: left;
+						}
+						
+						p {
+							font-family: variables.$fonts;
+							font-size: 1rem;
+							margin: 0;
+							padding: 0.5rem;
+							color: variables.$textLightGray;
+							text-align: left;
+						}
+
+						.buttonsContainer {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						
+							.cancelButton {
+								margin: 1.5rem 1rem 1rem 1rem;
+								width: auto;
+								border-radius: 1.2rem; 
+								text-align: center; 
+								padding: 0.5rem 1rem;
+								background-color: variables.$navbarBorder; 
+								color: variables.$buttonText; 
+								font-size: 1rem;
+								border: none;
+								outline: 0;
+								cursor: pointer;
+								transition: all 0.1s ease-out;
+								&:hover {
+									background-color: variables.$toolbarBorder;
+								}
+							}
+
+							.deleteButton {
+								margin: 1.5rem 1rem 1rem 1rem;
+								width: auto;
+								border-radius: 1.2rem; 
+								text-align: center; 
+								padding: 0.5rem 1rem;
+								background-color: variables.$deleteButton;
+								color: variables.$buttonText; 
+								font-size: 1rem;
+								border: none;
+								outline: 0;
+								cursor: pointer;
+								transition: all 0.1s ease-out;
+								&:hover {
+									background-color: variables.$errorDarkRed;
+								}
+							}
+						}
+					}
+				
 			}
 		}
 
