@@ -81,10 +81,27 @@
 	border: 1px solid variables.$containerBorder;
 	padding: 1rem;
 
+	textarea {
+		resize: none;
+		height: fit-content;
+		height: 3rem;
+		width: 18rem;
+		margin: 0;
+		font-size: 1rem;
+		color: variables.$textLightGray;
+		font-family: variables.$fonts;
+		background-color: variables.$inputDarkBackground;
+		border: 1px solid variables.$inputDarkBorder;
+		border-radius: 0.3rem;
+		padding: .3rem .5rem .3rem .5rem;
+	}
+
 	.inputBox {
 		display: flex;
 		margin-top: 1rem;
+		justify-content: left;
 		align-items: center;
+		margin: 1rem 0 0 0;
 
 		p, label {
 			font-family: variables.$fonts;
@@ -103,22 +120,19 @@
 			border-radius: 0.3rem;
 			padding: .3rem .5rem .3rem .5rem;
 			margin: 0 0 0 .3rem;
-			width: 13rem;
+			width: 12rem;
+			outline: none;
+			&:active, &:focus {
+				border: 1px solid variables.$containerBorder;
+			}
 		}
 
 		.checkbox {
 			width: 1rem;
+			outline: none;
 			&:checked {
 				background-color: variables.$attention;
 			}
-		}
-	
-		textarea {
-			resize: none;
-			height: fit-content;
-			min-height: 4rem;
-			width: 20rem;
-			margin: 0;
 		}
 	
 		.numberInput {
@@ -129,7 +143,7 @@
 		button, select {
 			cursor: pointer;
 			height: 2.53rem;
-			width: 8rem;
+			width: min-content;
 
 			.wish {
 				color: variables.$wish;
@@ -149,11 +163,37 @@
 		align-items: center;
 	  
 		button {
-			margin: 1rem 2rem 0 2rem;
+			margin: 2rem 1rem 0 1rem;
+			width: 6rem;
+			border-radius: 1.2rem; 
+			text-align: center; 
+			padding: 0.5rem 1rem;
+			background-color: variables.$buttonBackground;
+			font-family: variables.$fonts;
+			color: variables.$buttonText; 
+			font-size: 0.9rem;
+			border: none;
+			outline: 0;
+			transition: all 0.1s ease-out;
+			cursor: pointer;
+			&:hover {
+				background-color: variables.$buttonHover;
+			}
 		}
 
 		.delete {
-			background-color: variables.$errorDarkRed;
+			background-color: variables.$deleteButton;
+			&:hover {
+				background-color: variables.$errorDarkRed;
+			}
+		}
+
+		.disabledButton {
+			background-color: variables.$toolbarBorder;
+			cursor: default;
+			&:hover {
+				background-color: variables.$toolbarBorder;
+			}
 		}
 	}
 }

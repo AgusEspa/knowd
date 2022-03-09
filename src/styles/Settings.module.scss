@@ -156,9 +156,9 @@
 					}
 				}
 				.deleteButton {
-					background-color: variables.$errorDarkRed;
+					background-color: variables.$deleteButton;
 					&:hover {
-						background-color: variables.$errorButtonHover;
+						background-color: variables.$errorDarkRed;
 					}
 				}
 			}

@@ -112,14 +112,14 @@ const Subject = (props) => {
 			<div className={modalStyles.modalContainer}>
 				<div className={styles.editWindow}>
 					<form onSubmit={handleEditSubject}>
-						<div className={styles.inputBox}>
-							<textarea 
-								type="text" 
-								name="title"
-								value={editSubjectFormData.title}
-								onChange={handleEditSubjectFormChange}
-							/>
-						</div>
+						
+						<textarea 
+							type="text" 
+							name="title"
+							value={editSubjectFormData.title}
+							onChange={handleEditSubjectFormChange}
+						/>
+						
 						<div className={styles.inputBox}>
 							<label>Field: </label>
 							<input
@@ -192,8 +192,8 @@ const Subject = (props) => {
 						<div className={styles.buttonsContainer}>
 							<button type ="button" className={styles.delete} onClick={handleDeleteSubject}>Delete</button>
 							{subjectIsChanged ? 
-							<button>Save changes</button> :
-							<button disabled>Save changes</button>}
+							<button>Save</button> :
+							<button className={styles.disabledButton} disabled>Save</button>}
 							
 						</div>
 					</form>
