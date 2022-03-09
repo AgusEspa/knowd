@@ -94,6 +94,10 @@
 		border: 1px solid variables.$inputDarkBorder;
 		border-radius: 0.3rem;
 		padding: .3rem .5rem .3rem .5rem;
+		outline: 0;
+			&:active, &:focus {
+				border: 1px solid variables.$textLightGray;
+			}
 	}
 
 	.inputBox {
@@ -123,7 +127,7 @@
 			width: 12rem;
 			outline: none;
 			&:active, &:focus {
-				border: 1px solid variables.$containerBorder;
+				border: 1px solid variables.$textLightGray;
 			}
 		}
 
