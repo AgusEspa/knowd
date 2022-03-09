@@ -18,7 +18,7 @@ const Subjects = (props) => {
 			area: "Title",
 			relevance: 1,
 			progress: 1,
-			status: "wish",
+			status: "Wish",
 			needsAttention: false,
 			dueDate: ""
 		}

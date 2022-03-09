@@ -112,13 +112,15 @@ const Subject = (props) => {
 			<div className={modalStyles.modalContainer}>
 				<div className={styles.editWindow}>
 					<form onSubmit={handleEditSubject}>
-						<textarea 
-							type="text" 
-							name="title"
-							value={editSubjectFormData.title}
-							onChange={handleEditSubjectFormChange}
-						/>
-						<div>
+						<div className={styles.inputBox}>
+							<textarea 
+								type="text" 
+								name="title"
+								value={editSubjectFormData.title}
+								onChange={handleEditSubjectFormChange}
+							/>
+						</div>
+						<div className={styles.inputBox}>
 							<label>Field: </label>
 							<input
 								type="text" 
@@ -127,7 +129,7 @@ const Subject = (props) => {
 								onChange={handleEditSubjectFormChange}
 							/>
 						</div>
-						<div>
+						<div className={styles.inputBox}>
 							<label>Area: </label>
 							<input
 								type="text" 
@@ -136,9 +138,9 @@ const Subject = (props) => {
 								onChange={handleEditSubjectFormChange}
 							/>
 						</div>
-						<div>
+						<div className={styles.inputBox}>
 							<label>Relevance: </label>
-							<input
+							<input className={styles.numberInput}
 								type="number" 
 								name="relevance"
 								value={editSubjectFormData.relevance}
@@ -146,37 +148,41 @@ const Subject = (props) => {
 								onChange={handleEditSubjectFormChange}
 							/>
 						</div>	
-						<div>
+						<div className={styles.inputBox}>
 							<label>Progress: </label>
-							<input
+							<input className={styles.numberInput}
 								type="number" 
 								name="progress"
 								value={editSubjectFormData.progress}
 								min="1" max="100"
 								onChange={handleEditSubjectFormChange}
 							/>
+							<label>%</label>
 						</div>
-						<div>
+						<div className={styles.inputBox}>
 							<label>Status: </label>
-							<input
-								type="text" 
+							<select 
 								name="status"
 								value={editSubjectFormData.status}
-								onChange={handleEditSubjectFormChange}
-							/>
+								onChange={handleEditSubjectFormChange}>
+								<option className={styles.wish}>Wish</option>
+								<option className={styles.learning}>Learning</option>
+								<option className={styles.mastered}>Mastered</option>
+							</select>
 						</div>
-						<div>
+						<div className={styles.inputBox}>
 							<label>Needs attention? </label>
-							<input type="checkbox"
+							<input className={styles.checkbox}
+							type="checkbox"
 							name="needsAttention"
 							checked={editSubjectFormData.needsAttention}
 							onChange={handleEditSubjectFormChange}
 							/>
 						</div>
-						<div>
+						<div className={styles.inputBox}>
 							<label>Due date: </label>
 							{(editSubjectFormData.dueDate === "" || editSubjectFormData.dueDate === null) ? 
-							<button onClick={handleNewDueDate}>add due date</button> : 
+							<button onClick={handleNewDueDate}>add</button> : 
 							<input type="date" 
 							name="dueDate"
 							value={editSubjectFormData.dueDate}

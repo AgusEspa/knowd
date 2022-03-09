@@ -16,7 +16,6 @@
 @mixin subjectTitle {
 	font-family: variables.$fonts;
 	background-color: transparent;
-	color: variables.$textLight;
 	font-size: 1rem;
 	font-weight: 400;
 	padding: 0;
@@ -29,29 +28,19 @@
 	padding: 1rem;
 	background-color: variables.$background;
 
-	.needsAttentionFalse {
-		@include subjectDiv();
-		color: variables.$textLightGray;
-		h3 {
-			@include subjectTitle();
-		}
-	}
-
-	.needsAttentionTrue {
-		@include subjectDiv();
-		color: variables.$attention;
-		font-weight: 500;
-		h3 {
-			@include subjectTitle();
-		}
-	}
-
 	.subjectBoxWish {
 		@include subjectDiv();
 		border: 1px solid variables.$wish;
 		border-bottom: 2px solid variables.$wish;
 		h3 {
 			@include subjectTitle();
+		}
+		.needsAttentionTrue {
+			color: variables.$attention;
+			font-weight: 500;
+		}
+		.needsAttentionFalse {
+			color: variables.$textLightGray;
 		}
 	}
 	.subjectBoxLearning {
@@ -61,6 +50,13 @@
 		h3 {
 			@include subjectTitle();
 		}
+		.needsAttentionTrue {
+			color: variables.$attention;
+			font-weight: 500;
+		}
+		.needsAttentionFalse {
+			color: variables.$textLightGray;
+		}
 	}
 	.subjectBoxMastered {
 		@include subjectDiv();
@@ -68,6 +64,13 @@
 		border-bottom: 2px solid variables.$mastered;
 		h3 {
 			@include subjectTitle();
+		}
+		.needsAttentionTrue {
+			color: variables.$attention;
+			font-weight: 500;
+		}
+		.needsAttentionFalse {
+			color: variables.$textLightGray;
 		}
 	}	
 }
@@ -77,17 +80,21 @@
 	border-radius: .5rem;
 	border: 1px solid variables.$containerBorder;
 	padding: 1rem;
-	  
-	p, label {
-		font-family: variables.$fonts;
-		font-size: 1rem;
-		margin-top: .5rem;
-		color: variables.$textLightGray;
-		text-align: left;
-	}
 
-	input, textarea {
-		font-size: 0.9rem;
+	.inputBox {
+		display: flex;
+		margin-top: 1rem;
+		align-items: center;
+
+		p, label {
+			font-family: variables.$fonts;
+			font-size: 1rem;
+			color: variables.$textLightGray;
+			text-align: left;
+		}
+	
+		input, textarea, button, select {
+			font-size: 0.9rem;
 			color: variables.$textLightGray;
 			font-family: variables.$fonts;
 			background-color: variables.$inputDarkBackground;
@@ -95,14 +102,45 @@
 			height: 1.8rem;
 			border-radius: 0.3rem;
 			padding: .3rem .5rem .3rem .5rem;
-			margin-bottom: 0.5rem;
-	}
+			margin: 0 0 0 .3rem;
+			width: 13rem;
+		}
 
-	textarea {
-		resize: none;
-		height: fit-content;
-  		min-height: 4rem;
-  		width: 18rem;
+		.checkbox {
+			width: 1rem;
+			&:checked {
+				background-color: variables.$attention;
+			}
+		}
+	
+		textarea {
+			resize: none;
+			height: fit-content;
+			min-height: 4rem;
+			width: 20rem;
+			margin: 0;
+		}
+	
+		.numberInput {
+			width: 3.5rem;
+			margin: 0 .3rem 0 .3rem;
+		}
+
+		button, select {
+			cursor: pointer;
+			height: 2.53rem;
+			width: 8rem;
+
+			.wish {
+				color: variables.$wish;
+			}
+			.learning {
+				color: variables.$learning;
+			}
+			.mastered {
+				color: variables.$mastered;
+			}
+		}
 	}
 
 	.buttonsContainer {
