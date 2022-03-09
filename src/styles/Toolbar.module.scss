@@ -1,0 +1,50 @@
+@use './variables';
+
+.toolbarBox {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	background-color: variables.$toolbarBackground;
+	border-bottom: 1px solid variables.$toolbarBorder;
+
+	.toolsMenu {
+		height: 100%;
+
+		ul {
+			display: flex;
+			margin: 0.7rem;
+			list-style-type: none;
+		}
+		li {
+			text-decoration: none;
+			margin-right: 2rem;
+			padding: 0;
+		}
+		input {
+			font-size: 0.9rem;
+			color: variables.$textLightGray;
+			font-family: variables.$fonts;
+			background-color: variables.$inputDarkBackground;
+			border: 1px solid variables.$inputDarkBorder;
+			height: 1.8rem;
+			border-radius: 0.3rem;
+			padding: .3rem .5rem .3rem .5rem;
+		}
+		button {
+			cursor: pointer;
+			background-color: transparent;
+			border-radius: 0.3rem;
+			padding: .3rem .5rem .3rem .5rem;
+			border: none;
+			text-decoration: none;
+			color: variables.$textLightGray;
+			font-family: variables.$fonts;
+			font-size: 0.9rem;
+			transition: all 0.1s ease-out;
+			&:hover {
+				color: variables.$buttonText;
+		  	}
+		}
+  	}
+}

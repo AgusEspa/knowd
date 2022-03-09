@@ -2,19 +2,24 @@
 $background: black;
 $containerBackground: #161616;
 $containerBorder: #5200cc;
-$navbarBackground: #0f0f0f;
-$toolbarBackground: #0a0a0a;
+$navbarBackground: #1b1b1b;
+$navbarBorder: #272727;
+$toolbarBackground: #111111;
+$toolbarBorder: #424242;
 
 // TEXT
 $textLightGray: #bbbbbb;
+$textLight: #e4e4e4;
 $textDarkGray: #161616;
 $fonts: 'Roboto Mono', monospace;
-$links: #8533ff;
+$links: #954eff;
 
 // INPUTS
 $inputBackground: #e2e2e2;
 $inputBorder: #5200cc;
 $placeholderGray: #999999;
+$inputDarkBackground: black;
+$inputDarkBorder: #242424;
 
 // BUTTONS
 $buttonBackground: #5200cc;
@@ -32,7 +37,7 @@ $successLightGreen: #e3ffe3;
 
 
 // STATUS COLORS
-$wish: #b3cccc;
+$wish: #abdbdb;
 $learning: #ff66b3;
-$mastered: #66ffc2;
-$attention: #e6ac00;
+$mastered: #51dd87;
+$attention: #fdc827;

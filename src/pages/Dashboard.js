@@ -26,6 +26,7 @@ const Dashboard = () => {
             setUserAuth( prevState => ({
                 ...prevState,
                 username: response.data.username,
+                displayName: response.data.username.split(' ')[0],
                 emailAddress: response.data.emailAddress,}
             ));
             

@@ -8,10 +8,10 @@ const UserMenu = (props) => {
 			<div className={styles.dropdownMenuBox}>
 				<ul>
 					<li>
-						<Link to="/settings"><span>Settings</span></Link>
+						<Link to="/settings">Settings</Link>
 					</li>
 					<li>
-						<button onClick={props.logout}><span>Logout</span></button>
+						<button onClick={props.logout}>Logout</button>
 					</li>
 				</ul>
 			</div>

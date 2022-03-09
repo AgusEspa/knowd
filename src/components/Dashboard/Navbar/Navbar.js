@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
+import { BiUserCircle, BiMenu } from "react-icons/bi";
+
 import UserMenu from "./UserMenu";
 import styles from "../../../styles/Navbar.module.scss"
 
@@ -23,14 +25,16 @@ const Navbar = (props) => {
 			</div>
 			
 			<div className={styles.navLinksContainer}>
-				<button className={styles.navToggle} onClick={handleResponsiveNavToggle}>...</button>
+				<button className={styles.navToggle} onClick={handleResponsiveNavToggle}>
+					<BiMenu />
+				</button>
 				<div className={responsiveNavDisplay ? styles.linksMenuActive : styles.linksMenu}>
 					<ul>
 						<li>
-							<Link to="/dashboard"><span>Dashboard</span></Link>
+							<Link to="/dashboard">Dashboard</Link>
 						</li>
 						<li className={styles.dropdownButton}>
-							<span>{userAuth.username}</span>
+							<div className={styles.buttonIcon}><BiUserCircle />{userAuth.displayName}</div>
 							<UserMenu logout={logout} />
 						</li>
 					</ul>

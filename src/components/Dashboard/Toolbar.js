@@ -1,3 +1,4 @@
+import styles from "../../styles/Toolbar.module.scss";
 
 const Toolbar = (props) => {
 
@@ -9,9 +10,9 @@ const Toolbar = (props) => {
 
 
 	return (
-		<div className="toolbar">
+		<div className={styles.toolbarBox}>
       					  
-			<div className="tools-menu">	
+			<div className={styles.toolsMenu}>	
 			  	<ul>
 				  	
 				  	<li>
@@ -25,7 +26,7 @@ const Toolbar = (props) => {
 					</li>
 
 					<li>
-						<button onClick={props.handleCreateSubject}><span className="tools-menu-item">New Subject</span></button>
+						<button onClick={props.handleCreateSubject}>New Subject</button>
 					</li>
 				 
 				</ul>

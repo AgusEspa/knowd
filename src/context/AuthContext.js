@@ -7,7 +7,13 @@ export const AuthProvider = ({ children }) => {
 
 	const navigate = useNavigate();
 
-	const [userAuth, setUserAuth] = useState({username: "", emailAddress: "", accessToken: window.localStorage.getItem("access_token"), refreshToken: window.localStorage.getItem("refresh_token")});
+	const [userAuth, setUserAuth] = useState({
+		username: "",
+		displayName: "", 
+		emailAddress: "", 
+		accessToken: window.localStorage.getItem("access_token"), 
+		refreshToken: window.localStorage.getItem("refresh_token")}
+	);
 
 	const logout = () => {
 		setUserAuth([]);

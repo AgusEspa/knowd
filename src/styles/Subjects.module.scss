@@ -1,16 +1,22 @@
 @use './variables';
 
 @mixin subjectDiv {
-	background-color: variables.$containerBackground;
+	background-color: variables.$toolbarBackground;
 	border-radius: .2rem;
 	padding: .5rem;
 	margin: .5rem;
 	cursor: pointer;
 	width: 11rem;
+	transition: all 0.1s ease-out;
+	&:hover {
+		background-color: variables.$navbarBorder;
+	}
 }
 
 @mixin subjectTitle {
 	font-family: variables.$fonts;
+	background-color: transparent;
+	color: variables.$textLight;
 	font-size: 1rem;
 	font-weight: 400;
 	padding: 0;
@@ -78,6 +84,25 @@
 		margin-top: .5rem;
 		color: variables.$textLightGray;
 		text-align: left;
+	}
+
+	input, textarea {
+		font-size: 0.9rem;
+			color: variables.$textLightGray;
+			font-family: variables.$fonts;
+			background-color: variables.$inputDarkBackground;
+			border: 1px solid variables.$inputDarkBorder;
+			height: 1.8rem;
+			border-radius: 0.3rem;
+			padding: .3rem .5rem .3rem .5rem;
+			margin-bottom: 0.5rem;
+	}
+
+	textarea {
+		resize: none;
+		height: fit-content;
+  		min-height: 4rem;
+  		width: 18rem;
 	}
 
 	.buttonsContainer {
