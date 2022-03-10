@@ -3,6 +3,7 @@ import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import Subject from "./Subject";
 import Toolbar from "./Toolbar";
+import Explorer from "./Explorer";
 
 const Subjects = (props) => {
 
@@ -88,8 +89,14 @@ const Subjects = (props) => {
 				searchTerm={searchTerm}
 				setSearchTerm={setSearchTerm}
 			/>
-			<div className={styles.subjectsContainer}>
-				{mappedSearchedSubjects}
+
+			<div className={styles.containerGrid}>
+
+                <Explorer fields={props.fields}/>
+
+				<div className={styles.subjectsContainer}>
+					{mappedSearchedSubjects}
+				</div>
 			</div>
 		</>
 	);

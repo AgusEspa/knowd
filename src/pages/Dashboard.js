@@ -8,9 +8,9 @@ import Subjects from "../components/Dashboard/Subjects";
 const Dashboard = () => {
 
 	const { setUserAuth, logout } = useContext(AuthContext);
-
-    const [subjects, setSubjects] = useState([]);
-    const [networkError, setNetworkError] = useState("");
+    const [ subjects, setSubjects ] = useState([]);
+    const [ fields, setFields ] = useState([]); 
+    const [ networkError, setNetworkError ] = useState("");
 
     const api = useAxios();
 
@@ -39,8 +39,26 @@ const Dashboard = () => {
     }
 
     useEffect( () => {
+        getFields();
         getSubjects();
     }, []);
+
+    const getFields = async () => {
+
+        try {
+            const response = await api.get("/fields");
+			setFields(response.data);
+            
+        } catch (error) {
+            if (!error.response || error.response.status >= 500) {
+                setNetworkError("Unable to contact the server. Please try again later.");
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                setNetworkError("");
+            } else {
+                console.log(error.response.data);
+            }
+        }
+    }
 
     const getSubjects = async () => {
 
@@ -66,6 +84,8 @@ const Dashboard = () => {
             <Subjects 
                 subjects={subjects}
                 setSubjects={setSubjects} 
+                fields={fields}
+                setFields={setFields}
             />
             
             {(networkError !== "") &&
