@@ -6,7 +6,8 @@
 	justify-content: space-between;
 	align-items: center;
 	background-color: variables.$navbarBackground;
-	border: 1px solid variables.$navbarBorder;
+	border-bottom: 1px solid variables.$navbarBorder;
+	border-top: 1px solid variables.$containerBorder;
 
 	.navLogoBox {
 		display: flex;

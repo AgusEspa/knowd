@@ -36,7 +36,7 @@ ul {
 
 .containerGrid {
 	display: grid;
-	grid-template-columns: 25vw 73vw;
+	grid-template-columns: 23vw 75vw;
 	column-gap: 1rem;
 }
 
@@ -227,6 +227,10 @@ ul {
 			.mastered {
 				color: variables.$mastered;
 			}
+		}
+
+		.defaultOption {
+			color: variables.$toolbarBorder;
 		}
 	}
 

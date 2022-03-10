@@ -15,8 +15,8 @@ const Subjects = (props) => {
 
 		const newSubjectTemplate = {
 			title: "New Subject", 
-			field: "Title",
-			area: "Title",
+			field: "Select",
+			area: "",
 			relevance: 1,
 			progress: 1,
 			status: "Wish",
@@ -40,14 +40,19 @@ const Subjects = (props) => {
         }
 	}
 
-
-
 	const mappedFields = props.fields.map(field => 
 		<div key={field.id} className={styles.fieldBox}>
 			<label>{field.title}</label>
 			<ul>
-				<li><button onClick={() => setActiveField({field: field.title, area: ""})} className={((activeField.field === field.title) && (activeField.area === "")) ? styles.activeButton : styles.inactiveButton}>All areas</button></li>
-				{field.areas.map(area => <li key={area.id}><button onClick={() => setActiveField({field: field.title, area: area.title})}className={((activeField.field === field.title) && (activeField.area === area.title)) ? styles.activeButton : styles.inactiveButton}>{area.title}</button></li>)}
+				<li><button onClick={() => 
+					setActiveField({field: field.title, area: ""})} 
+					className={((activeField.field === field.title) && (activeField.area === "")) ? styles.activeButton : styles.inactiveButton}>All areas</button>
+				</li>
+				
+				{field.areas.map(area => 
+					<li key={area.id}>
+						<button onClick={() => setActiveField({field: field.title, area: area.title})}		className={((activeField.field === field.title) && (activeField.area === area.title)) ? styles.activeButton : styles.inactiveButton}>{area.title}</button>
+					</li>)}
 			</ul>
 		</div>
 	);
@@ -127,6 +132,7 @@ const Subjects = (props) => {
 					{mappedSearchedSubjects}
 				</div>
 			</div>
+
 		</>
 	);
 }
