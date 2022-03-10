@@ -100,6 +100,16 @@ const Subject = (props) => {
 		}));
 	}
 
+	const fieldOptions = props.fields.map(field => <option key={field.id}>{field.title}</option>);
+
+	const selectedField = props.fields.find(field => field.title === editSubjectFormData.field);
+	console.log(selectedField);
+
+	const areaOptions = selectedField === undefined ? 
+		<option>Select Field</option> :
+		selectedField.areas.map(area => <option key={area.id}>{area.title}</option>);
+	console.log(areaOptions);
+
 	return (
 		<>
 		<div className={setStyleStatus()} onClick={()=>setEditWindowIsOpen(true)}>
@@ -122,21 +132,19 @@ const Subject = (props) => {
 						
 						<div className={styles.inputBox}>
 							<label>Field: </label>
-							<input
-								type="text" 
-								name="field"
+							<select name="field"
 								value={editSubjectFormData.field}
-								onChange={handleEditSubjectFormChange}
-							/>
+								onChange={handleEditSubjectFormChange}>
+								{fieldOptions}
+							</select>
 						</div>
 						<div className={styles.inputBox}>
 							<label>Area: </label>
-							<input
-								type="text" 
-								name="area"
+							<select name="area"
 								value={editSubjectFormData.area}
-								onChange={handleEditSubjectFormChange}
-							/>
+								onChange={handleEditSubjectFormChange}>
+								{/* {areaOptions} */}
+							</select>
 						</div>
 						<div className={styles.inputBox}>
 							<label>Relevance: </label>

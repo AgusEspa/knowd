@@ -21,6 +21,18 @@
 	padding: 0;
 	margin: 0;
 }
+ul {
+	margin: 0;
+	padding: 0;
+	
+	li {
+		list-style: none;
+		text-decoration: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
 
 .containerGrid {
 	display: grid;
@@ -29,7 +41,53 @@
 }
 
 .explorerContainer {
-	color: white;
+	background-color: variables.$toolbarBackground;
+	border-right: 1px solid variables.$toolbarBorder;
+
+	.fieldBox {
+		border-bottom: 1px solid variables.$toolbarBorder;
+		margin: 0;
+		padding: 1rem;
+
+		label {
+			font-family: variables.$fonts;
+			background-color: transparent;
+			color: variables.$textLightGray;
+			font-size: 1.1rem;
+			padding: 0;
+			margin: 0;
+		}
+
+		button {
+			font-size: 1rem;
+			color: variables.$textLightGray;
+			font-family: variables.$fonts;
+			border-right: 0;
+			border-bottom: 0;
+			border-top: 0;
+			border-left: 3px solid variables.$navbarBorder;
+			height: 1.8rem;
+			padding: .3rem .5rem .3rem .5rem;
+			margin: .3rem 0 0 0;
+			outline: none;
+			cursor: pointer;
+		}
+
+		.inactiveButton {
+			background-color: transparent;
+			transition: all 0.1s ease-out;
+			&:hover {
+				background-color: variables.$navbarBorder;
+				border-left: 3px solid variables.$containerBorder;
+			}
+		}
+
+		.activeButton {
+			background-color: variables.$navbarBorder;
+			border-left: 3px solid variables.$containerBorder;
+			cursor: default;
+		}
+	}
 }
 
 .subjectsContainer {

@@ -3,11 +3,11 @@ import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import Subject from "./Subject";
 import Toolbar from "./Toolbar";
-import Explorer from "./Explorer";
 
 const Subjects = (props) => {
 
-	const [searchTerm, setSearchTerm] = useState("");
+	const [ searchTerm, setSearchTerm ] = useState("");
+	const [ activeField, setActiveField ] = useState({ field: "all", area: "" });
 
 	const api = useAxios();
 
@@ -40,6 +40,18 @@ const Subjects = (props) => {
         }
 	}
 
+
+
+	const mappedFields = props.fields.map(field => 
+		<div key={field.id} className={styles.fieldBox}>
+			<label>{field.title}</label>
+			<ul>
+				<li><button onClick={() => setActiveField({field: field.title, area: ""})} className={((activeField.field === field.title) && (activeField.area === "")) ? styles.activeButton : styles.inactiveButton}>All areas</button></li>
+				{field.areas.map(area => <li key={area.id}><button onClick={() => setActiveField({field: field.title, area: area.title})}className={((activeField.field === field.title) && (activeField.area === area.title)) ? styles.activeButton : styles.inactiveButton}>{area.title}</button></li>)}
+			</ul>
+		</div>
+	);
+
 	const sortFunction = (a, b) => {
 		const fa = a.title.toLowerCase();
 		const fb = b.title.toLowerCase();
@@ -55,10 +67,21 @@ const Subjects = (props) => {
 		else return 0;
 	}
 
+	const displaySubjects = () => {
+		if (activeField.field === "all") { 
+			return props.subjects;
+		} else if (activeField.field !== "all" && activeField.area === "") {
+			return props.subjects.filter(subject => (subject.field === activeField.field));
+		} else {
+			return props.subjects.filter(subject => (subject.field === activeField.field && subject.area === activeField.area));
+		}
+	}
+
 	const searchSubjects = () => {
-		if (searchTerm === "" || searchTerm === undefined) return props.subjects;
+
+		if (searchTerm === "" || searchTerm === undefined) return displaySubjects();
 		else { 
-			return props.subjects.filter(subject => subject.title.toLowerCase().includes(searchTerm.toLowerCase()));
+			return displaySubjects().filter(subject => subject.title.toLowerCase().includes(searchTerm.toLowerCase()));
 		}
 	}
 	
@@ -79,6 +102,7 @@ const Subjects = (props) => {
 						dueDate={subject.dueDate}
 						setSubjects={props.setSubjects}
 						setNetworkError={props.setNetworkError}
+						fields={props.fields}
 					/>);
 
 
@@ -92,7 +116,12 @@ const Subjects = (props) => {
 
 			<div className={styles.containerGrid}>
 
-                <Explorer fields={props.fields}/>
+				<div className={styles.explorerContainer}>
+					<div className={styles.fieldBox}>
+						<button onClick={() => setActiveField({field: "all", area: ""})} 
+							className={(activeField.field === "all") ? styles.activeButton : styles.inactiveButton}>All subjects</button></div>
+					{mappedFields}
+				</div>
 
 				<div className={styles.subjectsContainer}>
 					{mappedSearchedSubjects}
