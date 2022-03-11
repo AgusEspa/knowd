@@ -10,7 +10,6 @@ const Subjects = (props) => {
 	const [ searchTerm, setSearchTerm ] = useState("");
 	const [ activeField, setActiveField ] = useState({ field: "all", area: "" });
 	const [ fieldsManagerIsOpen, setFieldsManagerIsOpen ] = useState(false);
-	const [ editWindowIsOpen, setEditWindowIsOpen ] = useState(false);
 
 
 	const api = useAxios();
@@ -48,7 +47,16 @@ const Subjects = (props) => {
 		setFieldsManagerIsOpen(true);
 	}
 
-	const mappedFields = props.fields.map(field => 
+	const sortFieldsFunction = (a, b) => {
+		const fa = a.title.toLowerCase();
+		const fb = b.title.toLowerCase();
+        
+        if (fa < fb) return -1;
+        else if (fa > fb) return 1;
+		else return 0;
+	}
+
+	const mappedFields = props.fields.sort(sortFieldsFunction).map(field => 
 		<div key={field.id} className={styles.fieldBox}>
 			<label>{field.title}</label>
 			<ul>
@@ -57,7 +65,7 @@ const Subjects = (props) => {
 					className={((activeField.field === field.title) && (activeField.area === "")) ? styles.activeButton : styles.inactiveButton}>All areas</button>
 				</li>
 				
-				{field.areas.map(area => 
+				{field.areas.sort(sortFieldsFunction).map(area => 
 					<li key={area.id}>
 						<button onClick={() => setActiveField({field: field.title, area: area.title})}		className={((activeField.field === field.title) && (activeField.area === area.title)) ? styles.activeButton : styles.inactiveButton}>{area.title}</button>
 					</li>)}
@@ -131,11 +139,13 @@ const Subjects = (props) => {
 			<div className={styles.containerGrid}>
 
 				<div className={styles.explorerContainer}>
+				<div className={styles.fieldContainer}>
 					<div className={styles.fieldBox}>
 						<button onClick={() => setActiveField({field: "all", area: ""})} 
 							className={(activeField.field === "all") ? styles.activeButton : styles.inactiveButton}>All subjects</button>
 					</div>
 					{mappedFields}
+				</div>
 				</div>
 
 				<div className={styles.subjectsContainer}>

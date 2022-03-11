@@ -7,7 +7,7 @@ import modalStyles from "../../styles/Modals.module.scss";
 const FieldsManager = (props) => {
 
 	const [ formData, setFormData ] = useState("");
-	const [ areaFormData, setAreaFormData ] = useState( {title: "", field: ""});
+	const [ areaFormData, setAreaFormData ] = useState( {title: "", fieldId: ""} );
 
 	const api = useAxios();
 
@@ -22,6 +22,7 @@ const FieldsManager = (props) => {
 			...prevState,
 			[name]: value
 		}));
+
 	}
 
 	const handleNewField = async (event) => {
@@ -48,14 +49,17 @@ const FieldsManager = (props) => {
 
 	const handleNewArea = async (event) => {
 		event.preventDefault();
-		const payload = {title: formData};
+		const payload = {title: areaFormData.title};
 
 		try {
-            const response = await api.post(`${fieldId}/areas`, payload);
-			
-			props.setFields(props.fields.concat(response.data));
+            const response = await api.post(`fields/${areaFormData.fieldId}/areas`, payload);
 
-			setFormData("");
+			const fieldObject = props.fields.find(field => field.id === response.data.fieldId);
+			fieldObject.areas.push({ id: response.data.id, title: response.data.title });
+			
+			props.setFields(prevState => ( prevState.filter(field => field.id !== fieldObject.id).concat(fieldObject)));
+
+			setAreaFormData({title: "", fieldId: ""});
             
         } catch (error) {
             if (!error.response || error.response.status >= 500) {
@@ -68,7 +72,7 @@ const FieldsManager = (props) => {
         }
 	}
 
-	const fieldOptions = props.fields.map(field => <option key={field.id}>{field.title}</option>);
+	const fieldOptions = props.fields.map(field => <option key={field.id} value={field.id}>{field.title}</option>);
 
 
 	return (
@@ -84,12 +88,14 @@ const FieldsManager = (props) => {
 					onChange={handleFormChange} />
 					<button>Add</button>
 				</form>
-				<form onSubmit={handleNewField}>
+				<form onSubmit={handleNewArea}>
 					<label>New Area: </label>
-					<select name="field"
-						value={areaFormData.field}
+					<select name="fieldId"
+						type="select"
+						value={areaFormData.fieldId}
 						onChange={handleAreaFormDataChange}>
 						{fieldOptions}
+						<option className={styles.defaultOption} value={""}>-- Select --</option>
 					</select>
 					<input type="text"
 					name="title"
