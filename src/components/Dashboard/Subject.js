@@ -29,6 +29,7 @@ const Subject = (props) => {
 				setSubjects={props.setSubjects}
 				setNetworkError={props.setNetworkError}
 				fields={props.fields}
+				setFields={props.setFields}
 				id={props.id}
 				title={props.title}
 				field={props.field}

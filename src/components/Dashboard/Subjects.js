@@ -3,11 +3,15 @@ import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import Subject from "./Subject";
 import Toolbar from "./Toolbar";
+import FieldsManager from "./FieldsManager";
 
 const Subjects = (props) => {
 
 	const [ searchTerm, setSearchTerm ] = useState("");
 	const [ activeField, setActiveField ] = useState({ field: "all", area: "" });
+	const [ fieldsManagerIsOpen, setFieldsManagerIsOpen ] = useState(false);
+	const [ editWindowIsOpen, setEditWindowIsOpen ] = useState(false);
+
 
 	const api = useAxios();
 
@@ -38,6 +42,10 @@ const Subjects = (props) => {
                 console.log(error.response.data);
             }
         }
+	}
+
+	const handleManageFields = () => {
+		setFieldsManagerIsOpen(true);
 	}
 
 	const mappedFields = props.fields.map(field => 
@@ -115,6 +123,7 @@ const Subjects = (props) => {
 		<>
 			<Toolbar 
 				handleCreateSubject={handleCreateSubject}
+				handleManageFields={handleManageFields}
 				searchTerm={searchTerm}
 				setSearchTerm={setSearchTerm}
 			/>
@@ -124,7 +133,8 @@ const Subjects = (props) => {
 				<div className={styles.explorerContainer}>
 					<div className={styles.fieldBox}>
 						<button onClick={() => setActiveField({field: "all", area: ""})} 
-							className={(activeField.field === "all") ? styles.activeButton : styles.inactiveButton}>All subjects</button></div>
+							className={(activeField.field === "all") ? styles.activeButton : styles.inactiveButton}>All subjects</button>
+					</div>
 					{mappedFields}
 				</div>
 
@@ -132,6 +142,12 @@ const Subjects = (props) => {
 					{mappedSearchedSubjects}
 				</div>
 			</div>
+
+			{fieldsManagerIsOpen && <FieldsManager 
+				fields={props.fields}
+				setFields={props.setFields}
+				setFieldsManagerIsOpen={setFieldsManagerIsOpen}
+			/>}
 
 		</>
 	);

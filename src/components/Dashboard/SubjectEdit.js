@@ -21,6 +21,8 @@ const SubjectEdit = (props) => {
 
 	const handleEditSubjectFormChange = (event) => {
 
+		event.preventDefault();
+
 		setSubjectIsChanged(true);
 
 		const { name, type, value, checked } = event.target;
@@ -56,7 +58,9 @@ const SubjectEdit = (props) => {
         }
 	}
 
-	const handleDeleteSubject = async () => {
+	const handleDeleteSubject = async (event) => {
+
+		event.preventDefault();
 		
 		try {
             await api.delete(`/subjects/${props.id}`);
@@ -77,7 +81,10 @@ const SubjectEdit = (props) => {
 	}
 
 
-	const handleNewDueDate = () => {
+	const handleNewDueDate = (event) => {
+
+		event.preventDefault();
+
 		const newDate = new Date();
 		const currentDay = newDate.getDate();
 		const currentMonth = newDate.getMonth() + 1;

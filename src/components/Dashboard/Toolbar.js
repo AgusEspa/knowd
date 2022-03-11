@@ -14,6 +14,9 @@ const Toolbar = (props) => {
       					  
 			<div className={styles.toolsMenu}>	
 			  	<ul>
+				  	<li>
+					  <button onClick={props.handleManageFields}>Manage Fields</button>
+					</li>
 				  	
 				  	<li>
 						<input type="search" 
