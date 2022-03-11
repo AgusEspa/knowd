@@ -37,18 +37,15 @@ ul {
 	background-color: variables.$toolbarBackground;
 	border-right: 1px solid variables.$toolbarBorder;
 	left: 0;
-	position: fixed;
+	position: relative;
+	overflow: scroll;
+	height: 100%;
+	display: block;
+	margin: 0;
+	padding: .5rem;
 	min-width: 15rem;
 	max-width: 18rem;
-	height: 100%;
-
-	.fieldContainer {
-		overflow: scroll;
-		display: block;
-		position: relative;
-		margin: 0;
-		padding: .5rem;
-		height: 100%;
+		
 
 		.fieldBox {
 			display: block;
@@ -95,13 +92,11 @@ ul {
 				cursor: default;
 			}
 		}
-	}
 }
 
 .subjectsContainer {
 	display: flex;
 	justify-content: left;
-	grid-column: 2;
 	margin: 0;
 	padding: 1rem;
 	background-color: variables.$background;

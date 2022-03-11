@@ -136,19 +136,21 @@ const Subjects = (props) => {
 				setSearchTerm={setSearchTerm}
 			/>
 
-			<div className={styles.explorerContainer}>
-			<div className={styles.fieldContainer}>
-				<div className={styles.fieldBox}>
-					<button onClick={() => setActiveField({field: "all", area: ""})} 
-						className={(activeField.field === "all") ? styles.activeButton : styles.inactiveButton}>All subjects</button>
+			
+				<div className={styles.explorerContainer}>
+					
+					<div className={styles.fieldBox}>
+						<button onClick={() => setActiveField({field: "all", area: ""})} 
+							className={(activeField.field === "all") ? styles.activeButton : styles.inactiveButton}>All fields</button>
+						</div>
+						{mappedFields}
+					
 				</div>
-				{mappedFields}
-			</div>
-			</div>
 
-			<div className={styles.subjectsContainer}>
-				{mappedSearchedSubjects}
-			</div>
+				<div className={styles.subjectsContainer}>
+					{mappedSearchedSubjects}
+				</div>
+			
 
 			{fieldsManagerIsOpen && <FieldsManager 
 				fields={props.fields}

@@ -128,7 +128,9 @@ const SubjectEdit = (props) => {
 								value={editSubjectFormData.field}
 								onChange={handleEditSubjectFormChange}>
 								{fieldOptions}
-								<option className={styles.defaultOption} value={"Select" || ""}>-- Select --</option>
+								{editSubjectFormData.field === "Select" || "" ?
+								<option className={styles.defaultOption} value={"Select" || ""}>-- Select --</option> :
+								<option>{editSubjectFormData.field}</option>}
 							</select>
 						</div>
 						<div className={styles.inputBox}>
