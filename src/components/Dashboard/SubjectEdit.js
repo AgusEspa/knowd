@@ -96,7 +96,7 @@ const SubjectEdit = (props) => {
 		}));
 	}
 
-	const fieldOptions = props.fields.map(field => <option key={field.id}>{field.title}</option>);
+	const fieldOptions = props.fields.filter(fieldItem => fieldItem.title !== props.field).map(field => <option key={field.id}>{field.title}</option>);
 
 	const selectedFieldAreas = () => {
 		const selectedField = props.fields.find(field => field.title === editSubjectFormData.field);
@@ -105,7 +105,7 @@ const SubjectEdit = (props) => {
 		else return selectedField;
 	}  
 
-	const areaOptions = selectedFieldAreas().length !== 0 ? selectedFieldAreas().areas.map(area => <option key={area.id}>{area.title}</option>) : <option className={styles.defaultOption}>** empty **</option>;
+	const areaOptions = selectedFieldAreas().length !== 0 ? selectedFieldAreas().areas.filter(areaItem => areaItem.title !== props.area).map(area => <option key={area.id}>{area.title}</option>) : <option className={styles.defaultOption}>** empty **</option>;
 
 
 	return (
@@ -140,6 +140,9 @@ const SubjectEdit = (props) => {
 								onChange={handleEditSubjectFormChange}>
 								<option value="">None</option>
 								{areaOptions}
+								{editSubjectFormData.field === "Select" || "" ?
+								<option value={ ""}>None</option> :
+								<option>{editSubjectFormData.area}</option>}
 								
 							</select>
 						</div>
