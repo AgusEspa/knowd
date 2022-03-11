@@ -7,6 +7,8 @@
 	margin: .5rem;
 	cursor: pointer;
 	width: 11rem;
+	height: 3rem;
+	overflow: scroll;
 	transition: all 0.1s ease-out;
 	&:hover {
 		background-color: variables.$navbarBorder;
@@ -34,16 +36,18 @@ ul {
 }
 
 .mainContainer {
-	display: flex;
+	display: grid;
+	columns: 2;
 
 	.explorerContainer {
+		grid-column: 1;
 		background-color: variables.$toolbarBackground;
 		border-right: 1px solid variables.$toolbarBorder;
 		display: block;
 		margin: 0;
 		padding: .5rem;
-		min-width: 15rem;
-		max-width: 18rem;
+		max-width: 17rem;
+		min-width: 14rem;
 		height: 84vh;
     	overflow: auto;
 	
@@ -60,20 +64,20 @@ ul {
 					font-family: variables.$fonts;
 					background-color: transparent;
 					color: variables.$textLightGray;
-					font-size: 1.1rem;
+					font-size: 1rem;
 					padding: 0;
 					margin: 0;
 				}
 	
 				button {
-					font-size: 1rem;
+					font-size: 0.9rem;
 					color: variables.$textLightGray;
 					font-family: variables.$fonts;
+					text-align: left;
 					border-right: 0;
 					border-bottom: 0;
 					border-top: 0;
 					border-left: 3px solid variables.$navbarBorder;
-					height: 1.8rem;
 					padding: .3rem .5rem .3rem .5rem;
 					margin: .3rem 0 0 0;
 					outline: none;
@@ -99,9 +103,13 @@ ul {
 	}
 	
 	.subjectsContainer {
-		display: inline-block;
+		grid-column: 2;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: flex-start;
 		padding: 1rem;
 		background-color: variables.$background;
+		margin: 0;
 	
 		.subjectBoxWish {
 			@include subjectDiv();
