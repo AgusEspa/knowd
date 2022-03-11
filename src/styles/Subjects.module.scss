@@ -45,7 +45,7 @@ ul {
 		border-right: 1px solid variables.$toolbarBorder;
 		display: block;
 		margin: 0;
-		padding: .5rem;
+		padding: .5rem 0 .5rem .5rem; 
 		max-width: 17rem;
 		min-width: 14rem;
 		height: 84vh;
@@ -56,7 +56,7 @@ ul {
 	
 			.fieldBox {
 				display: block;
-				border-bottom: 1px solid variables.$toolbarBorder;
+				border-bottom: 1px solid variables.$navbarBorder;
 				margin: 0;
 				padding: 1rem;
 	
@@ -64,7 +64,8 @@ ul {
 					font-family: variables.$fonts;
 					background-color: transparent;
 					color: variables.$textLightGray;
-					font-size: 1rem;
+					font-size: 1.05rem;
+					font-weight: 800;
 					padding: 0;
 					margin: 0;
 				}
