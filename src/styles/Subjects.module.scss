@@ -33,120 +33,124 @@ ul {
 	}
 }
 
-.explorerContainer {
-	background-color: variables.$toolbarBackground;
-	border-right: 1px solid variables.$toolbarBorder;
-	left: 0;
-	position: relative;
-	overflow: scroll;
-	height: 100%;
-	display: block;
-	margin: 0;
-	padding: .5rem;
-	min-width: 15rem;
-	max-width: 18rem;
-		
+.mainContainer {
+	display: flex;
 
-		.fieldBox {
+	.explorerContainer {
+		background-color: variables.$toolbarBackground;
+		border-right: 1px solid variables.$toolbarBorder;
+		display: block;
+		margin: 0;
+		padding: .5rem;
+		min-width: 15rem;
+		max-width: 18rem;
+		height: 84vh;
+    	overflow: auto;
+	
+		.fieldsContainer {
 			display: block;
-			border-bottom: 1px solid variables.$toolbarBorder;
-			margin: 0;
-			padding: 1rem;
-
-			label {
-				font-family: variables.$fonts;
-				background-color: transparent;
-				color: variables.$textLightGray;
-				font-size: 1.1rem;
-				padding: 0;
+	
+			.fieldBox {
+				display: block;
+				border-bottom: 1px solid variables.$toolbarBorder;
 				margin: 0;
-			}
-
-			button {
-				font-size: 1rem;
-				color: variables.$textLightGray;
-				font-family: variables.$fonts;
-				border-right: 0;
-				border-bottom: 0;
-				border-top: 0;
-				border-left: 3px solid variables.$navbarBorder;
-				height: 1.8rem;
-				padding: .3rem .5rem .3rem .5rem;
-				margin: .3rem 0 0 0;
-				outline: none;
-				cursor: pointer;
-			}
-
-			.inactiveButton {
-				background-color: transparent;
-				transition: all 0.1s ease-out;
-				&:hover {
+				padding: 1rem;
+	
+				label {
+					font-family: variables.$fonts;
+					background-color: transparent;
+					color: variables.$textLightGray;
+					font-size: 1.1rem;
+					padding: 0;
+					margin: 0;
+				}
+	
+				button {
+					font-size: 1rem;
+					color: variables.$textLightGray;
+					font-family: variables.$fonts;
+					border-right: 0;
+					border-bottom: 0;
+					border-top: 0;
+					border-left: 3px solid variables.$navbarBorder;
+					height: 1.8rem;
+					padding: .3rem .5rem .3rem .5rem;
+					margin: .3rem 0 0 0;
+					outline: none;
+					cursor: pointer;
+				}
+	
+				.inactiveButton {
+					background-color: transparent;
+					transition: all 0.1s ease-out;
+					&:hover {
+						background-color: variables.$navbarBorder;
+						border-left: 3px solid variables.$containerBorder;
+					}
+				}
+	
+				.activeButton {
 					background-color: variables.$navbarBorder;
 					border-left: 3px solid variables.$containerBorder;
+					cursor: default;
 				}
 			}
-
-			.activeButton {
-				background-color: variables.$navbarBorder;
-				border-left: 3px solid variables.$containerBorder;
-				cursor: default;
+		}
+	}
+	
+	.subjectsContainer {
+		display: inline-block;
+		padding: 1rem;
+		background-color: variables.$background;
+	
+		.subjectBoxWish {
+			@include subjectDiv();
+			border: 1px solid variables.$wish;
+			border-bottom: 2px solid variables.$wish;
+			h3 {
+				@include subjectTitle();
+			}
+			.needsAttentionTrue {
+				color: variables.$attention;
+				font-weight: 500;
+			}
+			.needsAttentionFalse {
+				color: variables.$textLightGray;
 			}
 		}
+		.subjectBoxLearning {
+			@include subjectDiv();
+			border: 1px solid variables.$learning;
+			border-bottom: 2px solid variables.$learning;
+			h3 {
+				@include subjectTitle();
+			}
+			.needsAttentionTrue {
+				color: variables.$attention;
+				font-weight: 500;
+			}
+			.needsAttentionFalse {
+				color: variables.$textLightGray;
+			}
+		}
+		.subjectBoxMastered {
+			@include subjectDiv();
+			border: 1px solid variables.$mastered;
+			border-bottom: 2px solid variables.$mastered;
+			h3 {
+				@include subjectTitle();
+			}
+			.needsAttentionTrue {
+				color: variables.$attention;
+				font-weight: 500;
+			}
+			.needsAttentionFalse {
+				color: variables.$textLightGray;
+			}
+		}	
+	}
 }
 
-.subjectsContainer {
-	display: flex;
-	justify-content: left;
-	margin: 0;
-	padding: 1rem;
-	background-color: variables.$background;
-
-	.subjectBoxWish {
-		@include subjectDiv();
-		border: 1px solid variables.$wish;
-		border-bottom: 2px solid variables.$wish;
-		h3 {
-			@include subjectTitle();
-		}
-		.needsAttentionTrue {
-			color: variables.$attention;
-			font-weight: 500;
-		}
-		.needsAttentionFalse {
-			color: variables.$textLightGray;
-		}
-	}
-	.subjectBoxLearning {
-		@include subjectDiv();
-		border: 1px solid variables.$learning;
-		border-bottom: 2px solid variables.$learning;
-		h3 {
-			@include subjectTitle();
-		}
-		.needsAttentionTrue {
-			color: variables.$attention;
-			font-weight: 500;
-		}
-		.needsAttentionFalse {
-			color: variables.$textLightGray;
-		}
-	}
-	.subjectBoxMastered {
-		@include subjectDiv();
-		border: 1px solid variables.$mastered;
-		border-bottom: 2px solid variables.$mastered;
-		h3 {
-			@include subjectTitle();
-		}
-		.needsAttentionTrue {
-			color: variables.$attention;
-			font-weight: 500;
-		}
-		.needsAttentionFalse {
-			color: variables.$textLightGray;
-		}
-	}	
-}
 
 .editWindow {
 	background-color: variables.$containerBackground;
