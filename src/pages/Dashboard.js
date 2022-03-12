@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import useAxios from "../utils/useAxios";
+import { nanoid } from 'nanoid'
 import Navbar from "../components/Dashboard/Navbar/Navbar";
 import Notification from "../components/Dashboard/Notification";
 import Subjects from "../components/Dashboard/Subjects";
@@ -39,26 +40,49 @@ const Dashboard = () => {
     }
 
     useEffect( () => {
-        getFields();
         getSubjects();
     }, []);
 
-    const getFields = async () => {
 
-        try {
-            const response = await api.get("/fields");
-			setFields(response.data);
+    useEffect( () => {
+        const rawFieldData = subjects.map(subject => ({field: subject.field, area: subject.area}));
+        const mappedFieldsSet = new Set();
+        rawFieldData.filter(fieldObject => fieldObject.field !== "All").map(fieldObject => mappedFieldsSet.add(fieldObject.field));
+
+        const fieldObjects = [];
+
+        const sortFieldsFunction = (a, b) => {
+            const fa = a.toLowerCase();
+            const fb = b.toLowerCase();
             
-        } catch (error) {
-            if (!error.response || error.response.status >= 500) {
-                setNetworkError("Unable to contact the server. Please try again later.");
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                setNetworkError("");
-            } else {
-                console.log(error.response.data);
-            }
+            if (fa < fb) return -1;
+            else if (fa > fb) return 1;
+            else return 0;
         }
-    }
+
+        const mappedFields = [...mappedFieldsSet].sort(sortFieldsFunction);
+
+        
+        mappedFields.forEach(field => {
+            const mappedAreasSet = new Set();
+
+            rawFieldData.forEach(fieldObject => {
+                if (fieldObject.field === field && fieldObject.area !== "All") mappedAreasSet.add(fieldObject.area)
+            });
+
+            const mappedAreas = [...mappedAreasSet].sort(sortFieldsFunction);
+
+            const areaObjectsList = [];
+
+            mappedAreas.forEach(areaItem => areaObjectsList.push({area: areaItem, areaId: nanoid()}));
+
+            fieldObjects.push( {field: field, fieldId: nanoid(), areas: areaObjectsList} )
+        });
+
+        setFields(fieldObjects);
+        console.log(fieldObjects);
+
+    }, [subjects]);
 
     const getSubjects = async () => {
 
@@ -85,7 +109,6 @@ const Dashboard = () => {
                 subjects={subjects}
                 setSubjects={setSubjects} 
                 fields={fields}
-                setFields={setFields}
             />
             
             {(networkError !== "") &&
