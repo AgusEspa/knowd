@@ -27,10 +27,18 @@ const SubjectEdit = (props) => {
 
 		const { name, type, value, checked } = event.target;
 
-		setEditSubjectFormData( prevState => ( {
-			...prevState,
-			[name]: type === "checkbox" ? checked : value
-		}));
+		if (event.target.name === "field") {
+			setEditSubjectFormData( prevState => ( {
+				...prevState,
+				field: value,
+				area: "All"
+			}));
+		} else {
+			setEditSubjectFormData( prevState => ( {
+				...prevState,
+				[name]: type === "checkbox" ? checked : value
+			}));
+		}
 	}
 
 	const handleEditSubject = async (event) => {
@@ -96,16 +104,11 @@ const SubjectEdit = (props) => {
 		}));
 	}
 
-	const fieldOptions = props.fields.filter(fieldItem => fieldItem.title !== props.field).map(field => <option key={field.id}>{field.title}</option>);
+	const fieldOptions = props.fields.filter(fieldObject => fieldObject.field !== props.field).map(fieldObject => <option key={fieldObject.fieldId}>{fieldObject.field}</option>);
 
-	const selectedFieldAreas = () => {
-		const selectedField = props.fields.find(field => field.title === editSubjectFormData.field);
-		if (selectedField === undefined) return [];
-		else if (selectedField.areas.length === 0) return [];
-		else return selectedField;
-	}  
+	const selectedField = props.fields.find(fieldObject => fieldObject.field === editSubjectFormData.field);
 
-	const areaOptions = selectedFieldAreas().length !== 0 ? selectedFieldAreas().areas.filter(areaItem => areaItem.title !== props.area).map(area => <option key={area.id}>{area.title}</option>) : <option className={styles.defaultOption}>** empty **</option>;
+	const areaOptions = selectedField.areas.filter(areaItem => areaItem.area !== props.area).map(areaItem => <option key={areaItem.areaId}>{areaItem.area}</option>);
 
 
 	return (
@@ -127,10 +130,9 @@ const SubjectEdit = (props) => {
 							<select name="field"
 								value={editSubjectFormData.field}
 								onChange={handleEditSubjectFormChange}>
+								<option>{editSubjectFormData.field}</option>
 								{fieldOptions}
-								{editSubjectFormData.field === "Select" || "" ?
-								<option className={styles.defaultOption} value={"Select" || ""}>-- Select --</option> :
-								<option>{editSubjectFormData.field}</option>}
+								{editSubjectFormData.field !== "All" &&								<option>All</option>}
 							</select>
 						</div>
 						<div className={styles.inputBox}>
@@ -138,10 +140,10 @@ const SubjectEdit = (props) => {
 							<select name="area"
 								value={editSubjectFormData.area}
 								onChange={handleEditSubjectFormChange}>
+								<option>{editSubjectFormData.area}</option>
 								{areaOptions}
-								{editSubjectFormData.field === "Select" || "" ?
-								<option value={""}>None</option> :
-								<option>{editSubjectFormData.area}</option>}
+								{editSubjectFormData.area !== "All" &&
+								<option>All</option>}
 							</select>
 						</div>
 						<div className={styles.inputBox}>

@@ -3,7 +3,6 @@ import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import Subject from "./Subject";
 import Toolbar from "./Toolbar";
-import FieldsManager from "./FieldsManager";
 
 const Subjects = (props) => {
 
@@ -19,7 +18,7 @@ const Subjects = (props) => {
 		const newSubjectTemplate = {
 			title: "New Subject", 
 			field: "Select",
-			area: "",
+			area: "All",
 			relevance: 1,
 			progress: 1,
 			status: "Wish",
@@ -47,27 +46,19 @@ const Subjects = (props) => {
 		setFieldsManagerIsOpen(true);
 	}
 
-	const sortFieldsFunction = (a, b) => {
-		const fa = a.title.toLowerCase();
-		const fb = b.title.toLowerCase();
-        
-        if (fa < fb) return -1;
-        else if (fa > fb) return 1;
-		else return 0;
-	}
+	const mappedFields = props.fields.map(fieldObject => 
+		<div key={fieldObject.fieldId} className={styles.fieldBox}>
 
-	const mappedFields = props.fields.sort(sortFieldsFunction).map(field => 
-		<div key={field.id} className={styles.fieldBox}>
-			<label>{field.title}</label>
+			<label>{fieldObject.field}</label>
 			<ul>
 				<li><button onClick={() => 
-					setActiveField({field: field.title, area: ""})} 
-					className={((activeField.field === field.title) && (activeField.area === "")) ? styles.activeButton : styles.inactiveButton}>All areas</button>
+					setActiveField({field: fieldObject.field, area: ""})} 
+					className={((activeField.field === fieldObject.field) && (activeField.area === "")) ? styles.activeButton : styles.inactiveButton}>All areas</button>
 				</li>
 				
-				{field.areas.sort(sortFieldsFunction).map(area => 
-					<li key={area.id}>
-						<button onClick={() => setActiveField({field: field.title, area: area.title})}		className={((activeField.field === field.title) && (activeField.area === area.title)) ? styles.activeButton : styles.inactiveButton}>{area.title}</button>
+				{fieldObject.areas.map(areaItem => 
+					<li key={areaItem.areaId}>
+						<button onClick={() => setActiveField({field: fieldObject.field, area: areaItem.area})}		className={((activeField.field === fieldObject.field) && (activeField.area === areaItem.area)) ? styles.activeButton : styles.inactiveButton}>{areaItem.area}</button>
 					</li>)}
 			</ul>
 		</div>
@@ -152,12 +143,6 @@ const Subjects = (props) => {
 					{mappedSearchedSubjects}
 				</div>
 			</div>
-
-			{fieldsManagerIsOpen && <FieldsManager 
-				fields={props.fields}
-				setFields={props.setFields}
-				setFieldsManagerIsOpen={setFieldsManagerIsOpen}
-			/>}
 
 		</>
 	);
