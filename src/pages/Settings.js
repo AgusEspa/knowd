@@ -236,6 +236,7 @@ const Settings = () => {
     const handleDeleteUser = async (event) => {
         event.preventDefault();
 
+        setModalIsOpen(false);
         setIsLoading(true);
         setButtonIsEnabled(false);
 
