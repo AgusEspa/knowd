@@ -80,7 +80,6 @@ const Dashboard = () => {
         });
 
         setFields(fieldObjects);
-        console.log(fieldObjects);
 
     }, [subjects]);
 
