@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../../styles/Subjects.module.scss";
+import AreaEdit from "./AreaEdit";
 
 const FieldEdit = (props) => {
 
@@ -17,20 +18,29 @@ const FieldEdit = (props) => {
 		console.log("editing");
 	}
 
+	const mappedAreasForEditing = props.field.areas.map(area => 
+		<div className={styles.inputAreaBox} key={area.id}>
+			<AreaEdit 
+				area={area}
+			/>
+		</div>
+	);
+
 	return (
+		<>
 		<form onSubmit={handleEditField}>
-			<div className={styles.inputFieldsBox}>
-				<input type="text"
-					onChange={handleFormChange}
-					name="formData"
-					value={formFieldData} 
-				/>
+			<input type="text"
+				onChange={handleFormChange}
+				name="formData"
+				value={formFieldData} 
+			/>
 				
 				<button>Save</button>
 				
 				<button type="button" onClick={handleDeleteField}>Save</button>
-			</div>
 		</form>
+		{mappedAreasForEditing}
+		</>
 	)
 }
 
