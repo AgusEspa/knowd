@@ -138,10 +138,9 @@ const SubjectEdit = (props) => {
 							<select name="area"
 								value={editSubjectFormData.area}
 								onChange={handleEditSubjectFormChange}>
-								<option value="">None</option>
 								{areaOptions}
 								{editSubjectFormData.field === "Select" || "" ?
-								<option value={ ""}>None</option> :
+								<option value={""}>None</option> :
 								<option>{editSubjectFormData.area}</option>}
 								
 							</select>
