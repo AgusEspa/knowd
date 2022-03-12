@@ -192,17 +192,6 @@ ul {
 				border: 1px solid variables.$textLightGray;
 			}
 	}
-
-	h3 {
-		@include subjectTitle();
-		font-size: 1.1rem;
-		color: variables.$textLightGray;
-		padding-top: 2rem;
-	}
-
-	.firstTitle {
-		padding: 0;
-	}
 	
 
 	.inputBox {
@@ -265,104 +254,6 @@ ul {
 			}
 		}
 
-		.defaultOption {
-			color: variables.$toolbarBorder;
-		}
-	}
-
-	.inputFieldsBox, .inputAreaBox {
-		margin-top: 1rem;
-		justify-content: left;
-		align-items: center;
-		margin: 1rem 0 0 0;
-
-		p, label {
-			font-family: variables.$fonts;
-			font-size: 1rem;
-			color: variables.$textLightGray;
-			text-align: left;
-		}
-
-		h3 {
-			font-family: variables.$fonts;
-			font-size: 1.1rem;
-			color: variables.$textLightGray;
-			text-align: left;
-		}
-	
-		input, textarea, button, select {
-			font-size: 1rem;
-			color: variables.$textLightGray;
-			font-family: variables.$fonts;
-			background-color: variables.$inputDarkBackground;
-			border: 1px solid variables.$inputDarkBorder;
-			height: 1.8rem;
-			border-radius: 0.3rem;
-			padding: .3rem .5rem .3rem .5rem;
-			margin: 0;
-			width: 10rem;
-			outline: none;
-			&:active, &:focus, &:hover {
-				border: 1px solid variables.$textLightGray;
-			}
-		}
-
-		.blockInput {
-			display: block;
-		}
-
-		.checkbox {
-			width: 1rem;
-			outline: none;
-			&:checked {
-				background-color: variables.$attention;
-			}
-		}
-	
-		.numberInput {
-			width: 3.5rem;
-			margin: 0 .3rem 0 .3rem;
-		}
-
-		button, select {
-			cursor: pointer;
-			height: 2.53rem;
-			width: min-content;
-
-			.wish {
-				color: variables.$wish;
-			}
-			.learning {
-				color: variables.$learning;
-			}
-			.mastered {
-				color: variables.$mastered;
-			}
-		}
-
-		.defaultOption {
-			color: variables.$toolbarBorder;
-		}
-
-		.inputAreasContainer {
-			display: block;
-			border-left: 1px solid variables.$toolbarBorder;
-			padding: 0 0 0 0.7rem;
-			margin-top: 0.5rem;
-			margin-left: 0.3rem;
-	
-			.inputAreaBox {
-				margin: 0;
-				input {
-					margin: 0;
-					font-size: 0.9rem;
-					height: 1.4rem;
-				}
-				button {
-					height: fit-content;
-				}
-			}
-		}
 	}
 
 	.buttonsContainer {
