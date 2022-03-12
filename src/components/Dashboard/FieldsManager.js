@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import modalStyles from "../../styles/Modals.module.scss";
+import FieldEdit from "./FieldEdit";
 
 
 const FieldsManager = (props) => {
@@ -74,35 +75,51 @@ const FieldsManager = (props) => {
 
 	const fieldOptions = props.fields.map(field => <option key={field.id} value={field.id}>{field.title}</option>);
 
+	const mappedFieldsForEditing = props.fields.map(field => 
+		<div className={styles.inputFieldsBox} key={field.id}>
+			<FieldEdit 
+				field={field}
+			/>
+		</div>
+	);
+
 
 	return (
 		<>
 			<div className={modalStyles.backdrop} onClick={() => props.setFieldsManagerIsOpen(false)} />
 			<div className={modalStyles.modalContainer}>
 				<div className={styles.editWindow}>
-				<form onSubmit={handleNewField}>
-					<label>New Field: </label>
-					<input type="text"
-					name="formData"
-					value={formData}
-					onChange={handleFormChange} />
-					<button>Add</button>
-				</form>
-				<form onSubmit={handleNewArea}>
-					<label>New Area: </label>
-					<select name="fieldId"
-						type="select"
-						value={areaFormData.fieldId}
-						onChange={handleAreaFormDataChange}>
-						{fieldOptions}
-						<option className={styles.defaultOption} value={""}>-- Select --</option>
-					</select>
-					<input type="text"
-					name="title"
-					value={areaFormData.title}
-					onChange={handleAreaFormDataChange} />
-					<button>Add</button>
-				</form>
+					<div className={styles.inputFieldsBox}>
+						<form onSubmit={handleNewField}>
+						
+							<label>New Field: </label>
+							<input type="text"
+							name="formData"
+							value={formData}
+							onChange={handleFormChange} />
+							<button>Add</button>	
+						</form>
+					</div>
+					<div className={styles.inputFieldsBox}>
+						<form onSubmit={handleNewArea}>
+							<label>New Area: </label>
+							<select name="fieldId"
+								type="select"
+								value={areaFormData.fieldId}
+								onChange={handleAreaFormDataChange}>
+								{fieldOptions}
+								<option className={styles.defaultOption} value={""}>-- Select --</option>
+							</select>
+							<input type="text"
+							name="title"
+							value={areaFormData.title}
+							onChange={handleAreaFormDataChange} />
+							<button>Add</button>
+						</form>
+					</div>
+
+					<h3>Edit and delete</h3>
+					{mappedFieldsForEditing}
 				</div>
 			</div>
 		</>

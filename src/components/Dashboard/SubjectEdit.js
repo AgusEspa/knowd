@@ -142,7 +142,6 @@ const SubjectEdit = (props) => {
 								{editSubjectFormData.field === "Select" || "" ?
 								<option value={""}>None</option> :
 								<option>{editSubjectFormData.area}</option>}
-								
 							</select>
 						</div>
 						<div className={styles.inputBox}>
