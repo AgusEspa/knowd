@@ -170,6 +170,9 @@ ul {
 	border-radius: .5rem;
 	border: 1px solid variables.$containerBorder;
 	padding: 1rem;
+	max-height: 70vh;
+	max-width: 30vw;
+	overflow: scroll;
 
 	textarea {
 		resize: none;
@@ -191,12 +194,16 @@ ul {
 	}
 
 	h3 {
-		font-family: variables.$fonts;
+		@include subjectTitle();
 		font-size: 1.1rem;
 		color: variables.$textLightGray;
-		text-align: left;
-		padding-top: .5rem;
+		padding-top: 2rem;
 	}
+
+	.firstTitle {
+		padding: 0;
+	}
+	
 
 	.inputBox {
 		display: flex;
@@ -264,7 +271,6 @@ ul {
 	}
 
 	.inputFieldsBox, .inputAreaBox {
-		display: flex;
 		margin-top: 1rem;
 		justify-content: left;
 		align-items: center;
@@ -285,7 +291,7 @@ ul {
 		}
 	
 		input, textarea, button, select {
-			font-size: 0.9rem;
+			font-size: 1rem;
 			color: variables.$textLightGray;
 			font-family: variables.$fonts;
 			background-color: variables.$inputDarkBackground;
@@ -293,30 +299,16 @@ ul {
 			height: 1.8rem;
 			border-radius: 0.3rem;
 			padding: .3rem .5rem .3rem .5rem;
-			margin: 0 0 0 .3rem;
-			width: 12rem;
+			margin: 0;
+			width: 10rem;
 			outline: none;
 			&:active, &:focus, &:hover {
 				border: 1px solid variables.$textLightGray;
 			}
 		}
 
-		button {
-			font-size: 0.9rem;
-			color: variables.$textLightGray;
-			font-family: variables.$fonts;
-			background-color: variables.$inputDarkBackground;
-			border: 1px solid variables.$inputDarkBorder;
-			height: 1.8rem;
-			border-radius: 0.3rem;
-			padding: .3rem .5rem .3rem .5rem;
-			margin: 0 0 0 .3rem;
-			width: 12rem;
-			outline: none;
-			transition: all 0.1s ease-out;
-			&:hover {
-				border: 1px solid variables.$textLightGray;
-			}
+		.blockInput {
+			display: block;
 		}
 
 		.checkbox {
@@ -350,6 +342,26 @@ ul {
 
 		.defaultOption {
 			color: variables.$toolbarBorder;
+		}
+
+		.inputAreasContainer {
+			display: block;
+			border-left: 1px solid variables.$toolbarBorder;
+			padding: 0 0 0 0.7rem;
+			margin-top: 0.5rem;
+			margin-left: 0.3rem;
+	
+			.inputAreaBox {
+				margin: 0;
+				input {
+					margin: 0;
+					font-size: 0.9rem;
+					height: 1.4rem;
+				}
+				button {
+					height: fit-content;
+				}
+			}
 		}
 	}
 

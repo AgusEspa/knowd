@@ -31,15 +31,17 @@ const FieldEdit = (props) => {
 		<form onSubmit={handleEditField}>
 			<input type="text"
 				onChange={handleFormChange}
-				name="formData"
+				name="formFieldData"
 				value={formFieldData} 
 			/>
 				
 				<button>Save</button>
 				
-				<button type="button" onClick={handleDeleteField}>Save</button>
+				<button type="button" onClick={handleDeleteField}>Delete</button>
 		</form>
-		{mappedAreasForEditing}
+		<div className={styles.inputAreasContainer}>
+			{mappedAreasForEditing}
+		</div>
 		</>
 	)
 }

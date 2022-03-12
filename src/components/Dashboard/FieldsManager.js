@@ -89,6 +89,8 @@ const FieldsManager = (props) => {
 			<div className={modalStyles.backdrop} onClick={() => props.setFieldsManagerIsOpen(false)} />
 			<div className={modalStyles.modalContainer}>
 				<div className={styles.editWindow}>
+
+					<h3 className={styles.firstTitle}>New Fields and Areas of Study</h3>
 					<div className={styles.inputFieldsBox}>
 						<form onSubmit={handleNewField}>
 						
@@ -96,6 +98,7 @@ const FieldsManager = (props) => {
 							<input type="text"
 							name="formData"
 							value={formData}
+							placeholder="Field title"
 							onChange={handleFormChange} />
 							<button>Add</button>	
 						</form>
@@ -108,17 +111,18 @@ const FieldsManager = (props) => {
 								value={areaFormData.fieldId}
 								onChange={handleAreaFormDataChange}>
 								{fieldOptions}
-								<option className={styles.defaultOption} value={""}>-- Select --</option>
+								<option className={styles.defaultOption} value={""}>-- Select Field --</option>
 							</select>
 							<input type="text"
 							name="title"
 							value={areaFormData.title}
+							placeholder="Area title"
 							onChange={handleAreaFormDataChange} />
 							<button>Add</button>
 						</form>
 					</div>
 
-					<h3>Edit and delete</h3>
+					<h3>Edit Existing Fields and Areas</h3>
 					{mappedFieldsForEditing}
 				</div>
 			</div>

@@ -3,10 +3,10 @@ import styles from "../../styles/Subjects.module.scss";
 
 const AreaEdit = (props) => {
 
-	const [ formAreaData, setFormAreaData ] = useState(props.field.title);
+	const [ formAreaData, setFormAreaData ] = useState(props.area.title);
 
 	const handleFormChange = (event) => {
-		setFormFieldData(event.target.value);
+		setFormAreaData(event.target.value);
 	}
 
 	const handleDeleteField = () => {
@@ -19,17 +19,17 @@ const AreaEdit = (props) => {
 
 	return (
 		<form onSubmit={handleEditField}>
-			<div className={styles.inputFieldsBox}>
+
 				<input type="text"
 					onChange={handleFormChange}
-					name="formData"
-					value={formFieldData} 
+					name="formAreaData"
+					value={formAreaData} 
 				/>
 				
 				<button>Save</button>
 				
-				<button type="button" onClick={handleDeleteField}>Save</button>
-			</div>
+				<button type="button" onClick={handleDeleteField}>Delete</button>
+
 		</form>
 	)
 }
