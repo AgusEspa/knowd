@@ -12,7 +12,7 @@ const Dashboard = () => {
     const [ subjects, setSubjects ] = useState([]);
     const [ fields, setFields ] = useState([]); 
     const [ isLoading, setIsLoading ] = useState(false);
-    const [ networkError, setNetworkError ] = useState("");
+    const [ notification, setNotification ] = useState({message: "", type: ""});
 
     const api = useAxios();
 
@@ -33,10 +33,9 @@ const Dashboard = () => {
             ));
             
         } catch (error) {
-
-            setNetworkError("Unable to verify identity. Try again later.");
+            setNotification(prevState => ({message: "Unable to verify identity. Please try again later.", type: "error"}));
             await new Promise(resolve => setTimeout(resolve, 10000));
-            setNetworkError("");
+            setNotification(prevState => ({message: "", type: ""}));
         }
     }
 
@@ -98,9 +97,9 @@ const Dashboard = () => {
             setIsLoading(false);
 
             if (!error.response || error.response.status >= 500) {
-                setNetworkError("Unable to contact the server. Please try again later.");
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                setNetworkError("");
+                setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                await new Promise(resolve => setTimeout(resolve, 6000));
+                setNotification(prevState => ({message: "", type: ""}));
             } else {
                 console.log(error.response.data);
             }
@@ -115,14 +114,14 @@ const Dashboard = () => {
                 subjects={subjects}
                 setSubjects={setSubjects} 
                 fields={fields}
-                setNetworkError={setNetworkError}
+                setNotification={setNotification}
                 isLoading={isLoading}
             />
             
-            {(networkError !== "") &&
+            {(notification.message !== "") &&
             <Notification 
-                message={networkError} 
-                type={"error"}
+                message={notification.message} 
+                type={notification.type}
             />}
             
         </>

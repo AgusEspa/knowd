@@ -60,9 +60,9 @@ const SubjectCreate = (props) => {
         } catch (error) {
 			setIsLoading(false);
             if (!error.response || error.response.status >= 500) {
-                props.setNetworkError("Unable to contact the server. Please try again later.");
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                props.setNetworkError("");
+                props.setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                await new Promise(resolve => setTimeout(resolve, 6000));
+                props.setNotification(prevState => ({message: "", type: ""}));
             } else {
                 console.log(error.response.data);
             }

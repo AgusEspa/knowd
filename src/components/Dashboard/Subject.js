@@ -27,7 +27,7 @@ const Subject = (props) => {
 			<SubjectEdit 
 				setEditWindowIsOpen={setEditWindowIsOpen}
 				setSubjects={props.setSubjects}
-				setNetworkError={props.setNetworkError}
+				setNotification={props.setNotification}
 				fields={props.fields}
 				id={props.id}
 				title={props.title}
