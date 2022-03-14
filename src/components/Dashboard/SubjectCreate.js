@@ -9,8 +9,8 @@ const SubjectCreate = (props) => {
 
 	const [ subjectFormData, setSubjectFormData ] = useState( () => ({
 		title: "", 
-		field: "",
-		area: "",
+		field: props.activeField.field,
+		area: props.activeField.area,
 		relevance: 5,
 		progress: 50,
 		status: "Wish",

@@ -8,7 +8,7 @@ import SubjectCreate from "./SubjectCreate";
 const Subjects = (props) => {
 
 	const [ searchTerm, setSearchTerm ] = useState("");
-	const [ activeField, setActiveField ] = useState({ field: "all", area: "" });
+	const [ activeField, setActiveField ] = useState({ field: "", area: "" });
 	const [ newSubjectsWindowIsOpen, setNewSubjectsWindowIsOpen ] = useState(false);
 
 	const mappedFields = props.fields.map(fieldObject => 
@@ -32,8 +32,8 @@ const Subjects = (props) => {
 	const sortFunction = (a, b) => {
 		const fa = a.title.toLowerCase();
 		const fb = b.title.toLowerCase();
-        const ia = a.relavance;
-        const ib = b.relavance;
+        const ia = a.relevance;
+        const ib = b.relevance;
         
         if (ia < ib) return 1;
         else if (ia > ib) return -1;
@@ -45,9 +45,9 @@ const Subjects = (props) => {
 	}
 
 	const displaySubjects = () => {
-		if (activeField.field === "all") { 
+		if (activeField.field === "") { 
 			return props.subjects;
-		} else if (activeField.field !== "all" && activeField.area === "") {
+		} else if (activeField.field !== "" && activeField.area === "") {
 			return props.subjects.filter(subject => (subject.field === activeField.field));
 		} else {
 			return props.subjects.filter(subject => (subject.field === activeField.field && subject.area === activeField.area));
@@ -95,8 +95,8 @@ const Subjects = (props) => {
 				<div className={styles.explorerContainer}>
 					<div className={styles.fieldsContainer}>
 					<div className={styles.fieldBox}>
-						<button onClick={() => setActiveField({field: "all", area: ""})} 
-							className={(activeField.field === "all") ? styles.activeButton : styles.inactiveButton}>All fields</button>
+						<button onClick={() => setActiveField({field: "", area: ""})} 
+							className={(activeField.field === "") ? styles.activeButton : styles.inactiveButton}>All fields</button>
 						</div>
 					{mappedFields}
 					</div>
@@ -119,6 +119,7 @@ const Subjects = (props) => {
 				setSubjects={props.setSubjects}
 				setNotification={props.setNotification}
 				fields={props.fields}
+				activeField={activeField}
 			/>}
 
 		</>
