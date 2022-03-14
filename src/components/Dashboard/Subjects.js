@@ -20,8 +20,8 @@ const Subjects = (props) => {
 			title: "", 
 			field: "",
 			area: "",
-			relevance: 1,
-			progress: 1,
+			relevance: 5,
+			progress: 50,
 			status: "Wish",
 			needsAttention: false,
 			dueDate: ""
