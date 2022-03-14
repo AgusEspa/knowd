@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import useAxios from "../utils/useAxios";
+import { BsChevronRight } from "react-icons/bs";
 import Navbar from "../components/Dashboard/Navbar/Navbar";
 import Notification from "../components/Dashboard/Notification";
 import DeleteModal from "../components/Settings/DeleteModal";
@@ -322,19 +323,31 @@ const Settings = () => {
                     <div className={styles.settingsGrid}>
 
                         <div className={styles.buttonsBox}>
-                            <button onClick={handleUsernameToggle}>
-                                <label>User details</label>
-                                <img src={"./arrow-right.png"} alt="arrow icon" />
-                            </button>
-                            <button onClick={handlePasswordToggle}>
-                                <label>Password</label>
-                                <img src={"./arrow-right.png"} alt="arrow icon" />
-                            </button>
-                            <button onClick={handleDeleteToggle}>
-                                <label className={styles.delete}>Delete Account</label>
-                                <img src={"./arrow-right.png"} alt="arrow icon" />
-                            </button>
+                            <div className={styles.labelBox}>
+                                <button onClick={handleUsernameToggle}>
+                                    <label>User details</label>
+                                    <BsChevronRight />
+                                </button>
                         </div>
+
+                        <div className={styles.buttonsBox}>
+                            <div className={styles.labelBox}>
+                                <button onClick={handlePasswordToggle}>
+                                    <label>Password</label>
+                                    <BsChevronRight />
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={styles.buttonsBox}>
+                            <div className={styles.labelBox}>
+                                <button onClick={handleDeleteToggle}>
+                                    <label className={styles.delete}>Delete Account</label>
+                                    <BsChevronRight />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                         {toggleUsername &&
                         <div className={styles.userBox}> 

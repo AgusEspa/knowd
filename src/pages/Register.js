@@ -53,7 +53,7 @@ const Register = () => {
         }
 
         if (!data.passwordVerification) {
-            errors.passwordVerification = "Plese re-enter the password";
+            errors.passwordVerification = "Please re-enter the password";
         } else if (data.password !== data.passwordVerification) {
             errors.passwordVerification = "Passwords don't match";
         }

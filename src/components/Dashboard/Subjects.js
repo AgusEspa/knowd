@@ -3,20 +3,21 @@ import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import Subject from "./Subject";
 import Toolbar from "./Toolbar";
+import SubjectEdit from "./SubjectEdit";
 
 const Subjects = (props) => {
 
 	const [ searchTerm, setSearchTerm ] = useState("");
 	const [ activeField, setActiveField ] = useState({ field: "all", area: "" });
-	const [ fieldsManagerIsOpen, setFieldsManagerIsOpen ] = useState(false);
-
+	const [ editNewSubjectsWindowIsOpen, setEditNewSubjectsWindowIsOpen ] = useState(false);
+	const [ newSubject, setNewSubject ] = useState();
 
 	const api = useAxios();
 
 	const handleCreateSubject = async () => {
 
 		const newSubjectTemplate = {
-			title: "New Subject", 
+			title: "Title", 
 			field: "Select",
 			area: "All",
 			relevance: 1,
@@ -28,8 +29,12 @@ const Subjects = (props) => {
 
 		try {
             const response = await api.post("/subjects", newSubjectTemplate);
+
+			setNewSubject(response.data);
 			
 			props.setSubjects(props.subjects.concat(response.data));
+
+			setEditNewSubjectsWindowIsOpen(true);
             
         } catch (error) {
             if (!error.response || error.response.status >= 500) {
@@ -40,10 +45,6 @@ const Subjects = (props) => {
                 console.log(error.response.data);
             }
         }
-	}
-
-	const handleManageFields = () => {
-		setFieldsManagerIsOpen(true);
 	}
 
 	const mappedFields = props.fields.map(fieldObject => 
@@ -122,7 +123,6 @@ const Subjects = (props) => {
 		<>
 			<Toolbar 
 				handleCreateSubject={handleCreateSubject}
-				handleManageFields={handleManageFields}
 				searchTerm={searchTerm}
 				setSearchTerm={setSearchTerm}
 			/>
@@ -143,6 +143,23 @@ const Subjects = (props) => {
 					{mappedSearchedSubjects}
 				</div>
 			</div>
+
+			{editNewSubjectsWindowIsOpen && 
+			<SubjectEdit 
+				setEditWindowIsOpen={setEditNewSubjectsWindowIsOpen}
+				setSubjects={props.setSubjects}
+				setNetworkError={props.setNetworkError}
+				fields={props.fields}
+				id={newSubject.id}
+				title={newSubject.title}
+				field={newSubject.field}
+				area={newSubject.area}
+				relevance={newSubject.relevance}
+				progress={newSubject.progress}
+				status={newSubject.status}
+				needsAttention={newSubject.needsAttention}
+				dueDate={newSubject.dueDate}
+			/>}
 
 		</>
 	);

@@ -38,7 +38,7 @@ const ResetPassword = () => {
         }
 
         if (!data.passwordVerification) {
-            errors.passwordVerification = "Plese re-enter the password";
+            errors.passwordVerification = "Please re-enter the password";
         } else if (data.newPassword !== data.passwordVerification) {
             errors.passwordVerification = "Passwords don't match";
         }
@@ -99,71 +99,72 @@ const ResetPassword = () => {
 
                 <form onSubmit={handlePasswordReset} noValidate>
 
-                <div className={styles.labelBox}>
+                    <div className={styles.labelBox}>
                         <label>Password:</label>
                         <div className={styles.helperIcon}
                             onMouseEnter={() => setPasswordHelperDisplay(true)}
-        				    onMouseLeave={() => setPasswordHelperDisplay(false)}>
+                            onMouseLeave={() => setPasswordHelperDisplay(false)}>
                             <BsInfoCircle />
                         </div>
                         {passwordHelperDisplay && <div className={styles.passwordHelper}><p>Password must have at least 8 characters</p></div>}
                     </div>
                     {formValidationErrors.newPassword !== "" ?
-                    <div> 
-                        <input className={styles.validationError} type="password" 
+                        <div> 
+                            <input className={styles.validationError} type="password" 
+                            name="newPassword"
+                            value={formData.newPassword}
+                            onChange={handleFormChange}
+                            />
+                            <p className={styles.validationErrorMessage}>{formValidationErrors.newPassword}</p>
+                        </div> :
+                        <input type="password" 
                         name="newPassword"
                         value={formData.newPassword}
                         onChange={handleFormChange}
                         />
-                        <p className={styles.validationErrorMessage}>{formValidationErrors.newPassword}</p>
-                    </div> :
-                    <input type="password" 
-                    name="newPassword"
-                    value={formData.newPassword}
-                    onChange={handleFormChange}
-                    />
                     }
 
                     <label>Confirm password:</label>
                     {formValidationErrors.passwordVerification !== "" ?
-                    <div> 
-                        <input className={styles.validationError} type="password" 
+                        <div> 
+                            <input className={styles.validationError} type="password" 
+                            name="passwordVerification"
+                            value={formData.passwordVerification}
+                            onChange={handleFormChange}
+                            />
+                            <p className={styles.validationErrorMessage}>{formValidationErrors.passwordVerification}</p>
+                        </div> :
+                        <input type="password" 
                         name="passwordVerification"
                         value={formData.passwordVerification}
                         onChange={handleFormChange}
                         />
-                        <p className={styles.validationErrorMessage}>{formValidationErrors.passwordVerification}</p>
-                    </div> :
-                    <input type="password" 
-                    name="passwordVerification"
-                    value={formData.passwordVerification}
-                    onChange={handleFormChange}
-                    />
                     }
-                    
+                        
                     {buttonIsEnabled ? 
                         <button>Reset password</button> :
                         <button disabled>Resetting...</button>
                     }
 
                     {isLoading &&
-                    <div className={styles.loadingSpinnerContainer}>
-                        <div className={resources.spinner}></div>
-                    </div>
+                        <div className={styles.loadingSpinnerContainer}>
+                            <div className={resources.spinner}></div>
+                        </div>
                     }
+
                     {networkError !== "" && 
-                    <div className={styles.loginErrorMessage}>
-                        <p>{networkError}</p>
-                    </div>}
+                        <div className={styles.loginErrorMessage}>
+                            <p>{networkError}</p>
+                        </div>}
+
                     {isSubmited && 
-                    <div className={styles.successfulRegistrationMessage}>
-                    <p>Your password was reset succesfully.</p>
-                    <p>Redirecting to login...</p>
-                    </div>}
+                        <div className={styles.successfulRegistrationMessage}>
+                        <p>Your password was reset succesfully.</p>
+                        <p>Redirecting to login...</p>
+                        </div>
+                    }
 
                 </form>
-
-                
             </div>
         </main>
 	)

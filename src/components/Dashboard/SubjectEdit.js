@@ -73,9 +73,9 @@ const SubjectEdit = (props) => {
 		try {
             await api.delete(`/subjects/${props.id}`);
 			
-			props.setSubjects(prevState => ( prevState.filter(subject => subject.id !== props.id)));
-
 			props.setEditWindowIsOpen(false);
+			
+			props.setSubjects(prevState => ( prevState.filter(subject => subject.id !== props.id)));
             
         } catch (error) {
             if (!error.response || error.response.status >= 500) {
