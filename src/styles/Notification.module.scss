@@ -13,12 +13,12 @@ p {
 	bottom: 0;
 	right: 0;
 	z-index: 1;
-	border-right: 5px solid variables.$errorDarkRed;
+	border-left: 5px solid variables.$errorDarkRed;
 	background-color: variables.$containerBackground;
 	margin: 2rem;
 	padding: 1rem;
 	width: 14rem;
-	border-radius: .5rem 0 0 .5rem;
+	border-radius: 0 .3rem .3rem 0;
 	animation: showMe 0.5s normal;
 }
 
@@ -27,12 +27,12 @@ p {
 	bottom: 0;
 	right: 0;
 	z-index: 1;
-	border-right: 5px solid variables.$successDarkGreen;
+	border-left: 5px solid variables.$successDarkGreen;
 	background-color: variables.$containerBackground;
 	margin: 2rem;
 	padding: 1rem;
 	width: 14rem;
-	border-radius: .5rem 0 0 .5rem;
+	border-radius: 0 .3rem .3rem 0;
 	animation: showMe 0.5s normal;
 }
 

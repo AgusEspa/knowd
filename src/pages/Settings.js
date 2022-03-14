@@ -42,10 +42,9 @@ const Settings = () => {
             ));
             
         } catch (error) {
-            setNotification(prevState => ({message: "Unable to verify identity. Loging out...", type: "error"}));
-            await new Promise(resolve => setTimeout(resolve, 6000));
+            setNotification(prevState => ({message: "Unable to verify identity. Try again later.", type: "error"}));
+            await new Promise(resolve => setTimeout(resolve, 10000));
             setNotification(prevState => ({message: "", type: ""}));
-            logout();
         }
     };
 

@@ -22,8 +22,6 @@ const Dashboard = () => {
 
 	const getCredentials = async () => {
 
-        //loading true
-
         try {
             const response = await api.get("/users/authenticated");
 			
@@ -33,16 +31,12 @@ const Dashboard = () => {
                 displayName: response.data.username.split(' ')[0],
                 emailAddress: response.data.emailAddress,}
             ));
-
-            //loading false
             
         } catch (error) {
-            //loading false
 
-            setNetworkError("Unable to verify identity. Loging out...");
-            await new Promise(resolve => setTimeout(resolve, 6000));
+            setNetworkError("Unable to verify identity. Try again later.");
+            await new Promise(resolve => setTimeout(resolve, 10000));
             setNetworkError("");
-            logout();
         }
     }
 
