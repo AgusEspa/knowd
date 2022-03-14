@@ -17,9 +17,9 @@ const Subjects = (props) => {
 	const handleCreateSubject = async () => {
 
 		const newSubjectTemplate = {
-			title: "Title", 
-			field: "Select",
-			area: "All",
+			title: "", 
+			field: "",
+			area: "",
 			relevance: 1,
 			progress: 1,
 			status: "Wish",

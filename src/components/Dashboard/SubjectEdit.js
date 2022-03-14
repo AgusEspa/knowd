@@ -31,7 +31,7 @@ const SubjectEdit = (props) => {
 			setEditSubjectFormData( prevState => ( {
 				...prevState,
 				field: value,
-				area: "All"
+				area: ""
 			}));
 		} else {
 			setEditSubjectFormData( prevState => ( {
@@ -104,11 +104,13 @@ const SubjectEdit = (props) => {
 		}));
 	}
 
-	const fieldOptions = props.fields.filter(fieldObject => fieldObject.field !== props.field).map(fieldObject => <option key={fieldObject.fieldId}>{fieldObject.field}</option>);
+	const fieldOptions = props.fields.map(fieldObject => <option key={fieldObject.fieldId}>{fieldObject.field}</option>);
 
 	const selectedField = props.fields.find(fieldObject => fieldObject.field === editSubjectFormData.field);
 
-	const areaOptions = selectedField.areas.filter(areaItem => areaItem.area !== props.area).map(areaItem => <option key={areaItem.areaId}>{areaItem.area}</option>);
+	const areaOptions = (selectedField === undefined || selectedField === "") ? 
+		<option></option> :
+		selectedField.areas.map(areaItem => <option key={areaItem.areaId}>{areaItem.area}</option>);
 
 
 	return (
@@ -121,30 +123,36 @@ const SubjectEdit = (props) => {
 						<textarea 
 							type="text" 
 							name="title"
+							placeholder="Title"
 							value={editSubjectFormData.title}
 							onChange={handleEditSubjectFormChange}
 						/>
 						
 						<div className={styles.inputBox}>
 							<label>Field: </label>
-							<select name="field"
+							<input list="fields" 
+								name="field" 
 								value={editSubjectFormData.field}
-								onChange={handleEditSubjectFormChange}>
+								onChange={handleEditSubjectFormChange}
+							/>
+							<datalist id="fields">
 								<option>{editSubjectFormData.field}</option>
 								{fieldOptions}
-								{editSubjectFormData.field !== "All" &&								<option>All</option>}
-							</select>
+							</datalist>
+
 						</div>
 						<div className={styles.inputBox}>
 							<label>Area: </label>
-							<select name="area"
+							<input list="areas" 
+								name="area" 
 								value={editSubjectFormData.area}
-								onChange={handleEditSubjectFormChange}>
+								onChange={handleEditSubjectFormChange}
+							/>
+							<datalist id="areas">
 								<option>{editSubjectFormData.area}</option>
 								{areaOptions}
-								{editSubjectFormData.area !== "All" &&
-								<option>All</option>}
-							</select>
+							</datalist>
+							
 						</div>
 						<div className={styles.inputBox}>
 							<label>Relevance: </label>
