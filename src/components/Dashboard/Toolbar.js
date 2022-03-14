@@ -26,7 +26,7 @@ const Toolbar = (props) => {
 					</li>
 
 					<li>
-						<button onClick={props.handleCreateSubject}>New Subject</button>
+						<button onClick={() => props.setNewSubjectsWindowIsOpen(true)}>New Subject</button>
 					</li>
 				 
 				</ul>

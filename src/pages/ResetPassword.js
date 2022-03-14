@@ -11,7 +11,6 @@ const ResetPassword = () => {
     const [formValidationErrors, setFormValidationErrors] = useState({newPassword: "", passwordVerification:""});
     const [networkError, setNetworkError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [buttonIsEnabled, setButtonIsEnabled] = useState(true);
     const [isSubmited, setIsSubmited] = useState(false);
 	const [passwordHelperDisplay, setPasswordHelperDisplay] = useState(false);
 	const navigate = useNavigate();
@@ -65,7 +64,6 @@ const ResetPassword = () => {
 
                 setNetworkError("");
                 setIsLoading(true);
-                setButtonIsEnabled(false);
 
             try {
                 await axios.put(`${baseUrl}/users/reset_password`, requestBody);
@@ -75,7 +73,6 @@ const ResetPassword = () => {
                 navigate("/login");
             } catch (error) {
                 setIsLoading(false);
-                setButtonIsEnabled(false);
                 if (!error.response || error.response.status >= 500) {
                     setNetworkError("Unable to contact the server. Please try again later.");
                 } else if (error.response.status) {
@@ -140,16 +137,14 @@ const ResetPassword = () => {
                         onChange={handleFormChange}
                         />
                     }
-                        
-                    {buttonIsEnabled ? 
-                        <button>Reset password</button> :
-                        <button disabled>Resetting...</button>
-                    }
 
-                    {isLoading &&
-                        <div className={styles.loadingSpinnerContainer}>
-                            <div className={resources.spinner}></div>
-                        </div>
+                    {isLoading ? 
+                        <button className={styles.disabledButton} disabled>
+                            <div className={styles.loadingSpinnerContainer}>
+                                <div className={resources.spinner}></div>
+                            </div>
+                        </button> :
+                        <button>Reset password</button>
                     }
 
                     {networkError !== "" && 

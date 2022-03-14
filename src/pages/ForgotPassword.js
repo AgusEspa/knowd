@@ -8,9 +8,8 @@ const ForgotPassword = () => {
     const [formData, setFormData] = useState({emailAddress: ""});
     const [formValidationErrors, setFormValidationErrors] = useState({emailAddress: ""});
     const [networkError, setNetworkError] = useState("");
-    const [buttonIsEnabled, setButtonIsEnabled] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-	const [isSent, setIsSent] = useState("");
+	const [isSent, setIsSent] = useState(false);
 
 	const baseUrl = "http://localhost:8080/api";
 
@@ -52,7 +51,6 @@ const ForgotPassword = () => {
 
             setNetworkError("");
             setIsLoading(true);
-            setButtonIsEnabled(false);
 
             try {
                 await axios.post(`${baseUrl}/users/forgot_password`, formData);
@@ -60,7 +58,6 @@ const ForgotPassword = () => {
                 setIsSent(true);
             } catch (error) {
                 setIsLoading(false);
-                setButtonIsEnabled(true);
                 if (!error.response || error.response.status >= 500) {
                     setNetworkError("Unable to contact the server. Please try again later.");
                 } else if (error.response.status) {
@@ -100,17 +97,16 @@ const ForgotPassword = () => {
                     onChange={handleFormChange}
                     />
                     }
-                    
-                    {buttonIsEnabled ? 
-                        <button>Submit</button> :
-                        <button disabled>Submiting...</button>
+
+                    {isLoading ? 
+                        <button className={styles.disabledButton} disabled>
+                            <div className={styles.loadingSpinnerContainer}>
+                                <div className={resources.spinner}></div>
+                            </div>
+                        </button> :
+                        <button>Submit</button>
                     }
 
-                    {isLoading &&
-                    <div className={styles.loadingSpinnerContainer}>
-                        <div className={resources.spinner}></div>
-                    </div>
-                    }
                     {networkError !== "" && 
                     <div className={styles.loginErrorMessage}>
                         <p>{networkError}</p>

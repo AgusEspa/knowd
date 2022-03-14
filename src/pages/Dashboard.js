@@ -11,6 +11,7 @@ const Dashboard = () => {
 	const { setUserAuth, logout } = useContext(AuthContext);
     const [ subjects, setSubjects ] = useState([]);
     const [ fields, setFields ] = useState([]); 
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ networkError, setNetworkError ] = useState("");
 
     const api = useAxios();
@@ -21,6 +22,8 @@ const Dashboard = () => {
 
 	const getCredentials = async () => {
 
+        //loading true
+
         try {
             const response = await api.get("/users/authenticated");
 			
@@ -30,8 +33,12 @@ const Dashboard = () => {
                 displayName: response.data.username.split(' ')[0],
                 emailAddress: response.data.emailAddress,}
             ));
+
+            //loading false
             
         } catch (error) {
+            //loading false
+
             setNetworkError("Unable to verify identity. Loging out...");
             await new Promise(resolve => setTimeout(resolve, 6000));
             setNetworkError("");
@@ -85,11 +92,17 @@ const Dashboard = () => {
 
     const getSubjects = async () => {
 
+        setIsLoading(true);
+
         try {
             const response = await api.get("/subjects");
 			setSubjects(response.data);
+            setIsLoading(false);
+
             
         } catch (error) {
+            setIsLoading(false);
+
             if (!error.response || error.response.status >= 500) {
                 setNetworkError("Unable to contact the server. Please try again later.");
                 await new Promise(resolve => setTimeout(resolve, 5000));
@@ -108,6 +121,8 @@ const Dashboard = () => {
                 subjects={subjects}
                 setSubjects={setSubjects} 
                 fields={fields}
+                setNetworkError={setNetworkError}
+                isLoading={isLoading}
             />
             
             {(networkError !== "") &&

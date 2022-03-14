@@ -15,7 +15,6 @@ const Settings = () => {
     const [deleteFormData, setDeleteFormData] = useState({emailAddress: "", oldPassword: ""});
     const [credentialsError, setCredentialsError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [buttonIsEnabled, setButtonIsEnabled] = useState(true);
     const [formValidationErrors, setFormValidationErrors] = useState({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
     const [toggleUsername, setToggleUsername] = useState(false);
     const [togglePassword, setTogglePassword] = useState(false);
@@ -106,7 +105,6 @@ const Settings = () => {
         if (validationErrors.emailAddress === "" && validationErrors.username === "" && validationErrors.oldPassword === "") {
 
             setIsLoading(true);
-            setButtonIsEnabled(false);
             
             try {
                 await api.put("/users", formData);
@@ -118,7 +116,6 @@ const Settings = () => {
 
             } catch (error) {
                 setIsLoading(false);
-                setButtonIsEnabled(true);
 
                 if (!error.response || error.response.status >= 500) {
                     setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
@@ -177,7 +174,6 @@ const Settings = () => {
         if (validationErrors.oldPassword === "" && validationErrors.newPassword === "" && validationErrors.passwordVerification === "" ) {
 
             setIsLoading(true);
-            setButtonIsEnabled(false);
             
             try {
                 await api.put("/users", formData);
@@ -189,7 +185,6 @@ const Settings = () => {
 
             } catch (error) {
                 setIsLoading(false);
-                setButtonIsEnabled(true);
 
                 if (!error.response || error.response.status >= 500) {
                     setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
@@ -239,18 +234,15 @@ const Settings = () => {
 
         setModalIsOpen(false);
         setIsLoading(true);
-        setButtonIsEnabled(false);
 
             try {
                 await api.delete("/users", {data: deleteFormData});
-                setIsLoading(false);
                 setNotification(prevState => ({message: "Your account and all personal data were deleted successfully.", type: "ok"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
                 setNotification(prevState => ({message: "", type: ""}));
                 logout();
             } catch (error) {
                 setIsLoading(false);
-                setButtonIsEnabled(true);
                 if (!error.response || error.response.status >= 500) {
                     setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                     await new Promise(resolve => setTimeout(resolve, 5000));
@@ -407,16 +399,15 @@ const Settings = () => {
 
                                 {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}
                                 <div className={styles.submitButtonBox}>
-                                    {buttonIsEnabled ? 
-                                        <button>Save changes</button> :
-                                        <button disabled>Saving changes...</button>
-                                    }
+                                {isLoading ? 
+                                    <button className={styles.disabledButton} disabled>
+                                        <div className={styles.loadingSpinnerButtonContainer}>
+                                            <div className={resources.spinner}></div>
+                                        </div>
+                                    </button> :
+                                    <button>Save changes</button>
+                                }
 
-                                    {isLoading &&
-                                    <div className={styles.loadingSpinnerContainer}>
-                                        <div className={resources.spinner}></div>
-                                    </div>
-                                    }
                                 </div>
                             </form>
                         </div>}
@@ -485,14 +476,13 @@ const Settings = () => {
 
                                 {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}
                                 <div className={styles.submitButtonBox}>
-                                    {buttonIsEnabled ? 
-                                        <button>Save changes</button> :
-                                        <button disabled>Saving changes...</button>
-                                    }
-                                    {isLoading &&
-                                    <div className={styles.loadingSpinnerContainer}>
-                                        <div className={resources.spinner}></div>
-                                    </div>
+                                    {isLoading ? 
+                                        <button className={styles.disabledButton} disabled>
+                                            <div className={styles.loadingSpinnerButtonContainer}>
+                                                <div className={resources.spinner}></div>
+                                            </div>
+                                        </button> :
+                                        <button>Save changes</button>
                                     }
                                 </div>
                             </form>
@@ -539,15 +529,13 @@ const Settings = () => {
 
                                 {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}
                                 <div className={styles.submitButtonBox}>
-                                    {buttonIsEnabled ? 
-                                        <button type="button" className={styles.deleteButton} onClick={handleDeleteButton}>Delete account</button> :
-                                        <button disabled>Deleting account...</button>
-                                    }
-                                    
-                                    {isLoading &&
-                                    <div className={styles.loadingSpinnerContainer}>
-                                        <div className={resources.spinner}></div>
-                                    </div>
+                                    {isLoading ? 
+                                        <button className={styles.disabledButton} disabled>
+                                            <div className={styles.loadingSpinnerButtonContainer}>
+                                                <div className={resources.spinner}></div>
+                                            </div>
+                                        </button> :
+                                        <button type="button" className={styles.deleteButton} onClick={handleDeleteButton}>Delete account</button>
                                     }
                                 </div>
                                 {modalIsOpen &&

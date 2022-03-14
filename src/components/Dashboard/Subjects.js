@@ -1,51 +1,15 @@
 import { useState } from "react";
-import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
+import resources from "../../styles/Resources.module.scss";
 import Subject from "./Subject";
 import Toolbar from "./Toolbar";
-import SubjectEdit from "./SubjectEdit";
+import SubjectCreate from "./SubjectCreate";
 
 const Subjects = (props) => {
 
 	const [ searchTerm, setSearchTerm ] = useState("");
 	const [ activeField, setActiveField ] = useState({ field: "all", area: "" });
-	const [ editNewSubjectsWindowIsOpen, setEditNewSubjectsWindowIsOpen ] = useState(false);
-	const [ newSubject, setNewSubject ] = useState();
-
-	const api = useAxios();
-
-	const handleCreateSubject = async () => {
-
-		const newSubjectTemplate = {
-			title: "", 
-			field: "",
-			area: "",
-			relevance: 5,
-			progress: 50,
-			status: "Wish",
-			needsAttention: false,
-			dueDate: ""
-		}
-
-		try {
-            const response = await api.post("/subjects", newSubjectTemplate);
-
-			setNewSubject(response.data);
-			
-			props.setSubjects(props.subjects.concat(response.data));
-
-			setEditNewSubjectsWindowIsOpen(true);
-            
-        } catch (error) {
-            if (!error.response || error.response.status >= 500) {
-                props.setNetworkError("Unable to contact the server. Please try again later.");
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                props.setNetworkError("");
-            } else {
-                console.log(error.response.data);
-            }
-        }
-	}
+	const [ newSubjectsWindowIsOpen, setNewSubjectsWindowIsOpen ] = useState(false);
 
 	const mappedFields = props.fields.map(fieldObject => 
 		<div key={fieldObject.fieldId} className={styles.fieldBox}>
@@ -122,7 +86,7 @@ const Subjects = (props) => {
 	return (
 		<>
 			<Toolbar 
-				handleCreateSubject={handleCreateSubject}
+				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
 				searchTerm={searchTerm}
 				setSearchTerm={setSearchTerm}
 			/>
@@ -140,25 +104,21 @@ const Subjects = (props) => {
 				</div>
 
 				<div className={styles.subjectsContainer}>
+					{props.isLoading && 
+						<div className={styles.loadingSpinnerMainContainer}>
+                    		<div className={resources.spinner}></div>
+                		</div>
+					}
 					{mappedSearchedSubjects}
 				</div>
 			</div>
 
-			{editNewSubjectsWindowIsOpen && 
-			<SubjectEdit 
-				setEditWindowIsOpen={setEditNewSubjectsWindowIsOpen}
+			{newSubjectsWindowIsOpen && 
+			<SubjectCreate 
+				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
 				setSubjects={props.setSubjects}
 				setNetworkError={props.setNetworkError}
 				fields={props.fields}
-				id={newSubject.id}
-				title={newSubject.title}
-				field={newSubject.field}
-				area={newSubject.area}
-				relevance={newSubject.relevance}
-				progress={newSubject.progress}
-				status={newSubject.status}
-				needsAttention={newSubject.needsAttention}
-				dueDate={newSubject.dueDate}
 			/>}
 
 		</>

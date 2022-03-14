@@ -121,7 +121,8 @@
 
 				button {
 					margin-top: 1.5rem;
-					width: auto;
+					width: 10rem;
+					height: 2.5rem;
 					border-radius: 1.2rem; 
 					text-align: center; 
 					padding: 0.5rem 1rem;
@@ -171,6 +172,22 @@
 					}
 				}
 
+				.disabledButton {
+					background-color: variables.$disabledButton;
+					transition: all 0.1s ease-out;
+					cursor: default;
+					&:hover {
+						background-color: variables.$disabledButton;
+					  }
+				}
+				  
+				.loadingSpinnerButtonContainer {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin: 0;
+					padding: 0rem;
+				}
 				
 
 					.deleteModalBox {
@@ -223,7 +240,7 @@
 
 							.deleteButton {
 								margin: 1.5rem 1rem 1rem 1rem;
-								width: auto;
+								width: 8rem;
 								border-radius: 1.2rem; 
 								text-align: center; 
 								padding: 0.5rem 1rem;

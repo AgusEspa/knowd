@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import modalStyles from "../../styles/Modals.module.scss";
+import resources from "../../styles/Resources.module.scss";
 
 const SubjectEdit = (props) => {
 
@@ -16,6 +17,7 @@ const SubjectEdit = (props) => {
 		dueDate: props.dueDate } 
 	));
 	const [ subjectIsChanged, setSubjectIsChanged ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState({delete: false, save: false});
 
 	const api = useAxios();
 
@@ -44,6 +46,11 @@ const SubjectEdit = (props) => {
 	const handleEditSubject = async (event) => {
 
 		event.preventDefault();
+
+		setIsLoading(prevState => ({
+			...prevState,
+			save: true
+		}));
 		
 		try {
             const response = await api.put(`/subjects/${props.id}`, editSubjectFormData);
@@ -56,6 +63,11 @@ const SubjectEdit = (props) => {
 			props.setEditWindowIsOpen(false);
 
         } catch (error) {
+			setIsLoading(prevState => ({
+				...prevState,
+				save: false
+			}));
+
             if (!error.response || error.response.status >= 500) {
                 props.setNetworkError("Unable to contact the server. Please try again later.");
                 await new Promise(resolve => setTimeout(resolve, 5000));
@@ -69,6 +81,11 @@ const SubjectEdit = (props) => {
 	const handleDeleteSubject = async (event) => {
 
 		event.preventDefault();
+
+		setIsLoading(prevState => ({
+			...prevState,
+			delete: true
+		}));
 		
 		try {
             await api.delete(`/subjects/${props.id}`);
@@ -78,6 +95,11 @@ const SubjectEdit = (props) => {
 			props.setSubjects(prevState => ( prevState.filter(subject => subject.id !== props.id)));
             
         } catch (error) {
+			setIsLoading(prevState => ({
+				...prevState,
+				delete: false
+			}));
+
             if (!error.response || error.response.status >= 500) {
                 props.setNetworkError("Unable to contact the server. Please try again later.");
                 await new Promise(resolve => setTimeout(resolve, 5000));
@@ -206,11 +228,26 @@ const SubjectEdit = (props) => {
 							/>}
 						</div>
 						<div className={styles.buttonsContainer}>
-							<button type ="button" className={styles.delete} onClick={handleDeleteSubject}>Delete</button>
-							{subjectIsChanged ? 
-							<button>Save</button> :
-							<button className={styles.disabledButton} disabled>Save</button>}
-							
+
+							{isLoading.delete ? 
+                        	<button className={styles.disabledButton} disabled>
+								<div className={styles.loadingSpinnerButtonContainer}>
+									<div className={resources.spinnerSmall}></div>
+								</div>
+								</button> :
+                        	<button type ="button" className={styles.delete} onClick={handleDeleteSubject}>Delete</button>}
+
+							{!isLoading.save ? 
+								subjectIsChanged ? 
+								<button>Save</button> :
+								<button className={styles.disabledButton} disabled>Save</button> 
+							:
+							<button className={styles.disabledButton} disabled>
+								<div className={styles.loadingSpinnerButtonContainer}>
+									<div className={resources.spinnerSmall}></div>
+								</div>
+                        	</button>}
+
 						</div>
 					</form>
 					

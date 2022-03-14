@@ -11,7 +11,6 @@ const Login = () => {
     const [credentialsError, setCredentialsError] = useState("");
     const [networkError, setNetworkError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [buttonIsEnabled, setButtonIsEnabled] = useState(true);
     const [formValidationErrors, setFormValidationErrors] = useState({emailAddress: "", password: ""});
     const { setUserAuth } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -58,7 +57,6 @@ const Login = () => {
 
         if (validationErrors.emailAddress === "" && validationErrors.password === "") {
             setIsLoading(true);
-            setButtonIsEnabled(false);
             login(); 
         }
     }
@@ -90,7 +88,6 @@ const Login = () => {
 
         } catch (error) {
             setIsLoading(false);
-            setButtonIsEnabled(true);
             if (!error.response || error.response.status >= 500) {
                 setNetworkError("Unable to contact the server. Please try again later.");
             } else {
@@ -144,17 +141,15 @@ const Login = () => {
                         />
                     }
                     {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}
-                    {buttonIsEnabled ? 
-                        <button>Log in</button> :
-                        <button disabled>Loging in...</button>
+                    {isLoading ? 
+                        <button className={styles.disabledButton} disabled>
+                            <div className={styles.loadingSpinnerContainer}>
+                                <div className={resources.spinner}></div>
+                            </div>
+                        </button> :
+                        <button>Log in</button>
                     }   
                 </form>
-
-                {isLoading &&
-                <div className={styles.loadingSpinnerContainer}>
-                    <div className={resources.spinner}></div>
-                </div>
-                }
 
                 {networkError !== "" && 
                     <div className={styles.loginErrorMessage}>

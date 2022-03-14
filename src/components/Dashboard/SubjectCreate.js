@@ -2,20 +2,22 @@ import { useState } from "react";
 import useAxios from "../../utils/useAxios";
 import styles from "../../styles/Subjects.module.scss";
 import modalStyles from "../../styles/Modals.module.scss";
+import resources from "../../styles/Resources.module.scss";
+
 
 const SubjectCreate = (props) => {
 
-	const [ editSubjectFormData, setEditSubjectFormData ] = useState( () => ({
-		title: props.title, 
-		field: props.field,
-		area: props.area,
-		relevance: props.relevance,
-		progress: props.progress,
-		status: props.status,
-		needsAttention: props.needsAttention,
-		dueDate: props.dueDate } 
+	const [ subjectFormData, setSubjectFormData ] = useState( () => ({
+		title: "", 
+		field: "",
+		area: "",
+		relevance: 5,
+		progress: 50,
+		status: "Wish",
+		needsAttention: false,
+		dueDate: "" } 
 	));
-	const [ subjectIsChanged, setSubjectIsChanged ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
 
 	const api = useAxios();
 
@@ -23,61 +25,40 @@ const SubjectCreate = (props) => {
 
 		event.preventDefault();
 
-		setSubjectIsChanged(true);
-
 		const { name, type, value, checked } = event.target;
 
 		if (event.target.name === "field") {
-			setEditSubjectFormData( prevState => ( {
+			setSubjectFormData( prevState => ( {
 				...prevState,
 				field: value,
 				area: ""
 			}));
 		} else {
-			setEditSubjectFormData( prevState => ( {
+			setSubjectFormData( prevState => ( {
 				...prevState,
 				[name]: type === "checkbox" ? checked : value
 			}));
 		}
 	}
 
-	const handleEditSubject = async (event) => {
+
+	const handleCreateSubject = async (event) => {
 
 		event.preventDefault();
-		
+
+		setIsLoading(true);
+
 		try {
-            const response = await api.put(`/subjects/${props.id}`, editSubjectFormData);
+
+            const response = await api.post("/subjects", subjectFormData);
 			
-			props.setSubjects(prevState => ( 
-				prevState.filter(Subject => Subject.id !== props.id)
-					.concat(response.data)));
-
-			setSubjectIsChanged(false);
-			props.setEditWindowIsOpen(false);
-
-        } catch (error) {
-            if (!error.response || error.response.status >= 500) {
-                props.setNetworkError("Unable to contact the server. Please try again later.");
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                props.setNetworkError("");
-            } else {
-                console.log(error.response.data);
-            }
-        }
-	}
-
-	const handleDeleteSubject = async (event) => {
-
-		event.preventDefault();
-		
-		try {
-            await api.delete(`/subjects/${props.id}`);
+			props.setSubjects(prevState => (prevState.concat(response.data)));
 			
-			props.setEditWindowIsOpen(false);
-			
-			props.setSubjects(prevState => ( prevState.filter(subject => subject.id !== props.id)));
+			props.setNewSubjectsWindowIsOpen(false);
+
             
         } catch (error) {
+			setIsLoading(false);
             if (!error.response || error.response.status >= 500) {
                 props.setNetworkError("Unable to contact the server. Please try again later.");
                 await new Promise(resolve => setTimeout(resolve, 5000));
@@ -98,7 +79,7 @@ const SubjectCreate = (props) => {
 		const currentMonth = newDate.getMonth() + 1;
 		const currentYear = newDate.getFullYear();
 		const currentDate = `${currentYear}-${currentMonth<10 ?`0${currentMonth}`:`${currentMonth}`}-${currentDay<10?`0${currentDay}`:`${currentDay}`}`
-		setEditSubjectFormData( prevState => ( {
+		setSubjectFormData( prevState => ( {
 			...prevState,
 			dueDate: currentDate
 		}));
@@ -106,7 +87,7 @@ const SubjectCreate = (props) => {
 
 	const fieldOptions = props.fields.map(fieldObject => <option key={fieldObject.fieldId}>{fieldObject.field}</option>);
 
-	const selectedField = props.fields.find(fieldObject => fieldObject.field === editSubjectFormData.field);
+	const selectedField = props.fields.find(fieldObject => fieldObject.field === subjectFormData.field);
 
 	const areaOptions = (selectedField === undefined || selectedField === "") ? 
 		<option></option> :
@@ -115,16 +96,16 @@ const SubjectCreate = (props) => {
 
 	return (
 		<>
-			<div className={modalStyles.backdrop} onClick={() => props.setEditWindowIsOpen(false)} />
+			<div className={modalStyles.backdrop} onClick={() => props.setNewSubjectsWindowIsOpen(false)} />
 			<div className={modalStyles.modalContainer}>
 				<div className={styles.editWindow}>
-					<form onSubmit={handleEditSubject}>
+					<form onSubmit={handleCreateSubject}>
 						
 						<textarea 
 							type="text" 
 							name="title"
 							placeholder="Title"
-							value={editSubjectFormData.title}
+							value={subjectFormData.title}
 							onChange={handleEditSubjectFormChange}
 						/>
 						
@@ -132,11 +113,11 @@ const SubjectCreate = (props) => {
 							<label>Field: </label>
 							<input list="fields" 
 								name="field" 
-								value={editSubjectFormData.field}
+								value={subjectFormData.field}
 								onChange={handleEditSubjectFormChange}
 							/>
 							<datalist id="fields">
-								<option>{editSubjectFormData.field}</option>
+								<option>{subjectFormData.field}</option>
 								{fieldOptions}
 							</datalist>
 
@@ -145,11 +126,11 @@ const SubjectCreate = (props) => {
 							<label>Area: </label>
 							<input list="areas" 
 								name="area" 
-								value={editSubjectFormData.area}
+								value={subjectFormData.area}
 								onChange={handleEditSubjectFormChange}
 							/>
 							<datalist id="areas">
-								<option>{editSubjectFormData.area}</option>
+								<option>{subjectFormData.area}</option>
 								{areaOptions}
 							</datalist>
 							
@@ -159,7 +140,7 @@ const SubjectCreate = (props) => {
 							<input className={styles.numberInput}
 								type="number" 
 								name="relevance"
-								value={editSubjectFormData.relevance}
+								value={subjectFormData.relevance}
 								min="1" max="10"
 								onChange={handleEditSubjectFormChange}
 							/>
@@ -169,7 +150,7 @@ const SubjectCreate = (props) => {
 							<input className={styles.numberInput}
 								type="number" 
 								name="progress"
-								value={editSubjectFormData.progress}
+								value={subjectFormData.progress}
 								min="1" max="100"
 								onChange={handleEditSubjectFormChange}
 							/>
@@ -179,7 +160,7 @@ const SubjectCreate = (props) => {
 							<label>Status: </label>
 							<select 
 								name="status"
-								value={editSubjectFormData.status}
+								value={subjectFormData.status}
 								onChange={handleEditSubjectFormChange}>
 								<option className={styles.wish}>Wish</option>
 								<option className={styles.learning}>Learning</option>
@@ -191,26 +172,31 @@ const SubjectCreate = (props) => {
 							<input className={styles.checkbox}
 							type="checkbox"
 							name="needsAttention"
-							checked={editSubjectFormData.needsAttention}
+							checked={subjectFormData.needsAttention}
 							onChange={handleEditSubjectFormChange}
 							/>
 						</div>
 						<div className={styles.inputBox}>
 							<label>Due date: </label>
-							{(editSubjectFormData.dueDate === "" || editSubjectFormData.dueDate === null) ? 
+							{(subjectFormData.dueDate === "" || subjectFormData.dueDate === null) ? 
 							<button onClick={handleNewDueDate}>add</button> : 
 							<input type="date" 
 							name="dueDate"
-							value={editSubjectFormData.dueDate}
+							value={subjectFormData.dueDate}
 							onChange={handleEditSubjectFormChange}
 							/>}
 						</div>
 						<div className={styles.buttonsContainer}>
-							<button type ="button" className={styles.delete} onClick={handleDeleteSubject}>Delete</button>
-							{subjectIsChanged ? 
-							<button>Save</button> :
-							<button className={styles.disabledButton} disabled>Save</button>}
-							
+							<button type ="button" onClick={() => props.setNewSubjectsWindowIsOpen(false)}>Cancel</button>
+
+							{!isLoading ? 
+							<button type="submit">Create</button> :
+							<button className={styles.disabledButton} disabled>
+								<div className={styles.loadingSpinnerButtonContainer}>
+									<div className={resources.spinnerSmall}></div>
+								</div>
+							</button>}
+
 						</div>
 					</form>
 					

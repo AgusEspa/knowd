@@ -160,7 +160,12 @@ ul {
 			.needsAttentionFalse {
 				color: variables.$textLightGray;
 			}
-		}	
+		}
+
+		.loadingSpinnerMainContainer {
+			margin: 1rem 0 0 2rem;
+			padding: 0rem;
+		}
 	}
 }
 
@@ -193,7 +198,6 @@ ul {
 			}
 	}
 	
-
 	.inputBox {
 		display: flex;
 		margin-top: 1rem;
@@ -264,6 +268,7 @@ ul {
 		button {
 			margin: 2rem 1rem 0 1rem;
 			width: 6rem;
+			height: 2.3rem;
 			border-radius: 1.2rem; 
 			text-align: center; 
 			padding: 0.5rem 1rem;
@@ -293,6 +298,14 @@ ul {
 			&:hover {
 				background-color: variables.$toolbarBorder;
 			}
+		}
+
+		.loadingSpinnerButtonContainer {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0;
+			padding: 0rem;
 		}
 	}
 }
