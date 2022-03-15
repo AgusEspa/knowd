@@ -404,7 +404,7 @@ const Settings = () => {
                                 {isLoading ? 
                                     <button className={styles.disabledButton} disabled>
                                         <div className={styles.loadingSpinnerButtonContainer}>
-                                            <div className={resources.spinner}></div>
+                                            <div className={resources.loadingBar}></div>
                                         </div>
                                     </button> :
                                     <button>Save changes</button>
@@ -481,7 +481,7 @@ const Settings = () => {
                                     {isLoading ? 
                                         <button className={styles.disabledButton} disabled>
                                             <div className={styles.loadingSpinnerButtonContainer}>
-                                                <div className={resources.spinner}></div>
+                                                <div className={resources.loadingBar}></div>
                                             </div>
                                         </button> :
                                         <button>Save changes</button>
@@ -534,7 +534,7 @@ const Settings = () => {
                                     {isLoading ? 
                                         <button className={styles.disabledButton} disabled>
                                             <div className={styles.loadingSpinnerButtonContainer}>
-                                                <div className={resources.spinner}></div>
+                                                <div className={resources.loadingBar}></div>
                                             </div>
                                         </button> :
                                         <button type="button" className={styles.deleteButton} onClick={handleDeleteButton}>Delete account</button>

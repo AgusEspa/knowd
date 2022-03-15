@@ -23,8 +23,6 @@ const SubjectCreate = (props) => {
 
 	const handleEditSubjectFormChange = (event) => {
 
-		event.preventDefault();
-
 		const { name, type, value, checked } = event.target;
 
 		if (event.target.name === "field") {
@@ -33,6 +31,7 @@ const SubjectCreate = (props) => {
 				field: value,
 				area: ""
 			}));
+
 		} else {
 			setSubjectFormData( prevState => ( {
 				...prevState,
@@ -71,8 +70,6 @@ const SubjectCreate = (props) => {
 
 
 	const handleNewDueDate = (event) => {
-
-		event.preventDefault();
 
 		const newDate = new Date();
 		const currentDay = newDate.getDate();
@@ -193,7 +190,7 @@ const SubjectCreate = (props) => {
 							<button type="submit">Create</button> :
 							<button className={styles.disabledButton} disabled>
 								<div className={styles.loadingSpinnerButtonContainer}>
-									<div className={resources.spinnerSmall}></div>
+									<div className={resources.loadingBar}></div>
 								</div>
 							</button>}
 

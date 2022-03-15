@@ -1,25 +1,20 @@
+@use './variables';
 
-.spinner {
-	width: 0.85rem;
-	height: 0.85rem;
-	border: 4px solid #f3f3f3;
-	border-top: 4px solid #474747;
-	border-radius: 50%;
-	animation: spinner 1.5s linear infinite;
+.loadingBar {
+	width: 3rem;
+	height: 0.4rem;
+	background-color: variables.$textLightGray;
+	border-radius: 0.1rem;
+	animation: bar 1.5s linear infinite;
 }
-.spinnerSmall {
-	width: 0.7rem;
-	height: 0.7rem;
-	border: 3px solid #f3f3f3;
-	border-top: 3px solid #474747;
-	border-radius: 50%;
-	animation: spinner 1.5s linear infinite;
-}
-@keyframes spinner {
+@keyframes bar {
 	0% {
-	  transform: rotate(0deg);
+	  transform: scaleX(0);
+	}
+	50% {
+	  transform: scaleX(1);
 	}
 	100% {
-	  transform: rotate(360deg);
+		transform: scaleX(0);
 	}
 }

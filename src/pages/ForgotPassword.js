@@ -101,7 +101,7 @@ const ForgotPassword = () => {
                     {isLoading ? 
                         <button className={styles.disabledButton} disabled>
                             <div className={styles.loadingSpinnerContainer}>
-                                <div className={resources.spinner}></div>
+                                <div className={resources.loadingBar}></div>
                             </div>
                         </button> :
                         <button>Submit</button>

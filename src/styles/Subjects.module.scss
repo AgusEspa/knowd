@@ -231,10 +231,7 @@ ul {
 
 		.checkbox {
 			width: 1rem;
-			outline: none;
-			&:checked {
-				background-color: variables.$attention;
-			}
+			color: variables.$attention;
 		}
 	
 		.numberInput {

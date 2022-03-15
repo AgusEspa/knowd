@@ -107,7 +107,7 @@ const Subjects = (props) => {
 				<div className={styles.subjectsContainer}>
 					{props.isLoading && 
 						<div className={styles.loadingSpinnerMainContainer}>
-                    		<div className={resources.spinner}></div>
+                    		<div className={resources.loadingBar}></div>
                 		</div>
 					}
 					{mappedSearchedSubjects}

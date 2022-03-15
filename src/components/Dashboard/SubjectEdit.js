@@ -23,8 +23,6 @@ const SubjectEdit = (props) => {
 
 	const handleEditSubjectFormChange = (event) => {
 
-		event.preventDefault();
-
 		setSubjectIsChanged(true);
 
 		const { name, type, value, checked } = event.target;
@@ -112,8 +110,6 @@ const SubjectEdit = (props) => {
 
 
 	const handleNewDueDate = (event) => {
-
-		event.preventDefault();
 
 		const newDate = new Date();
 		const currentDay = newDate.getDate();
@@ -232,7 +228,7 @@ const SubjectEdit = (props) => {
 							{isLoading.delete ? 
                         	<button className={styles.disabledButton} disabled>
 								<div className={styles.loadingSpinnerButtonContainer}>
-									<div className={resources.spinnerSmall}></div>
+									<div className={resources.loadingBar}></div>
 								</div>
 								</button> :
                         	<button type ="button" className={styles.delete} onClick={handleDeleteSubject}>Delete</button>}
@@ -244,7 +240,7 @@ const SubjectEdit = (props) => {
 							:
 							<button className={styles.disabledButton} disabled>
 								<div className={styles.loadingSpinnerButtonContainer}>
-									<div className={resources.spinnerSmall}></div>
+									<div className={resources.loadingBar}></div>
 								</div>
                         	</button>}
 
