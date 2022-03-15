@@ -51,7 +51,7 @@ const Dashboard = () => {
     useEffect( () => {
         const rawFieldData = subjects.map(subject => ({field: subject.field, area: subject.area}));
         const mappedFieldsSet = new Set();
-        rawFieldData.filter(fieldObject => fieldObject.field !== "All").map(fieldObject => mappedFieldsSet.add(fieldObject.field));
+        rawFieldData.filter(fieldObject => fieldObject.field !== "All" && fieldObject.field !== "").map(fieldObject => mappedFieldsSet.add(fieldObject.field));
 
         const fieldObjects = [];
 
@@ -71,7 +71,7 @@ const Dashboard = () => {
             const mappedAreasSet = new Set();
 
             rawFieldData.forEach(fieldObject => {
-                if (fieldObject.field === field && fieldObject.area !== "All") mappedAreasSet.add(fieldObject.area)
+                if (fieldObject.field === field && (fieldObject.area !== "All" && fieldObject.area !== "")) mappedAreasSet.add(fieldObject.area)
             });
 
             const mappedAreas = [...mappedAreasSet].sort(sortFieldsFunction);

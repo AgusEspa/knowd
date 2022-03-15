@@ -239,6 +239,7 @@ const Settings = () => {
 
             try {
                 await api.delete("/users", {data: deleteFormData});
+                setIsLoading(false);
                 setSuccessNotification(prevState => ({message: "Your account and all personal data were deleted successfully.", type: "ok"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
                 setSuccessNotification(prevState => ({message: "", type: ""}));
