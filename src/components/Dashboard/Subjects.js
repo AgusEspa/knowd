@@ -70,8 +70,6 @@ const Subjects = (props) => {
 						title={subject.title}
 						field={subject.field}
 						area={subject.area}
-						topics={subject.topics}
-						relations={subject.relations}
 						relevance={subject.relevance}
 						progress={subject.progress}
 						status={subject.status}
