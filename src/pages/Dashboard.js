@@ -5,14 +5,18 @@ import { nanoid } from 'nanoid'
 import Navbar from "../components/Dashboard/Navbar/Navbar";
 import Notification from "../components/Dashboard/Notification";
 import Subjects from "../components/Dashboard/Subjects";
+import notificationStyles from "../styles/Notification.module.scss";
 
 const Dashboard = () => {
 
-	const { setUserAuth, logout } = useContext(AuthContext);
+	const { setUserAuth } = useContext(AuthContext);
     const [ subjects, setSubjects ] = useState([]);
     const [ fields, setFields ] = useState([]); 
     const [ isLoading, setIsLoading ] = useState(false);
-    const [ notification, setNotification ] = useState({message: "", type: ""});
+    const [ idErrorNotification, setIdErrorNotification ] = useState({message: "", type: ""});
+    const [ networkErrorNotification, setNetworkErrorNotification ] = useState({message: "", type: ""});
+    const [ successNotification, setSuccessNotification ] = useState({message: "", type: ""});
+
 
     const api = useAxios();
 
@@ -33,9 +37,9 @@ const Dashboard = () => {
             ));
             
         } catch (error) {
-            setNotification(prevState => ({message: "Unable to verify identity. Please try again later.", type: "error"}));
+            setIdErrorNotification(prevState => ({message: "Unable to verify identity. Please try again later.", type: "error"}));
             await new Promise(resolve => setTimeout(resolve, 10000));
-            setNotification(prevState => ({message: "", type: ""}));
+            setIdErrorNotification(prevState => ({message: "", type: ""}));
         }
     }
 
@@ -97,9 +101,9 @@ const Dashboard = () => {
             setIsLoading(false);
 
             if (!error.response || error.response.status >= 500) {
-                setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
-                setNotification(prevState => ({message: "", type: ""}));
+                setNetworkErrorNotification(prevState => ({message: "", type: ""}));
             } else {
                 console.log(error.response.data);
             }
@@ -114,15 +118,30 @@ const Dashboard = () => {
                 subjects={subjects}
                 setSubjects={setSubjects} 
                 fields={fields}
-                setNotification={setNotification}
+                setNetworkErrorNotification={setNetworkErrorNotification}
+                setSuccessNotification={setSuccessNotification}
                 isLoading={isLoading}
             />
             
-            {(notification.message !== "") &&
-            <Notification 
-                message={notification.message} 
-                type={notification.type}
-            />}
+            <div className={notificationStyles.notificationContainer}>
+                {(idErrorNotification.message !== "") &&
+                <Notification 
+                    message={idErrorNotification.message} 
+                    type={idErrorNotification.type}
+                />}
+
+                {(networkErrorNotification.message !== "") &&
+                <Notification 
+                    message={networkErrorNotification.message} 
+                    type={networkErrorNotification.type}
+                />}
+
+                {(successNotification.message !== "") &&
+                <Notification 
+                    message={successNotification.message} 
+                    type={successNotification.type}
+                />}
+            </div>
             
         </>
     )

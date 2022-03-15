@@ -1,46 +1,55 @@
 @use './variables';
 
-p {
+.notificationContainer {
 	display: block;
-	font-family: variables.$fonts;
-	font-size: 1rem;
-	color: variables.$textLightGray;
-	margin: 0;
-}
-
-.errorNotification {
 	position: fixed;
 	bottom: 0;
 	right: 0;
 	z-index: 1;
-	border-left: 5px solid variables.$errorDarkRed;
-	background-color: variables.$containerBackground;
-	margin: 2rem;
-	padding: 1rem;
-	width: 14rem;
-	border-radius: 0 .3rem .3rem 0;
-	animation: showMe 0.5s normal;
+
+	p {
+		display: block;
+		font-family: variables.$fonts;
+		font-size: 1rem;
+		color: variables.$textLightGray;
+		margin: 0;
+	}
+
+	.errorNotification {
+		display: block;
+		border-left: 5px solid variables.$errorDarkRed;
+		border-top: 1px solid variables.$toolbarBorder;
+		border-bottom: 1px solid variables.$toolbarBorder;
+		border-right: 1px solid variables.$toolbarBorder;
+		background-color: variables.$containerBackground;
+		margin: 2rem;
+		padding: 1rem;
+		width: 14rem;
+		border-radius: 0 .3rem .3rem 0;
+		animation: showMe 0.5s normal;
+	}
+	
+	.successNotification {
+		display: block;
+		border-left: 5px solid variables.$successDarkGreen;
+		border-top: 1px solid variables.$toolbarBorder;
+		border-bottom: 1px solid variables.$toolbarBorder;
+		border-right: 1px solid variables.$toolbarBorder;
+		background-color: variables.$containerBackground;
+		margin: 2rem;
+		padding: 1rem;
+		width: 14rem;
+		border-radius: 0 .3rem .3rem 0;
+		animation: showMe 0.5s normal;
+	}
+	
+	@keyframes showMe{
+		0%{
+			opacity: 0;
+		}
+		100%{
+			opacity: 1;
+		}
+	}
 }
 
-.successNotification {
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	z-index: 1;
-	border-left: 5px solid variables.$successDarkGreen;
-	background-color: variables.$containerBackground;
-	margin: 2rem;
-	padding: 1rem;
-	width: 14rem;
-	border-radius: 0 .3rem .3rem 0;
-	animation: showMe 0.5s normal;
-}
-
-@keyframes showMe{
-	0%{
-		opacity: 0;
-	}
-	100%{
-		opacity: 1;
-	}
-}

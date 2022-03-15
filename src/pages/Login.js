@@ -10,7 +10,7 @@ const Login = () => {
     const [loginFormData, setLoginFormData] = useState({emailAddress: "", password: ""});
     const [credentialsError, setCredentialsError] = useState("");
     const [networkError, setNetworkError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [formValidationErrors, setFormValidationErrors] = useState({emailAddress: "", password: ""});
     const { setUserAuth } = useContext(AuthContext);
     const navigate = useNavigate();

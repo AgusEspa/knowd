@@ -78,7 +78,8 @@ const Subjects = (props) => {
 						needsAttention={subject.needsAttention}
 						dueDate={subject.dueDate}
 						setSubjects={props.setSubjects}
-						setNotification={props.setNotification}
+						setNetworkErrorNotification={props.setNetworkErrorNotification}
+                		setSuccessNotification={props.setSuccessNotification}
 						fields={props.fields}
 					/>);
 
@@ -117,7 +118,8 @@ const Subjects = (props) => {
 			<SubjectCreate 
 				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
 				setSubjects={props.setSubjects}
-				setNotification={props.setNotification}
+				setNetworkErrorNotification={props.setNetworkErrorNotification}
+                setSuccessNotification={props.setSuccessNotification}
 				fields={props.fields}
 				activeField={activeField}
 			/>}

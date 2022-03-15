@@ -7,6 +7,7 @@ import Notification from "../components/Dashboard/Notification";
 import DeleteModal from "../components/Settings/DeleteModal";
 import styles from "../styles/Settings.module.scss";
 import resources from "../styles/Resources.module.scss";
+import notificationStyles from "../styles/Notification.module.scss";
 
 const Settings = () => {
 
@@ -19,7 +20,9 @@ const Settings = () => {
     const [toggleUsername, setToggleUsername] = useState(false);
     const [togglePassword, setTogglePassword] = useState(false);
     const [toggleDelete, setToggleDelete] = useState(false);
-    const [notification, setNotification] = useState({message: "", type: ""});
+    const [ idErrorNotification, setIdErrorNotification ] = useState({message: "", type: ""});
+    const [ networkErrorNotification, setNetworkErrorNotification ] = useState({message: "", type: ""});
+    const [ successNotification, setSuccessNotification ] = useState({message: "", type: ""});
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
 
@@ -42,9 +45,9 @@ const Settings = () => {
             ));
             
         } catch (error) {
-            setNotification(prevState => ({message: "Unable to verify identity. Try again later.", type: "error"}));
+            setIdErrorNotification(prevState => ({message: "Unable to verify identity. Try again later.", type: "error"}));
             await new Promise(resolve => setTimeout(resolve, 10000));
-            setNotification(prevState => ({message: "", type: ""}));
+            setIdErrorNotification(prevState => ({message: "", type: ""}));
         }
     };
 
@@ -108,18 +111,18 @@ const Settings = () => {
             try {
                 await api.put("/users", formData);
                 setIsLoading(false);
-                setNotification(prevState => ({message: "User details updated. Redirecting to login...", type: "ok"}));
+                setSuccessNotification(prevState => ({message: "User details updated. Redirecting to login...", type: "ok"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
-                setNotification(prevState => ({message: "", type: ""}));
+                setSuccessNotification(prevState => ({message: "", type: ""}));
                 logout();
 
             } catch (error) {
                 setIsLoading(false);
 
                 if (!error.response || error.response.status >= 500) {
-                    setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                    setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                     await new Promise(resolve => setTimeout(resolve, 5000));
-                    setNotification(prevState => ({message: "", type: ""}));
+                    setNetworkErrorNotification(prevState => ({message: "", type: ""}));
                 } else if (error.response.status) {
                     if (error.response.data.includes("mail"))
                     setFormValidationErrors( prevState => ({
@@ -177,18 +180,18 @@ const Settings = () => {
             try {
                 await api.put("/users", formData);
                 setIsLoading(false);
-                setNotification(prevState => ({message: "Password updated. Redirecting to login...", type: "ok"}));
+                setSuccessNotification(prevState => ({message: "Password updated. Redirecting to login...", type: "ok"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
-                setNotification(prevState => ({message: "", type: ""}));
+                setSuccessNotification(prevState => ({message: "", type: ""}));
                 logout();
 
             } catch (error) {
                 setIsLoading(false);
 
                 if (!error.response || error.response.status >= 500) {
-                    setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                    setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                     await new Promise(resolve => setTimeout(resolve, 5000));
-                    setNotification(prevState => ({message: "", type: ""}));
+                    setNetworkErrorNotification(prevState => ({message: "", type: ""}));
                 } else if (error.response.status) {
                     if (error.response.data.includes("mail"))
                     setFormValidationErrors( prevState => ({
@@ -236,16 +239,16 @@ const Settings = () => {
 
             try {
                 await api.delete("/users", {data: deleteFormData});
-                setNotification(prevState => ({message: "Your account and all personal data were deleted successfully.", type: "ok"}));
+                setSuccessNotification(prevState => ({message: "Your account and all personal data were deleted successfully.", type: "ok"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
-                setNotification(prevState => ({message: "", type: ""}));
+                setSuccessNotification(prevState => ({message: "", type: ""}));
                 logout();
             } catch (error) {
                 setIsLoading(false);
                 if (!error.response || error.response.status >= 500) {
-                    setNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                    setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                     await new Promise(resolve => setTimeout(resolve, 5000));
-                    setNotification(prevState => ({message: "", type: ""}));
+                    setNetworkErrorNotification(prevState => ({message: "", type: ""}));
                 } else if (error.response.status) {
                     if (error.response.data.includes("mail"))
                     setFormValidationErrors( prevState => ({
@@ -545,11 +548,27 @@ const Settings = () => {
                     </div>
                 </div>
             </main>
-            {(notification.message !== "") &&
-            <Notification 
-                message={notification.message} 
-                type={notification.type}
-            />}
+
+            <div className={notificationStyles.notificationContainer}>
+                {(idErrorNotification.message !== "") &&
+                <Notification 
+                    message={idErrorNotification.message} 
+                    type={idErrorNotification.type}
+                />}
+
+                {(networkErrorNotification.message !== "") &&
+                <Notification 
+                    message={networkErrorNotification.message} 
+                    type={networkErrorNotification.type}
+                />}
+
+                {(successNotification.message !== "") &&
+                <Notification 
+                    message={successNotification.message} 
+                    type={successNotification.type}
+                />}
+            </div>
+
         </div>
 	)
 
