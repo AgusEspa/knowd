@@ -23,7 +23,7 @@ const Subjects = (props) => {
 				
 				{fieldObject.areas.map(areaItem => 
 					<li key={areaItem.areaId}>
-						<button type="button" onClick={() => setActiveField({field: fieldObject.field, area: areaItem.area})}		className={((activeField.field === fieldObject.field) && (activeField.area === areaItem.area)) ? styles.activeButton : styles.inactiveButton}>{areaItem.area}</button>
+						<button type="button" onClick={() => setActiveField({field: fieldObject.field, area: areaItem.area})} className={((activeField.field === fieldObject.field) && (activeField.area === areaItem.area)) ? styles.activeButton : styles.inactiveButton}>{areaItem.area}</button>
 					</li>)}
 			</ul>
 		</div>

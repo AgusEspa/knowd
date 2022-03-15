@@ -57,7 +57,6 @@ const SubjectEdit = (props) => {
 				prevState.filter(Subject => Subject.id !== props.id)
 					.concat(response.data)));
 
-			setSubjectIsChanged(false);
 			props.setEditWindowIsOpen(false);
 
         } catch (error) {
