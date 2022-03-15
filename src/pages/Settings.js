@@ -265,7 +265,7 @@ const Settings = () => {
     }
 
     const handleUsernameToggle = (event) => {
-        event.preventDefault();
+
         setFormValidationErrors({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
         setToggleUsername(prevState => !prevState);
         setFormData( prevState => ({
@@ -278,7 +278,6 @@ const Settings = () => {
     }
 
     const handlePasswordToggle = (event) => {
-        event.preventDefault();
         setFormValidationErrors({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
         setTogglePassword(prevState => !prevState);
         setToggleUsername(false);
@@ -286,7 +285,6 @@ const Settings = () => {
     }
 
     const handleDeleteToggle = (event) => {
-        event.preventDefault();
         setFormValidationErrors({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
         setToggleDelete(prevState => !prevState);
         setFormData( prevState => ({

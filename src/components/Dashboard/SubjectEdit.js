@@ -216,7 +216,7 @@ const SubjectEdit = (props) => {
 						<div className={styles.inputBox}>
 							<label>Due date: </label>
 							{(editSubjectFormData.dueDate === "" || editSubjectFormData.dueDate === null) ? 
-							<button onClick={handleNewDueDate}>add</button> : 
+							<button type="button" onClick={handleNewDueDate}>add</button> : 
 							<input type="date" 
 							name="dueDate"
 							value={editSubjectFormData.dueDate}
@@ -226,7 +226,7 @@ const SubjectEdit = (props) => {
 						<div className={styles.buttonsContainer}>
 
 							{isLoading.delete ? 
-                        	<button className={styles.disabledButton} disabled>
+                        	<button type="button" className={styles.disabledButton} disabled>
 								<div className={styles.loadingSpinnerButtonContainer}>
 									<div className={resources.loadingBar}></div>
 								</div>
@@ -235,10 +235,10 @@ const SubjectEdit = (props) => {
 
 							{!isLoading.save ? 
 								subjectIsChanged ? 
-								<button>Save</button> :
+								<button type="submit">Save</button> :
 								<button className={styles.disabledButton} disabled>Save</button> 
 							:
-							<button className={styles.disabledButton} disabled>
+							<button type="button" className={styles.disabledButton} disabled>
 								<div className={styles.loadingSpinnerButtonContainer}>
 									<div className={resources.loadingBar}></div>
 								</div>

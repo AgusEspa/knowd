@@ -176,7 +176,7 @@ const SubjectCreate = (props) => {
 						<div className={styles.inputBox}>
 							<label>Due date: </label>
 							{(subjectFormData.dueDate === "" || subjectFormData.dueDate === null) ? 
-							<button onClick={handleNewDueDate}>add</button> : 
+							<button type="button" onClick={handleNewDueDate}>add</button> : 
 							<input type="date" 
 							name="dueDate"
 							value={subjectFormData.dueDate}
@@ -188,7 +188,7 @@ const SubjectCreate = (props) => {
 
 							{!isLoading ? 
 							<button type="submit">Create</button> :
-							<button className={styles.disabledButton} disabled>
+							<button type="button" className={styles.disabledButton} disabled>
 								<div className={styles.loadingSpinnerButtonContainer}>
 									<div className={resources.loadingBar}></div>
 								</div>

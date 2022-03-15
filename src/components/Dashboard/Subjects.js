@@ -16,14 +16,14 @@ const Subjects = (props) => {
 
 			<label>{fieldObject.field}</label>
 			<ul>
-				<li><button onClick={() => 
+				<li><button type="button" onClick={() => 
 					setActiveField({field: fieldObject.field, area: ""})} 
 					className={((activeField.field === fieldObject.field) && (activeField.area === "")) ? styles.activeButton : styles.inactiveButton}>All areas</button>
 				</li>
 				
 				{fieldObject.areas.map(areaItem => 
 					<li key={areaItem.areaId}>
-						<button onClick={() => setActiveField({field: fieldObject.field, area: areaItem.area})}		className={((activeField.field === fieldObject.field) && (activeField.area === areaItem.area)) ? styles.activeButton : styles.inactiveButton}>{areaItem.area}</button>
+						<button type="button" onClick={() => setActiveField({field: fieldObject.field, area: areaItem.area})}		className={((activeField.field === fieldObject.field) && (activeField.area === areaItem.area)) ? styles.activeButton : styles.inactiveButton}>{areaItem.area}</button>
 					</li>)}
 			</ul>
 		</div>
@@ -96,7 +96,7 @@ const Subjects = (props) => {
 				<div className={styles.explorerContainer}>
 					<div className={styles.fieldsContainer}>
 					<div className={styles.fieldBox}>
-						<button onClick={() => setActiveField({field: "", area: ""})} 
+						<button type="button" onClick={() => setActiveField({field: "", area: ""})} 
 							className={(activeField.field === "") ? styles.activeButton : styles.inactiveButton}>All fields</button>
 						</div>
 					{mappedFields}
