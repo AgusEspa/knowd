@@ -24,6 +24,8 @@ const Relations = (props) => {
 
 		event.preventDefault();
 
+		setRelationFormData({title: ""});
+
 		setIsLoading(true);
 
 		try {
@@ -56,18 +58,17 @@ const Relations = (props) => {
 	const handleDeleteRelation = async (event) => {
 	
 		event.preventDefault();
-		const relationId = event.target.value;
 
 		setIsLoading(true);
 			
 		try {
-			await api.delete(`/subjects/relations/${relationId}`);
+			await api.delete(`/subjects/relations/${event.target.value}`);
 			
 			const fetchedEditedSubject = props.subjects.filter(subject => subject.id === props.subjectId);
 
 			const editedSubject = { 
 				...fetchedEditedSubject[0],
-				relations: fetchedEditedSubject[0].relations.filter(relation => relation.id !== relationId)
+				relations: fetchedEditedSubject[0].relations.filter(relation => relation.id !== parseInt(event.target.value))
 			}
 
 			props.setSubjects(prevState => ( 
@@ -90,7 +91,7 @@ const Relations = (props) => {
 	const mappedRelations = props.relations.map(relation => 
 		<li key={relation.id}>
 			<label>{relation.title}</label>
-			<button value ={relation.id} onClick={handleDeleteRelation}>delete</button>
+			<button value={relation.id} onClick={handleDeleteRelation}>delete</button>
 		</li>
 	);
 
@@ -113,7 +114,7 @@ const Relations = (props) => {
 						<input list="subjects" 
 							name="title" 
 							placeholder="search"
-							value={relationFormData.subject}
+							value={relationFormData.title}
 							onChange={handleRelationFormChange}
 						/>
 						<datalist id="subjects">
