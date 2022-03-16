@@ -2,17 +2,25 @@
 
 @mixin subjectDiv {
 	background-color: variables.$toolbarBackground;
+	position: relative;
 	border-radius: .2rem;
 	padding: .5rem;
 	margin: .5rem;
-	cursor: pointer;
+	cursor: default;
 	width: 11rem;
 	height: 3rem;
 	overflow: scroll;
-	transition: all 0.1s ease-out;
 	&:hover {
 		background-color: variables.$navbarBorder;
+		//color:alpha($color: #000000)
 	}
+	&:hover .cardButtonsContainer {
+		display: flex;
+	}
+	&:hover .needsAttentionTrue, &:hover .needsAttentionFalse {
+		opacity: 0.7;
+	}
+	
 }
 
 @mixin subjectTitle {
@@ -167,6 +175,42 @@ ul {
 					color: variables.$textLightGray;
 				}
 			}
+
+			.cardButtonsContainer {
+				display: none;
+				position: absolute;
+				top: 0;
+				right: 0;
+				background-color: transparent;
+				justify-content: end;
+				align-items: center;
+				z-index: 10;
+				padding: 0.5rem;
+
+				button {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background-color: variables.$textLightGray;
+					border-radius: 50%;
+					height: 1.5rem;
+					width: 1.5rem;
+					border: 0;
+					outline: none;
+					cursor: pointer;
+					margin-left: 0.3rem;
+					transition: all 0.1s ease-out;
+					&:hover {
+						background-color: variables.$textLight;
+					}
+
+					svg {
+						font-size: .9rem;
+						color: variables.$textDarkGray;
+						cursor: pointer;
+					}
+				}
+			}
 		}
 
 		.loadingSpinnerMainContainer {
@@ -175,7 +219,6 @@ ul {
 		}
 	}
 }
-
 
 .editWindow {
 	background-color: variables.$containerBackground;

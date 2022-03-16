@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { FiEdit3, FiLink } from "react-icons/fi";
 import styles from "../../styles/Subjects.module.scss";
 import SubjectEdit from "./SubjectEdit";
 
 const Subject = (props) => {
 
 	const [ editWindowIsOpen, setEditWindowIsOpen ] = useState(false);
+	const [ relationsWindowIsOpen, setRelationsWindowIsOpen ] = useState(false);
 
 	const setStyleStatus = () => {
 		if (props.status === "Learning") return styles.subjectBoxLearning;
@@ -19,8 +21,16 @@ const Subject = (props) => {
 
 	return (
 		<>
-			<div className={setStyleStatus()} onClick={()=>setEditWindowIsOpen(true)}>
+			<div className={setStyleStatus()}>
 				<h3 className={setStyleAttention()}>{props.title}</h3>
+				<div className={styles.cardButtonsContainer}>
+					<button type="button" onClick={()=>setEditWindowIsOpen(true)}>
+						<FiEdit3 />
+					</button>
+					<button type="button" onClick={()=>setRelationsWindowIsOpen(true)}>
+						<FiLink />
+					</button>
+				</div>
 			</div>
 
 			{editWindowIsOpen && 
@@ -39,6 +49,9 @@ const Subject = (props) => {
 				needsAttention={props.needsAttention}
 				dueDate={props.dueDate}
 			/>}
+
+			{relationsWindowIsOpen &&
+			<div></div>}
 
 		</>
 	)
