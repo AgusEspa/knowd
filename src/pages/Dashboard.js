@@ -94,8 +94,8 @@ const Dashboard = () => {
         try {
             const response = await api.get("/subjects");
 			setSubjects(response.data);
-            setIsLoading(false);
 
+            setIsLoading(false);
             
         } catch (error) {
             setIsLoading(false);

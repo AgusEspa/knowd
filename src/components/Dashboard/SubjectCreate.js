@@ -15,7 +15,8 @@ const SubjectCreate = (props) => {
 		progress: 50,
 		status: "Wish",
 		needsAttention: false,
-		dueDate: "" } 
+		dueDate: "",
+		relations: [] } 
 	));
     const [ isLoading, setIsLoading ] = useState(false);
 
