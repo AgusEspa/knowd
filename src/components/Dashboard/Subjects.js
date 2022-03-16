@@ -62,43 +62,48 @@ const Subjects = (props) => {
 		}
 	}
 	
-	const mappedSearchedLearningSubjects = searchSubjects().filter(subject => subject.status === "Learning").sort(sortFunction)
-				.map(subject => 
-					<Subject 
-						key={subject.id}
-						id={subject.id}
-						title={subject.title}
-						field={subject.field}
-						area={subject.area}
-						relevance={subject.relevance}
-						progress={subject.progress}
-						status={subject.status}
-						needsAttention={subject.needsAttention}
-						dueDate={subject.dueDate}
-						setSubjects={props.setSubjects}
-						setNetworkErrorNotification={props.setNetworkErrorNotification}
-                		setSuccessNotification={props.setSuccessNotification}
-						fields={props.fields}
-					/>);
+	const mappedSearchedLearningSubjects = searchSubjects().filter(subject => subject.status === "Learning")
+		.sort(sortFunction)
+		.map(subject => 
+			<Subject 
+				key={subject.id}
+				id={subject.id}
+				title={subject.title}
+				field={subject.field}
+				area={subject.area}
+				relevance={subject.relevance}
+				progress={subject.progress}
+				status={subject.status}
+				needsAttention={subject.needsAttention}
+				dueDate={subject.dueDate}
+				relations={subject.relations}
+				subjects={props.subjects}
+				setSubjects={props.setSubjects}
+				setNetworkErrorNotification={props.setNetworkErrorNotification}
+        		setSuccessNotification={props.setSuccessNotification}
+				fields={props.fields}
+				/>);
 
-	const mappedSearchedWishSubjects = searchSubjects().filter(subject => subject.status === "Wish").sort(sortFunction)
-	.map(subject => 
-		<Subject 
-			key={subject.id}
-			id={subject.id}
-			title={subject.title}
-			field={subject.field}
-			area={subject.area}
-			relevance={subject.relevance}
-			progress={subject.progress}
-			status={subject.status}
-			needsAttention={subject.needsAttention}
-			dueDate={subject.dueDate}
-			setSubjects={props.setSubjects}
-			setNetworkErrorNotification={props.setNetworkErrorNotification}
-			setSuccessNotification={props.setSuccessNotification}
-			fields={props.fields}
-		/>);
+	const mappedSearchedWishSubjects = searchSubjects().filter(subject => subject.status === "Wish")
+		.sort(sortFunction)
+		.map(subject => 
+			<Subject 
+				key={subject.id}
+				id={subject.id}
+				title={subject.title}
+				field={subject.field}
+				area={subject.area}
+				relevance={subject.relevance}
+				progress={subject.progress}
+				status={subject.status}
+				needsAttention={subject.needsAttention}
+				dueDate={subject.dueDate}
+				relations={subject.relations}
+				setSubjects={props.setSubjects}
+				setNetworkErrorNotification={props.setNetworkErrorNotification}
+				setSuccessNotification={props.setSuccessNotification}
+				fields={props.fields}
+			/>);
 
 	const mappedSearchedMasteredSubjects = searchSubjects().filter(subject => subject.status === "Mastered").sort(sortFunction)
 	.map(subject => 
@@ -113,6 +118,7 @@ const Subjects = (props) => {
 			status={subject.status}
 			needsAttention={subject.needsAttention}
 			dueDate={subject.dueDate}
+			relations={subject.relations}
 			setSubjects={props.setSubjects}
 			setNetworkErrorNotification={props.setNetworkErrorNotification}
 			setSuccessNotification={props.setSuccessNotification}

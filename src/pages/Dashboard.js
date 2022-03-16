@@ -142,7 +142,6 @@ const Dashboard = () => {
                     type={successNotification.type}
                 />}
             </div>
-            
         </>
     )
 }

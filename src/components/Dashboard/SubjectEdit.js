@@ -54,7 +54,7 @@ const SubjectEdit = (props) => {
             const response = await api.put(`/subjects/${props.id}`, editSubjectFormData);
 			
 			props.setSubjects(prevState => ( 
-				prevState.filter(Subject => Subject.id !== props.id)
+				prevState.filter(subject => subject.id !== props.id)
 					.concat(response.data)));
 
 			props.setEditWindowIsOpen(false);
@@ -66,9 +66,9 @@ const SubjectEdit = (props) => {
 			}));
 
             if (!error.response || error.response.status >= 500) {
-                props.setNetworkNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                props.setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
-                props.setNetworkNotification(prevState => ({message: "", type: ""}));
+                props.setNetworkErrosetNetworkErrorNotificationrNotification(prevState => ({message: "", type: ""}));
             } else {
                 console.log(error.response.data);
             }
@@ -98,9 +98,9 @@ const SubjectEdit = (props) => {
 			}));
 
             if (!error.response || error.response.status >= 500) {
-                props.setNetworkNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                props.setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
-                props.setNetworkNotification(prevState => ({message: "", type: ""}));
+                props.setNetworkErrorNotification(prevState => ({message: "", type: ""}));
             } else {
                 console.log(error.response.data);
             }

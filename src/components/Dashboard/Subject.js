@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { FiEdit3, FiLink } from "react-icons/fi";
+import { FiEdit3, FiLink, FiLayers } from "react-icons/fi";
 import styles from "../../styles/Subjects.module.scss";
 import SubjectEdit from "./SubjectEdit";
+import Relations from "./Relations";
 
 const Subject = (props) => {
 
 	const [ editWindowIsOpen, setEditWindowIsOpen ] = useState(false);
 	const [ relationsWindowIsOpen, setRelationsWindowIsOpen ] = useState(false);
+	const [ topicsWindowIsOpen, setTopicsWindowIsOpen ] = useState(false);
 
 	const setStyleStatus = () => {
 		if (props.status === "Learning") return styles.subjectBoxLearning;
@@ -27,6 +29,9 @@ const Subject = (props) => {
 					<button type="button" onClick={()=>setEditWindowIsOpen(true)}>
 						<FiEdit3 />
 					</button>
+					<button type="button" onClick={()=>setTopicsWindowIsOpen(true)}>
+						<FiLayers />
+					</button>
 					<button type="button" onClick={()=>setRelationsWindowIsOpen(true)}>
 						<FiLink />
 					</button>
@@ -37,7 +42,6 @@ const Subject = (props) => {
 			<SubjectEdit 
 				setEditWindowIsOpen={setEditWindowIsOpen}
 				setSubjects={props.setSubjects}
-				setNotification={props.setNotification}
 				fields={props.fields}
 				id={props.id}
 				title={props.title}
@@ -48,10 +52,21 @@ const Subject = (props) => {
 				status={props.status}
 				needsAttention={props.needsAttention}
 				dueDate={props.dueDate}
+				setNetworkErrorNotification={props.setNetworkErrorNotification}
 			/>}
 
-			{relationsWindowIsOpen &&
+			{topicsWindowIsOpen &&
 			<div></div>}
+
+			{relationsWindowIsOpen &&
+			<Relations 
+				relations={props.relations}
+				subjects={props.subjects}
+				setSubjects={props.setSubjects}
+				subjectId={props.id}
+				setRelationsWindowIsOpen={setRelationsWindowIsOpen}
+				setNetworkErrorNotification={props.setNetworkErrorNotification}
+			/>}
 
 		</>
 	)
