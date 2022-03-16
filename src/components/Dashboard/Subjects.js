@@ -62,7 +62,7 @@ const Subjects = (props) => {
 		}
 	}
 	
-	const mappedSearchedSubjects = searchSubjects().sort(sortFunction)
+	const mappedSearchedLearningSubjects = searchSubjects().filter(subject => subject.status === "Learning").sort(sortFunction)
 				.map(subject => 
 					<Subject 
 						key={subject.id}
@@ -80,6 +80,44 @@ const Subjects = (props) => {
                 		setSuccessNotification={props.setSuccessNotification}
 						fields={props.fields}
 					/>);
+
+	const mappedSearchedWishSubjects = searchSubjects().filter(subject => subject.status === "Wish").sort(sortFunction)
+	.map(subject => 
+		<Subject 
+			key={subject.id}
+			id={subject.id}
+			title={subject.title}
+			field={subject.field}
+			area={subject.area}
+			relevance={subject.relevance}
+			progress={subject.progress}
+			status={subject.status}
+			needsAttention={subject.needsAttention}
+			dueDate={subject.dueDate}
+			setSubjects={props.setSubjects}
+			setNetworkErrorNotification={props.setNetworkErrorNotification}
+			setSuccessNotification={props.setSuccessNotification}
+			fields={props.fields}
+		/>);
+
+	const mappedSearchedMasteredSubjects = searchSubjects().filter(subject => subject.status === "Mastered").sort(sortFunction)
+	.map(subject => 
+		<Subject 
+			key={subject.id}
+			id={subject.id}
+			title={subject.title}
+			field={subject.field}
+			area={subject.area}
+			relevance={subject.relevance}
+			progress={subject.progress}
+			status={subject.status}
+			needsAttention={subject.needsAttention}
+			dueDate={subject.dueDate}
+			setSubjects={props.setSubjects}
+			setNetworkErrorNotification={props.setNetworkErrorNotification}
+			setSuccessNotification={props.setSuccessNotification}
+			fields={props.fields}
+		/>);
 
 
 	return (
@@ -103,12 +141,28 @@ const Subjects = (props) => {
 				</div>
 
 				<div className={styles.subjectsContainer}>
-					{props.isLoading && 
-						<div className={styles.loadingSpinnerMainContainer}>
-                    		<div className={resources.loadingBar}></div>
-                		</div>
+					{props.isLoading &&
+						<div className={styles.subjectsBlocks}>
+							<div className={styles.loadingSpinnerMainContainer}>
+								<div className={resources.loadingBar}></div>
+							</div>
+						</div>
 					}
-					{mappedSearchedSubjects}
+					{mappedSearchedLearningSubjects.length !== 0  &&
+						<div className={styles.subjectsBlocks}>
+							{mappedSearchedLearningSubjects}
+						</div>
+					}
+					{mappedSearchedWishSubjects.length !== 0 &&
+						<div className={styles.subjectsBlocks}>
+							{mappedSearchedWishSubjects}
+						</div>
+					}
+					{mappedSearchedMasteredSubjects.length !== 0 &&
+						<div className={styles.subjectsBlocks}>
+							{mappedSearchedMasteredSubjects}
+						</div>
+					}
 				</div>
 			</div>
 

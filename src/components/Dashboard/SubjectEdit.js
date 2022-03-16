@@ -198,9 +198,9 @@ const SubjectEdit = (props) => {
 								name="status"
 								value={editSubjectFormData.status}
 								onChange={handleEditSubjectFormChange}>
-								<option className={styles.wish}>Wish</option>
-								<option className={styles.learning}>Learning</option>
-								<option className={styles.mastered}>Mastered</option>
+								<option value="Wish" className={styles.wish}>Wish</option>
+								<option value="Learning" className={styles.learning}>Learning</option>
+								<option value="Mastered" className={styles.mastered}>Mastered</option>
 							</select>
 						</div>
 						<div className={styles.inputBox}>
