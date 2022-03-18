@@ -31,18 +31,6 @@
 	margin: 0;
 }
 
-ul {
-	margin: 0;
-	padding: 0;
-	
-	li {
-		list-style: none;
-		text-decoration: none;
-		margin: 0;
-		padding: 0;
-	}
-}
-
 .mainContainer {
 	display: grid;
 	columns: 2;
@@ -61,6 +49,18 @@ ul {
 		min-width: 14rem;
 		height: 84vh;
     	overflow: auto;
+
+		ul {
+			margin: 0;
+			padding: 0;
+			
+			li {
+				list-style: none;
+				text-decoration: none;
+				margin: 0;
+				padding: 0;
+			}
+		}
 	
 		.fieldsContainer {
 			display: block;
@@ -221,19 +221,30 @@ ul {
 }
 
 .editWindow {
+	display: block;
 	background-color: variables.$containerBackground;
 	border-radius: .5rem;
 	border: 1px solid variables.$containerBorder;
 	padding: 1rem;
 	max-height: 70vh;
-	max-width: 30vw;
+	max-width: 20rem;
 	overflow: scroll;
+
+	h3 {
+		font-family: variables.$fonts;
+		font-weight: 500;
+		background-color: transparent;
+		font-size: 1.2rem;
+		padding: 0;
+		margin: 0;
+		color: variables.$textLightGray;
+	}
 
 	textarea {
 		resize: none;
 		height: fit-content;
 		height: 3rem;
-		width: 18rem;
+		width: 17rem;
 		margin: 0;
 		font-size: 1.1rem;
 		color: variables.$textLightGray;
@@ -319,6 +330,53 @@ ul {
 			}
 		}
 
+		.buttonIcon {
+			display: inline-flex;
+			align-self: center;
+			justify-self: center;
+			background-color: transparent;
+			border: 0;
+			outline: none;
+			cursor: pointer;
+			width: fit-content;
+			height: fit-content;
+			margin-left: 0.5rem;
+			padding: 0;
+			&:hover, &:active, &:focus {
+				border: none;
+			}
+
+			svg {
+				font-size: 1.3rem;
+				color: variables.$textLightGray;
+				cursor: pointer;
+			}
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+			display: block;
+			
+			li {
+				display: flex;
+				align-items: center;
+				list-style: none;
+				margin: 0 0 1rem 0.5rem;
+				padding: 0 0 0 0.5rem;
+				border-left: 3px solid variables.$navbarBorder;
+				font-size: 1rem;
+				color: variables.$textLightGray;
+				font-family: variables.$fonts;
+				&:hover .deleteButtonContainer {
+					display: flex;
+				}
+			}
+		}
+
+		.deleteButtonContainer {
+			display: none;
+		}
 	}
 
 	.buttonsContainer {
@@ -368,28 +426,5 @@ ul {
 			margin: 0;
 			padding: 0rem;
 		}
-	}
-}
-
-.editWindow {
-	background-color: variables.$containerBackground;
-	border-radius: .5rem;
-	border: 1px solid variables.$containerBorder;
-	padding: 1rem;
-	max-height: 70vh;
-	max-width: 30vw;
-	overflow: scroll;
-
-	li {
-		font-family: variables.$fonts;
-		font-size: 1rem;
-		color: variables.$textLightGray;
-		text-align: left;
-	}
-
-	select {
-		cursor: pointer;
-		height: 2.53rem;
-		width: min-content;
 	}
 }

@@ -1,66 +1,149 @@
+@use './variables';
+
 .headerContainer {
 	display: flex;
-	position: relative;
-	justify-content: space-between;
-	background-color: #432f70;
-}
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    justify-content: space-between;
+    align-items: center;
+	background-color: variables.$containerBorder;
 
-.headerLogoBox {
-	display: flex;
-	align-items: center;
-	margin: 2rem 0rem 2rem 5rem;
-}
+	.headerLogoBox {
+		display: flex;
+		align-items: center;
+		margin: 1rem 0rem 1rem 4rem;
 
-.headerLogo {
-	width: 10rem;
-}
+		.headerLogo {
+			width: 10rem;
+		}
+		@media screen and (max-width: 750px) {
+			margin: 1.5rem;
+			.headerLogo {
+				width: 8rem;
+			}
+		}
+	}
 
-.getStartedLink {
-	margin: 2rem 5rem 2rem 0rem;
+	.getStartedLink {
+		display: flex;
+		align-items: center;
+		margin: 1rem 4rem 1rem 0rem;
+		padding: 0;
+	
+		a {
+			cursor: pointer;
+			text-decoration: none;
+			padding: 0.8rem;
+			color: white;
+			font-family: variables.$fonts;
+			font-size: 1.2rem;
+			background-color: #2f0075;
+			border-radius: 0.3rem;
+			transition: all 0.1s ease-out;
+			  &:hover {
+				background-color: #781dff;
+			  }
+		}
+		@media screen and (max-width: 750px) {
+			margin: 1.5rem;
 
-	a {
-		display: block;
-		cursor: pointer;
-		text-decoration: none;
-		padding: 0.7rem;
-		color: white;
-		font-family: 'Asap', sans-serif;
-		font-size: 1.2rem;
-		background-color: #b34270;
-		border-radius: 0.7rem;
-		transition: all 0.1s ease-out;
-	  	&:hover {
-			background-color: #c5517f;
-			border-radius: 0.7rem;
-	  	}
+			a {
+				font-size: 1rem;
+				padding: 0.6rem;
+			}
+		}
 	}
 }
+
   
 .aboutContainer {
-	padding: 1rem;
+	padding: 2rem;
 	display: block;
-	background-color: #e2e2e2;
+	background-color: variables.$navbarBackground;
 	border-radius: 0.5rem;
-	margin: 2rem;
+	border: 1px solid variables.$navbarBorder;
+	margin: 8rem 3rem;
+
+	@media screen and (max-width: 750px) {
+		padding: 1.5rem;
+		margin: 7rem 1.5rem;
+	}
 
   	h2 {
-		font-family: 'Asap', sans-serif;
-		font-size: 1.7rem;
-		color: #1f1f1f;
+		font-family: variables.$fonts;
+		font-size: 1.4rem;
+		color: variables.$textLightGray;
 		margin: 0;
 		padding-top: 1rem;
 		padding-bottom: 1rem;
   	}
+	@media screen and (max-width: 750px) {
+		h2 {
+			font-size: 1.2rem;
+		}
+	}
+
 	h3 {
-		font-family: 'Asap', sans-serif;
-		font-size: 1.4rem;
-		color: #1f1f1f;
+		font-family: variables.$fonts;
+		font-size: 1.2rem;
+		color: variables.$textLightGray;
 		padding-bottom: 1rem;
-		margin: 0;
+		margin: 1.7rem 0 0 0;
   	}
+	@media screen and (max-width: 750px) {
+		h3 {
+			font-size: 1.05rem;
+		}
+	}
 	p {
-	font-size: 1.1rem;
-	font-family: 'Asap', sans-serif;
-	margin: 0;
+		font-size: 1rem;
+		line-height: 1.8rem;
+		color: white;
+		font-family: variables.$fonts;
+		margin: 0.3rem 0 0 0;
   	}
+	@media screen and (max-width: 750px) {
+		p {
+			font-size: .9rem;
+		}
+	}
+}
+
+.bigImageContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 2rem 0rem;
+
+	img {
+		width: 100%;
+		border: 3px solid variables.$disabledButton;
+		border-radius: 0.3rem;
+		padding: 0;
+		margin: 0;
+	}
+	@media screen and (max-width: 750px) {
+		img {
+			border: 2px solid variables.$disabledButton;
+		}
+	}
+}
+
+.smallImageContainer {
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+
+	img {
+		width: 50%
+	}
+	@media screen and (max-width: 750px) {
+		img {
+			border: 2px solid variables.$disabledButton;
+		}
+	}
 }

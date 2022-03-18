@@ -1,12 +1,16 @@
 import { useState } from "react";
 import useAxios from "../../utils/useAxios";
+import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import styles from "../../styles/Subjects.module.scss";
 import modalStyles from "../../styles/Modals.module.scss";
+import resources from "../../styles/Resources.module.scss";
 
 const Relations = (props) => {
 
 	const [ relationFormData, setRelationFormData ] = useState({title: ""});
-	const [ isLoading, setIsLoading ] = useState(false);
+	const [ isLoadingNew, setIsLoadingNew ] = useState(false);
+	const [ isLoadingDelete, setIsLoadingDelete ] = useState(false);
+
 
 	const api = useAxios();
 
@@ -26,7 +30,7 @@ const Relations = (props) => {
 
 		setRelationFormData({title: ""});
 
-		setIsLoading(true);
+		setIsLoadingNew(true);
 
 		try {
 
@@ -42,9 +46,11 @@ const Relations = (props) => {
 			props.setSubjects(prevState => ( 
 				prevState.filter(subject => subject.id !== props.subjectId)
 					.concat(editedSubject)));
+
+			setIsLoadingNew(false);
             
         } catch (error) {
-			setIsLoading(false);
+			setIsLoadingNew(false);
             if (!error.response || error.response.status >= 500) {
                 props.setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
                 await new Promise(resolve => setTimeout(resolve, 6000));
@@ -55,28 +61,30 @@ const Relations = (props) => {
         }
 	}
 
-	const handleDeleteRelation = async (event) => {
+	const handleDeleteRelation = async (event, relationId) => {
 	
 		event.preventDefault();
 
-		setIsLoading(true);
+		setIsLoadingDelete(true);
 			
 		try {
-			await api.delete(`/subjects/relations/${event.target.value}`);
+			await api.delete(`/subjects/relations/${relationId}`);
 			
 			const fetchedEditedSubject = props.subjects.filter(subject => subject.id === props.subjectId);
 
 			const editedSubject = { 
 				...fetchedEditedSubject[0],
-				relations: fetchedEditedSubject[0].relations.filter(relation => relation.id !== parseInt(event.target.value))
+				relations: fetchedEditedSubject[0].relations.filter(relation => relation.id !== relationId)
 			}
 
 			props.setSubjects(prevState => ( 
 				prevState.filter(subject => subject.id !== props.subjectId)
 					.concat(editedSubject)));
+
+			setIsLoadingDelete(false);
 				
 		} catch (error) {
-			setIsLoading(false);
+			setIsLoadingDelete(false);
 	
 			if (!error.response || error.response.status >= 500) {
 				props.setNetworkErrorNotification({message: "Unable to contact the server. Please try again later.", type: "error"});
@@ -91,7 +99,13 @@ const Relations = (props) => {
 	const mappedRelations = props.relations.map(relation => 
 		<li key={relation.id}>
 			<label>{relation.title}</label>
-			<button value={relation.id} onClick={handleDeleteRelation}>delete</button>
+			<div className={styles.deleteButtonContainer}>
+				{isLoadingDelete ?
+				<div className={resources.loadingSpinnerSmall}></div> :
+				<button onClick={(event) => handleDeleteRelation(event, relation.id)} className={styles.buttonIcon}>
+					<AiOutlineCloseCircle />
+				</button>}
+			</div>
 		</li>
 	);
 
@@ -103,14 +117,16 @@ const Relations = (props) => {
 		<div className={modalStyles.backdrop} onClick={() => props.setRelationsWindowIsOpen(false)} />
 		<div className={modalStyles.modalContainer}>
 			<div className={styles.editWindow}>
-				<div>
+			<h3>Relations</h3>
+				<div className={styles.inputBox}>
 					<ul>
 						{mappedRelations}
 					</ul>
 				</div>
 				<div>
 					<form onSubmit={handleNewRelation}>
-						<label>New relation: </label>
+					<div className={styles.inputBox}>
+						<label>New: </label>
 						<input list="subjects" 
 							name="title" 
 							placeholder="search"
@@ -120,7 +136,12 @@ const Relations = (props) => {
 						<datalist id="subjects">
 							{subjectOptions}
 						</datalist>
-						<button>Create</button>
+						{isLoadingNew ?
+						<div className={resources.loadingSpinnerSmall}></div> :
+						<button className={styles.buttonIcon}>
+							<AiOutlinePlusCircle />
+						</button>}
+					</div>
 					</form>
 				</div>
 			</div>
