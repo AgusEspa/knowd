@@ -128,7 +128,9 @@ const Dashboard = () => {
 				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
 				searchTerm={searchTerm}
 				setSearchTerm={setSearchTerm}
+                fields={fields}
 			/>
+            {console.log(fields)}
             
             {subjectsWindowIsOpen &&
             <Subjects 

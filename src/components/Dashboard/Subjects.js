@@ -116,6 +116,7 @@ const Subjects = (props) => {
 			needsAttention={subject.needsAttention}
 			dueDate={subject.dueDate}
 			relations={subject.relations}
+			subjects={props.subjects}
 			setSubjects={props.setSubjects}
 			setNetworkErrorNotification={props.setNetworkErrorNotification}
 			setSuccessNotification={props.setSuccessNotification}

@@ -16,10 +16,10 @@ const About = () => {
 				<img src="screen1.png" alt="screen sample" />
 			</div>
 
-			<h3 className={styles.imagesCaptions}>Check your learning profile and subjects' relations:</h3>
+			<h3 className={styles.imagesCaptions}>Review your learning profile and statistics:</h3>
 			<div className={styles.smallImagesContainer}>
 				<img src="screen2.png" alt="screen sample" />
-				<img src="screen2.png" alt="screen sample" />
+				<img src="screen3.png" alt="screen sample" />
 			</div>
 		</main>
 	);
