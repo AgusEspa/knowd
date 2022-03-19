@@ -2,14 +2,11 @@ import { useState } from "react";
 import styles from "../../styles/Subjects.module.scss";
 import resources from "../../styles/Resources.module.scss";
 import Subject from "./Subject";
-import Toolbar from "./Toolbar";
 import SubjectCreate from "./SubjectCreate";
 
 const Subjects = (props) => {
 
-	const [ searchTerm, setSearchTerm ] = useState("");
 	const [ activeField, setActiveField ] = useState({ field: "", area: "" });
-	const [ newSubjectsWindowIsOpen, setNewSubjectsWindowIsOpen ] = useState(false);
 
 	const mappedFields = props.fields.map(fieldObject => 
 		<div key={fieldObject.fieldId} className={styles.fieldBox}>
@@ -56,9 +53,9 @@ const Subjects = (props) => {
 
 	const searchSubjects = () => {
 
-		if (searchTerm === "" || searchTerm === undefined) return displaySubjects();
+		if (props.searchTerm === "" || props.searchTerm === undefined) return displaySubjects();
 		else { 
-			return displaySubjects().filter(subject => subject.title.toLowerCase().includes(searchTerm.toLowerCase()));
+			return displaySubjects().filter(subject => subject.title.toLowerCase().includes(props.searchTerm.toLowerCase()));
 		}
 	}
 	
@@ -128,13 +125,8 @@ const Subjects = (props) => {
 
 	return (
 		<>
-			<Toolbar 
-				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
-				searchTerm={searchTerm}
-				setSearchTerm={setSearchTerm}
-			/>
 
-			<div className={styles.mainContainer}>
+			<main className={styles.mainContainer}>
 				<div className={styles.explorerContainer}>
 					<div className={styles.fieldsContainer}>
 					<div className={styles.fieldBox}>
@@ -170,11 +162,11 @@ const Subjects = (props) => {
 						</div>
 					}
 				</div>
-			</div>
+			</main>
 
-			{newSubjectsWindowIsOpen && 
+			{props.newSubjectsWindowIsOpen && 
 			<SubjectCreate 
-				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
+				setNewSubjectsWindowIsOpen={props.setNewSubjectsWindowIsOpen}
 				setSubjects={props.setSubjects}
 				setNetworkErrorNotification={props.setNetworkErrorNotification}
                 setSuccessNotification={props.setSuccessNotification}

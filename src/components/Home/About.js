@@ -11,8 +11,15 @@ const About = () => {
 			<p>You will be able to make entries for any number of subjects and topics, organize them according to the discipline and field of studies.</p> 
 			<p> Also, and perhaps more importantly, you will be able to connect them thus enriching the potential for further developing your expertise profile, and hopefuly make discoveries that no specialist could.</p>
 
+			<h3 className={styles.imagesCaptions}>A comprehensive dashboard with all your learning subjects:</h3>
 			<div className={styles.bigImageContainer}>
 				<img src="screen1.png" alt="screen sample" />
+			</div>
+
+			<h3 className={styles.imagesCaptions}>Check your learning profile and subjects' relations:</h3>
+			<div className={styles.smallImagesContainer}>
+				<img src="screen2.png" alt="screen sample" />
+				<img src="screen2.png" alt="screen sample" />
 			</div>
 		</main>
 	);

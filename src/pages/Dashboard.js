@@ -1,10 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import useAxios from "../utils/useAxios";
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import Navbar from "../components/Dashboard/Navbar/Navbar";
+import Toolbar from "../components/Dashboard/Toolbar";
 import Notification from "../components/Dashboard/Notification";
 import Subjects from "../components/Dashboard/Subjects";
+import Stats from "../components/Dashboard/Stats";
 import notificationStyles from "../styles/Notification.module.scss";
 
 const Dashboard = () => {
@@ -12,7 +14,11 @@ const Dashboard = () => {
 	const { setUserAuth } = useContext(AuthContext);
     const [ subjects, setSubjects ] = useState([]);
     const [ fields, setFields ] = useState([]); 
+	const [ searchTerm, setSearchTerm ] = useState("");
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ subjectsWindowIsOpen, setSubjectsWindowIsOpen ] = useState(true);
+    const [ statsWindowIsOpen, setStatsWindowIsOpen ] = useState(false);
+	const [ newSubjectsWindowIsOpen, setNewSubjectsWindowIsOpen ] = useState(false);
     const [ idErrorNotification, setIdErrorNotification ] = useState({message: "", type: ""});
     const [ networkErrorNotification, setNetworkErrorNotification ] = useState({message: "", type: ""});
     const [ successNotification, setSuccessNotification ] = useState({message: "", type: ""});
@@ -114,14 +120,37 @@ const Dashboard = () => {
         <>
 			<Navbar />
 
+            <Toolbar 
+                subjectsWindowIsOpen={subjectsWindowIsOpen}
+                setSubjectsWindowIsOpen={setSubjectsWindowIsOpen}
+                statsWindowIsOpen={statsWindowIsOpen}
+                setStatsWindowIsOpen={setStatsWindowIsOpen}
+				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
+				searchTerm={searchTerm}
+				setSearchTerm={setSearchTerm}
+			/>
+            
+            {subjectsWindowIsOpen &&
             <Subjects 
                 subjects={subjects}
                 setSubjects={setSubjects} 
                 fields={fields}
+				searchTerm={searchTerm}
+                newSubjectsWindowIsOpen={newSubjectsWindowIsOpen}
+				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
                 setNetworkErrorNotification={setNetworkErrorNotification}
                 setSuccessNotification={setSuccessNotification}
                 isLoading={isLoading}
             />
+            }
+
+            {statsWindowIsOpen &&
+            <Stats 
+                subjects={subjects}
+                fields={fields}
+            />
+            }
+            
             
             <div className={notificationStyles.notificationContainer}>
                 {(idErrorNotification.message !== "") &&

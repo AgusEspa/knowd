@@ -8,6 +8,16 @@ const Toolbar = (props) => {
 		props.setSearchTerm(event.target.value);
 	}
 
+	const handleSubjectsWindowButton = () => {
+		props.setSubjectsWindowIsOpen(true);
+		props.setStatsWindowIsOpen(false);
+	}
+
+	const handleStatsWindowButton = () => {
+		props.setStatsWindowIsOpen(true);
+		props.setSubjectsWindowIsOpen(false);
+	}
+
 
 	return (
 		<div className={styles.toolbarBox}>
@@ -26,8 +36,27 @@ const Toolbar = (props) => {
 					</li>
 
 					<li>
-						<button onClick={() => props.setNewSubjectsWindowIsOpen(true)}>New Subject</button>
+						{props.subjectsWindowIsOpen ? 
+							<button onClick={() => props.setNewSubjectsWindowIsOpen(true)}>New Subject</button> :
+							<button className={styles.disabledButton} disabled>New Subject</button>
+						}
 					</li>
+
+					<li>
+						{props.subjectsWindowIsOpen ? 
+							<button onClick={handleSubjectsWindowButton} className={styles.activeButton}>Subjects</button> :
+							<button onClick={handleSubjectsWindowButton}>Subjects</button>
+						}
+						
+					</li>
+
+					<li>
+						{props.statsWindowIsOpen ? 
+							<button onClick={handleStatsWindowButton} className={styles.activeButton}>Stats</button> :
+							<button onClick={handleStatsWindowButton}>Stats</button>
+						}
+					</li>
+
 				 
 				</ul>
 			</div>

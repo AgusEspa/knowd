@@ -1,0 +1,42 @@
+@use './variables';
+
+.statsContainer {
+	background-color: transparent;
+	margin: 0;
+	padding: 2rem;
+	width: fit-content;
+
+	h2 {
+		font-family: variables.$fonts;
+		font-size: 1.3rem;
+		color: variables.$textLightGray;
+		margin: 0;
+		padding: 0;
+  	}
+	@media screen and (max-width: 750px) {
+		h2 {
+			font-size: 1.1rem;
+		}
+	}
+
+	p {
+		font-size: 0.8rem;
+		color: variables.$textLightGray;
+		font-family: variables.$fonts;
+		margin: 0;
+  	}
+	@media screen and (max-width: 750px) {
+		p {
+			font-size: .9rem;
+		}
+	}
+
+	.statsBigBox {
+		padding: 1rem;
+		display: block;
+		background-color: variables.$toolbarBackground;
+		border: 1px solid variables.$disabledButton;
+		border-radius: 0.5rem;
+		margin: 0;
+	}
+}
