@@ -109,7 +109,7 @@ const Relations = (props) => {
 		</li>
 	);
 
-	const subjectOptions = props.subjects.map(subject => 
+	const subjectOptions = props.subjects.filter(subject => subject.field !== props.field).map(subject => 
 		<option key={subject.id}>{subject.title}</option>);
 	
 	return (
@@ -118,6 +118,7 @@ const Relations = (props) => {
 		<div className={modalStyles.modalContainer}>
 			<div className={styles.editWindow}>
 			<h3>Relations</h3>
+			<p>Potential impact on unconnected subjects</p>
 				<div className={styles.inputBox}>
 					<ul>
 						{mappedRelations}

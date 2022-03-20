@@ -64,6 +64,7 @@ const Subject = (props) => {
 				subjects={props.subjects}
 				setSubjects={props.setSubjects}
 				subjectId={props.id}
+				field={props.field}
 				setRelationsWindowIsOpen={setRelationsWindowIsOpen}
 				setNetworkErrorNotification={props.setNetworkErrorNotification}
 			/>}

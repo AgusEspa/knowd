@@ -258,6 +258,16 @@
 				border: 1px solid variables.$textLightGray;
 			}
 	}
+
+	p {
+		margin: 0.2rem 0 0 0;
+		padding: 0;
+		font-family: variables.$fonts;
+		font-weight: 500;
+		background-color: transparent;
+		font-size: .9rem;
+		color: variables.$placeholderGray;
+	}
 	
 	.inputBox {
 		display: flex;

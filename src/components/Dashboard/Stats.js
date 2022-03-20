@@ -1,4 +1,4 @@
-import { PieChart, Pie, LabelList, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from 'recharts';
+import { PieChart, Pie, LabelList, Cell, RadarChart, PolarGrid, PolarAngleAxis, Radar, Legend, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 import styles from "../../styles/Stats.module.scss";
 
 const Stats = (props) => {
@@ -25,6 +25,37 @@ const Stats = (props) => {
 	const sortedStatsByAllFields = statsByAllFields.sort(sortByHighestValue);
 
 	const COLORS = ['#E20000', '#228B22', '#FFA500', '#40E0D0', '#FFFF00', '#DC143C', '#8B4513', '#DA70D6', '#00BFFF', '#F0E68C', '#32CD32', '#008080', '#7B68EE', '#9932CC', '#DEB887', '#800000', '#4B0082', '#00BFFF', '#808000', '#FF7F50', '#3CB371' ];
+
+
+	const buildRelationsStats = () => {
+		const relationsStats = [];
+			let subjectsWithRel = 0;
+			let totalRel = 0;
+
+		if (props.subjects.length > 1) {
+
+			props.subjects.forEach(subject => {
+				subject.relations.length > 0 && subjectsWithRel++;
+				totalRel += subject.relations.length;
+			});
+
+			relationsStats.push({
+				Fields: props.fields.length,
+				Total_subs: props.subjects.length,
+				Subs_with_rels: subjectsWithRel,
+				Total_rels: totalRel
+			});
+
+			if (totalRel > 0) return relationsStats;
+			else return [];
+
+		} else return [];
+	}	
+	const relationsData = buildRelationsStats();
+	const relCoefficient = relationsData.length > 0 ? 
+		(relationsData[0].Total_rels / relationsData[0].Total_subs).toFixed(2) :
+		0;
+
 
 	const statsByAreas = [];
 	props.fields.filter(fieldObject => fieldObject.areas.length > 2)
@@ -127,6 +158,43 @@ const Stats = (props) => {
 							fontSize="0.7rem"
 						/>
 					</RadarChart>
+				</div>
+			}
+
+			{relationsData.length > 0 &&
+				<div className={styles.statsBigBox}>
+					<h2>Relations Coefficient = <span className={relCoefficient < 0.3 ? styles.negativeCoef : styles.positiveCoef}>{relCoefficient}</span>
+						{
+							
+						}
+					</h2>
+					<p>by subject count</p>
+						<BarChart width={450} height={300}
+							data={relationsData}
+							margin={{
+								top: 40,
+								right: 65,
+								left: 10,
+								bottom: 25,
+							}}
+							>
+							<CartesianGrid />
+							<YAxis />
+							<Tooltip />
+							<Bar dataKey="Total_subs" fill="#ff3d00" legendType='none' />
+							<Bar dataKey="Subs_with_rels" fill="#2962ff" legendType='none' />
+							<Bar dataKey="Fields" fill="#ffeb3b" legendType='none' />
+							<Bar dataKey="Total_rels" fill="#8A2BE2" legendType='none' />
+							<Legend 
+								align="center"
+								iconSize="12"
+								iconType="circle"
+								verticalAlign="top" 
+								height={40}
+								width={450}
+								/>
+						</BarChart>
+					
 				</div>
 			}
 

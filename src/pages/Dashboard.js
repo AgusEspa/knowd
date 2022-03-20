@@ -130,7 +130,6 @@ const Dashboard = () => {
 				setSearchTerm={setSearchTerm}
                 fields={fields}
 			/>
-            {console.log(fields)}
             
             {subjectsWindowIsOpen &&
             <Subjects 

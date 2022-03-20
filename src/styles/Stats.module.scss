@@ -16,6 +16,13 @@
 		color: variables.$textLightGray;
 		margin: 0;
 		padding: 0;
+
+		.positiveCoef {
+			color: green;
+		}
+		.negativeCoef {
+			color: orange;
+		}
   	}
 	@media screen and (max-width: 750px) {
 		h2 {
