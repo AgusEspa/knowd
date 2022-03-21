@@ -25,6 +25,16 @@ const Stats = (props) => {
 				})
 		});
 
+		if (props.subjects.filter(subject => subject.field === "").length > 0) {
+			statsByAllFields.push({
+				name: "Empty Field",
+				valueL: props.subjects.filter(subject => subject.field === "" && subject.status === "Learning").length,
+				valueM: props.subjects.filter(subject => subject.field === "" && subject.status === "Mastered").length,
+				valueW: props.subjects.filter(subject => subject.field === "" && subject.status === "Wish").length
+			});
+		}
+		
+
 		return statsByAllFields;
 	}
 
@@ -71,8 +81,15 @@ const Stats = (props) => {
 			.forEach(fieldObject => {
 				const data = fieldObject.areas.map(area => ({
 					name: area.area,
-					value: props.subjects.filter(subject => subject.area === area.area && subject.status !== "Wish").length
+					value: props.subjects.filter(subject => subject.field === fieldObject.field && subject.area === area.area && subject.status !== "Wish").length
 				}));
+
+				if (props.subjects.filter(subject => subject.area === "").length > 0) {
+					data.push({
+						name: "Empty Area",
+						value: props.subjects.filter(subject => subject.field === fieldObject.field && subject.area === "" && subject.status !== "Wish").length
+					});
+				}
 			
 				const filteredData = data.filter(item => item.value > 0);
 
@@ -140,7 +157,7 @@ const Stats = (props) => {
 			{props.fields.length < 3 &&
 				<div className={styles.statsBigBox}><p>You don't have enough subjects and fields to calculate stats. To see all the stats, add more subjects and relations.</p></div>
 			}
-			{props.fields.length > 2 &&
+			{sortedStatsByAllFields.length > 2 &&
 				<div className={styles.statsBigBox}>
 					<h2>All Fields</h2>
 					<p>by subject count</p>

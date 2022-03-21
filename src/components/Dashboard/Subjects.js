@@ -32,7 +32,7 @@ const Subjects = (props) => {
         const ia = a.relevance;
         const ib = b.relevance;
         
-        if (ia < ib) return 1;
+		if (ia < ib) return 1;
         else if (ia > ib) return -1;
         else if (ia === ib) {
             if (fa < fb) return -1;
@@ -156,14 +156,14 @@ const Subjects = (props) => {
 							{mappedSearchedLearningSubjects}
 						</div>
 					}
-					{mappedSearchedWishSubjects.length !== 0 &&
-						<div className={styles.subjectsBlocks}>
-							{mappedSearchedWishSubjects}
-						</div>
-					}
 					{mappedSearchedMasteredSubjects.length !== 0 &&
 						<div className={styles.subjectsBlocks}>
 							{mappedSearchedMasteredSubjects}
+						</div>
+					}
+					{mappedSearchedWishSubjects.length !== 0 &&
+						<div className={styles.subjectsBlocks}>
+							{mappedSearchedWishSubjects}
 						</div>
 					}
 				</div>

@@ -21,10 +21,18 @@ const Subject = (props) => {
 		else return styles.needsAttentionFalse;
 	}
 
+	const progressWidth = props.progress < 20 ? (props.progress < 10 ? 13 : 17) : props.progress;
+	const progressBarWidthStyle = {
+		width: `${progressWidth}%`};
+
 	return (
 		<>
 			<div className={setStyleStatus()}>
 				<h3 className={setStyleAttention()}>{props.title}</h3>
+				{props.status !== "Wish" &&
+				<div className={styles.progressBarContainer}>
+					<div className={styles.progressBar} style={progressBarWidthStyle}><span>{props.progress}%</span></div>
+				</div>}
 				<div className={styles.cardButtonsContainer}>
 					<button type="button" onClick={()=>setEditWindowIsOpen(true)}>
 						<FiEdit3 />
