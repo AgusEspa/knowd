@@ -79,7 +79,8 @@ const Subjects = (props) => {
 				setNetworkErrorNotification={props.setNetworkErrorNotification}
         		setSuccessNotification={props.setSuccessNotification}
 				fields={props.fields}
-				/>);
+				/>
+		);
 
 	const mappedSearchedWishSubjects = searchSubjects().filter(subject => subject.status === "Wish")
 		.sort(sortFunction)
@@ -96,32 +97,35 @@ const Subjects = (props) => {
 				needsAttention={subject.needsAttention}
 				dueDate={subject.dueDate}
 				relations={subject.relations}
+				subjects={props.subjects}
 				setSubjects={props.setSubjects}
 				setNetworkErrorNotification={props.setNetworkErrorNotification}
-				setSuccessNotification={props.setSuccessNotification}
+        		setSuccessNotification={props.setSuccessNotification}
 				fields={props.fields}
-			/>);
+				/>
+		);
 
 	const mappedSearchedMasteredSubjects = searchSubjects().filter(subject => subject.status === "Mastered").sort(sortFunction)
-	.map(subject => 
-		<Subject 
-			key={subject.id}
-			id={subject.id}
-			title={subject.title}
-			field={subject.field}
-			area={subject.area}
-			relevance={subject.relevance}
-			progress={subject.progress}
-			status={subject.status}
-			needsAttention={subject.needsAttention}
-			dueDate={subject.dueDate}
-			relations={subject.relations}
-			subjects={props.subjects}
-			setSubjects={props.setSubjects}
-			setNetworkErrorNotification={props.setNetworkErrorNotification}
-			setSuccessNotification={props.setSuccessNotification}
-			fields={props.fields}
-		/>);
+		.map(subject => 
+			<Subject 
+				key={subject.id}
+				id={subject.id}
+				title={subject.title}
+				field={subject.field}
+				area={subject.area}
+				relevance={subject.relevance}
+				progress={subject.progress}
+				status={subject.status}
+				needsAttention={subject.needsAttention}
+				dueDate={subject.dueDate}
+				relations={subject.relations}
+				subjects={props.subjects}
+				setSubjects={props.setSubjects}
+				setNetworkErrorNotification={props.setNetworkErrorNotification}
+        		setSuccessNotification={props.setSuccessNotification}
+				fields={props.fields}
+				/>
+		);
 
 
 	return (

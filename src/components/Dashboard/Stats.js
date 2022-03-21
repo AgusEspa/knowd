@@ -184,12 +184,9 @@ const Stats = (props) => {
 
 			{relationsData.length > 0 &&
 				<div className={styles.statsBigBox}>
-					<h2>Relations Coefficient = <span className={relCoefficient < 0.3 ? styles.negativeCoef : styles.positiveCoef}>{relCoefficient}</span>
-						{
-							
-						}
+					<h2>Relations Coefficient = <span className={relCoefficient < 0.2 ? styles.negativeCoef : styles.positiveCoef}>{relCoefficient}</span>
 					</h2>
-					<p>by subject count</p>
+					<p>by subject count (aim for 0.2+)</p>
 						<BarChart width={450} height={300}
 							data={relationsData}
 							margin={{
