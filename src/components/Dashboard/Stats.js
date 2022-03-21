@@ -87,7 +87,6 @@ const Stats = (props) => {
 	};
 	
 	const sortedStatsByAreas = buildAreasStats().sort(sortByHighestValue);
-	console.log(sortedStatsByAreas);
 	
 	const mappedSortedStatsByAreas = sortedStatsByAreas.map(fieldObject =>
 		<div className={styles.statsBigBox} key={fieldObject.fieldId}>

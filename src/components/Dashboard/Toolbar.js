@@ -11,10 +11,18 @@ const Toolbar = (props) => {
 	const handleSubjectsWindowButton = () => {
 		props.setSubjectsWindowIsOpen(true);
 		props.setStatsWindowIsOpen(false);
+		props.setRelationsWindowIsOpen(false);
 	}
 
 	const handleStatsWindowButton = () => {
 		props.setStatsWindowIsOpen(true);
+		props.setSubjectsWindowIsOpen(false);
+		props.setRelationsWindowIsOpen(false);
+	}
+
+	const handleRelationsWindowButton = () => {
+		props.setRelationsWindowIsOpen(true);
+		props.setStatsWindowIsOpen(false);
 		props.setSubjectsWindowIsOpen(false);
 	}
 
@@ -54,6 +62,13 @@ const Toolbar = (props) => {
 						{props.statsWindowIsOpen ? 
 							<button onClick={handleStatsWindowButton} className={styles.activeButton}>Stats</button> :
 							<button onClick={handleStatsWindowButton}>Stats</button>
+						}
+					</li>
+
+					<li>
+						{props.relationsWindowIsOpen ? 
+							<button onClick={handleRelationsWindowButton} className={styles.activeButton}>Relations</button> :
+							<button onClick={handleRelationsWindowButton}>Relations</button>
 						}
 					</li>
 

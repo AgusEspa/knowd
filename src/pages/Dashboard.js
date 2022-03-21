@@ -7,6 +7,7 @@ import Toolbar from "../components/Dashboard/Toolbar";
 import Notification from "../components/Dashboard/Notification";
 import Subjects from "../components/Dashboard/Subjects";
 import Stats from "../components/Dashboard/Stats";
+import RelationsView from "../components/Dashboard/RelationsView";
 import notificationStyles from "../styles/Notification.module.scss";
 
 const Dashboard = () => {
@@ -18,6 +19,7 @@ const Dashboard = () => {
     const [ isLoading, setIsLoading ] = useState(false);
     const [ subjectsWindowIsOpen, setSubjectsWindowIsOpen ] = useState(true);
     const [ statsWindowIsOpen, setStatsWindowIsOpen ] = useState(false);
+    const [ relationsWindowIsOpen, setRelationsWindowIsOpen ] = useState(false);
 	const [ newSubjectsWindowIsOpen, setNewSubjectsWindowIsOpen ] = useState(false);
     const [ idErrorNotification, setIdErrorNotification ] = useState({message: "", type: ""});
     const [ networkErrorNotification, setNetworkErrorNotification ] = useState({message: "", type: ""});
@@ -125,6 +127,8 @@ const Dashboard = () => {
                 setSubjectsWindowIsOpen={setSubjectsWindowIsOpen}
                 statsWindowIsOpen={statsWindowIsOpen}
                 setStatsWindowIsOpen={setStatsWindowIsOpen}
+                relationsWindowIsOpen={relationsWindowIsOpen}
+                setRelationsWindowIsOpen={setRelationsWindowIsOpen}
 				setNewSubjectsWindowIsOpen={setNewSubjectsWindowIsOpen}
 				searchTerm={searchTerm}
 				setSearchTerm={setSearchTerm}
@@ -149,6 +153,12 @@ const Dashboard = () => {
             <Stats 
                 subjects={subjects}
                 fields={fields}
+            />
+            }
+
+            {relationsWindowIsOpen &&
+            <RelationsView 
+                subjects={subjects}
             />
             }
             
