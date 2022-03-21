@@ -32,16 +32,6 @@ const Toolbar = (props) => {
       					  
 			<div className={styles.toolsMenu}>	
 			  	<ul>
-				  	
-				  	<li>
-						<input type="search" 
-							placeholder="Search"
-							name="searchTerm"
-							value={props.searchTerm} 
-							onChange={handleSearchTermChange}
-						/>
-												
-					</li>
 
 					<li>
 						{props.subjectsWindowIsOpen ? 
@@ -51,11 +41,19 @@ const Toolbar = (props) => {
 					</li>
 
 					<li>
+						<input type="search" 
+							placeholder="Search"
+							name="searchTerm"
+							value={props.searchTerm} 
+							onChange={handleSearchTermChange}
+						/>						
+					</li>
+
+					<li>
 						{props.subjectsWindowIsOpen ? 
 							<button onClick={handleSubjectsWindowButton} className={styles.activeButton}>Subjects</button> :
 							<button onClick={handleSubjectsWindowButton}>Subjects</button>
 						}
-						
 					</li>
 
 					<li>

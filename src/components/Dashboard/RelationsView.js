@@ -1,3 +1,4 @@
+import { BsArrowReturnRight } from "react-icons/bs";
 import styles from "../../styles/RelationsView.module.scss";
 
 const RelationsView = (props) => {
@@ -10,7 +11,8 @@ const RelationsView = (props) => {
 			<h3>{subjectObject.title}</h3>
 				<ul>
 					{subjectObject.relations.map(relation => 
-						<li key={relation.id}>
+						<li key={relation.id} className={styles.relationContainer}>
+							<BsArrowReturnRight />
 							<p>{relation.title}</p>
 						</li>
 					)}

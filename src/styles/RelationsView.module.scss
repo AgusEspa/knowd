@@ -26,12 +26,35 @@
 			margin: 0;
 			padding: 0;
 		}
-	
-		p {
-			font-size: 1rem;
-			color: variables.$textLightGray;
-			font-family: variables.$fonts;
+
+		ul {
 			margin: 0;
+			padding: 0;
+		}
+
+		.relationContainer {
+			display: flex;
+			justify-content: flex-start;
+			align-content: center;
+			margin: 0;
+			padding: 0.5rem 0 0 0;
+			list-style: none;
+			text-decoration: none;
+
+			p {
+				font-size: 1rem;
+				color: variables.$textLightGray;
+				font-family: variables.$fonts;
+				margin: 0;
+			}
+
+			svg {
+				margin-right: 0.3rem;
+				fill: variables.$containerBorder;
+				font-size: 1.1rem;
+				font-weight: 700;
+				align-self: center;
+			}
 		}
 	}
 }
