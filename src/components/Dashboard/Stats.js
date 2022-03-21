@@ -1,4 +1,4 @@
-import { PieChart, Pie, LabelList, Cell, RadarChart, PolarGrid, PolarAngleAxis, Radar, Legend, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from 'recharts';
+import { PieChart, Pie, LabelList, Cell, RadarChart, PolarGrid, PolarAngleAxis, Radar, Legend, BarChart, CartesianGrid, YAxis, Tooltip, Bar } from 'recharts';
 import styles from "../../styles/Stats.module.scss";
 
 const Stats = (props) => {
@@ -12,25 +12,31 @@ const Stats = (props) => {
 		else return 0;
 	}
 
-	const statsByAllFields = [];
-	props.fields.forEach(fieldObject => {
-		statsByAllFields.push( {
-			name: fieldObject.field,
-			valueL: props.subjects.filter(subject => subject.field === fieldObject.field && subject.status === "Learning").length,
-			valueM: props.subjects.filter(subject => subject.field === fieldObject.field && subject.status === "Mastered").length,
-			valueW: props.subjects.filter(subject => subject.field === fieldObject.field && subject.status === "Wish").length
-			})
-	});
+	const buildFieldStats = () => {
 
-	const sortedStatsByAllFields = statsByAllFields.sort(sortByHighestValue);
+		const statsByAllFields = [];
+
+		props.fields.forEach(fieldObject => {
+			statsByAllFields.push( {
+				name: fieldObject.field,
+				valueL: props.subjects.filter(subject => subject.field === fieldObject.field && subject.status === "Learning").length,
+				valueM: props.subjects.filter(subject => subject.field === fieldObject.field && subject.status === "Mastered").length,
+				valueW: props.subjects.filter(subject => subject.field === fieldObject.field && subject.status === "Wish").length
+				})
+		});
+
+		return statsByAllFields;
+	}
+
+	const sortedStatsByAllFields = buildFieldStats().sort(sortByHighestValue);
 
 	const COLORS = ['#E20000', '#228B22', '#FFA500', '#40E0D0', '#FFFF00', '#DC143C', '#8B4513', '#DA70D6', '#00BFFF', '#F0E68C', '#32CD32', '#008080', '#7B68EE', '#9932CC', '#DEB887', '#800000', '#4B0082', '#00BFFF', '#808000', '#FF7F50', '#3CB371' ];
 
 
 	const buildRelationsStats = () => {
 		const relationsStats = [];
-			let subjectsWithRel = 0;
-			let totalRel = 0;
+		let subjectsWithRel = 0;
+		let totalRel = 0;
 
 		if (props.subjects.length > 1) {
 
@@ -51,26 +57,38 @@ const Stats = (props) => {
 
 		} else return [];
 	}	
+
 	const relationsData = buildRelationsStats();
 	const relCoefficient = relationsData.length > 0 ? 
 		(relationsData[0].Total_rels / relationsData[0].Total_subs).toFixed(2) :
 		0;
 
 
-	const statsByAreas = [];
-	props.fields.filter(fieldObject => fieldObject.areas.length > 2)
-		.forEach(fieldObject => {
-			const data = fieldObject.areas.map(area => ({
-				name: area.area,
-				value: props.subjects.filter(subject => subject.area === area.area && subject.status !== "Wish").length
-			}));
-			const filteredData = data.filter(item => item.value > 0);
-			statsByAreas.push({
-				field: fieldObject.field, 
-				fieldId: fieldObject.fieldId, 
-				data: filteredData});
-	});
-	const sortedStatsByAreas = statsByAreas.sort(sortByHighestValue);
+	const buildAreasStats = () => {
+		const statsByAreas = [];
+
+		props.fields.filter(fieldObject => fieldObject.areas.length >= 2)
+			.forEach(fieldObject => {
+				const data = fieldObject.areas.map(area => ({
+					name: area.area,
+					value: props.subjects.filter(subject => subject.area === area.area && subject.status !== "Wish").length
+				}));
+			
+				const filteredData = data.filter(item => item.value > 0);
+
+				statsByAreas.push({
+					field: fieldObject.field, 
+					fieldId: fieldObject.fieldId, 
+					data: filteredData
+				});
+		});
+		
+		return statsByAreas.filter(item => item.data.length >= 2);
+	};
+	
+	const sortedStatsByAreas = buildAreasStats().sort(sortByHighestValue);
+	console.log(sortedStatsByAreas);
+	
 	const mappedSortedStatsByAreas = sortedStatsByAreas.map(fieldObject =>
 		<div className={styles.statsBigBox} key={fieldObject.fieldId}>
 			<h2>{fieldObject.field}</h2>
@@ -120,6 +138,9 @@ const Stats = (props) => {
 	return (
 		<main className={styles.statsContainer}>
 
+			{props.fields.length < 3 &&
+				<div className={styles.statsBigBox}><p>You don't have enough subjects and fields to calculate stats. To see all the stats, add more subjects and relations.</p></div>
+			}
 			{props.fields.length > 2 &&
 				<div className={styles.statsBigBox}>
 					<h2>All Fields</h2>

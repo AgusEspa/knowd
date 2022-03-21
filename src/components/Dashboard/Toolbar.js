@@ -51,11 +51,9 @@ const Toolbar = (props) => {
 					</li>
 
 					<li>
-						{props.fields.length !== 0 ?
-							props.statsWindowIsOpen ? 
+						{props.statsWindowIsOpen ? 
 							<button onClick={handleStatsWindowButton} className={styles.activeButton}>Stats</button> :
-							<button onClick={handleStatsWindowButton}>Stats</button> :
-							<button className={styles.disabledButton} disabled>Stats</button>
+							<button onClick={handleStatsWindowButton}>Stats</button>
 						}
 					</li>
 
