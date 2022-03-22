@@ -7,7 +7,6 @@ import resources from "../../styles/Resources.module.scss";
 const Topic = (props) => {
 
 	const [ isDone, setIsDone ] = useState(props.topic.isDone);
-	const [ isLoadingDelete, setIsLoadingDelete ] = useState(false);
 
 	const api = useAxios();
 
@@ -21,7 +20,7 @@ const Topic = (props) => {
 	
 		event.preventDefault();
 
-		setIsLoadingDelete(true);
+		props.setIsLoadingDelete(true);
 			
 		try {
 			await api.delete(`/subjects/topics/${topicId}`);
@@ -37,10 +36,10 @@ const Topic = (props) => {
 				prevState.filter(subject => subject.id !== props.subjectId)
 					.concat(editedSubject)));
 
-			setIsLoadingDelete(false);
+			props.setIsLoadingDelete(false);
 				
 		} catch (error) {
-			setIsLoadingDelete(false);
+			props.setIsLoadingDelete(false);
 	
 			if (!error.response || error.response.status >= 500) {
 				props.setNetworkErrorNotification({message: "Unable to contact the server. Please try again later.", type: "error"});
@@ -54,7 +53,7 @@ const Topic = (props) => {
 
 	const editTopic = async (topicId, title, checked) => {
 
-		setIsLoadingDelete(true);
+		props.setIsLoadingDelete(true);
 
 		const data = {title: title, isDone: checked};
 		
@@ -73,10 +72,10 @@ const Topic = (props) => {
 				prevState.filter(subject => subject.id !== props.subjectId)
 					.concat(editedSubject)));
 
-			setIsLoadingDelete(false);
+			props.setIsLoadingDelete(false);
             
         } catch (error) {
-			setIsLoadingDelete(false);
+			props.setIsLoadingDelete(false);
 
             if (!error.response || error.response.status >= 500) {
                 props.setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
@@ -101,7 +100,7 @@ const Topic = (props) => {
 			<label>{props.topic.title}</label>
 
 			<div className={styles.deleteButtonContainer}>
-				{isLoadingDelete ?
+				{props.isLoadingDelete ?
 				<div className={resources.loadingSpinnerSmall}></div> :
 				<button onClick={(event) => handleDeleteTopic(event, props.topic.id)} className={styles.buttonIcon}>
 					<AiOutlineCloseCircle />
