@@ -98,14 +98,17 @@ const Relations = (props) => {
 
 	const mappedRelations = props.relations.map(relation => 
 		<li key={relation.id}>
-			<label>{relation.title}</label>
-			<div className={styles.deleteButtonContainer}>
-				{isLoadingDelete ?
-				<div className={resources.loadingSpinnerSmall}></div> :
-				<button onClick={(event) => handleDeleteRelation(event, relation.id)} className={styles.buttonIcon}>
+			<label>{relation.title === "" ? "empty" : relation.title}</label>
+			{isLoadingDelete ?
+				<div className={styles.deleteSpinnerContainer}>
+					<div className={resources.loadingSpinnerSmall}></div>
+				</div> :
+				<div className={styles.deleteButtonContainer}>
+					<button onClick={(event) => handleDeleteRelation(event, relation.id)} className={styles.buttonIcon}>
 					<AiOutlineCloseCircle />
-				</button>}
-			</div>
+					</button>
+				</div>
+			}
 		</li>
 	);
 
@@ -114,19 +117,24 @@ const Relations = (props) => {
 	
 	return (
 		<>
-		<div className={modalStyles.backdrop} onClick={() => props.setRelationsWindowIsOpen(false)} />
+
+		{isLoadingNew || isLoadingDelete ?
+			<div className={modalStyles.backdrop} /> :
+			<div className={modalStyles.backdrop} onClick={() => props.setRelationsWindowIsOpen(false)} />
+		}
+
 		<div className={modalStyles.modalContainer}>
 			<div className={styles.editWindow}>
 			<h3>Relations</h3>
 			<p>Potential impact on unconnected subjects</p>
-				<div className={styles.inputBox}>
+				<div className={styles.topicBox}>
 					<ul>
 						{mappedRelations}
 					</ul>
 				</div>
 				<div>
 					<form onSubmit={handleNewRelation}>
-					<div className={styles.inputBox}>
+					<div className={styles.topicBox}>
 						<label>New: </label>
 						<input list="subjects" 
 							name="title" 

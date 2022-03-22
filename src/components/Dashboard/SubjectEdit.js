@@ -132,7 +132,12 @@ const SubjectEdit = (props) => {
 
 	return (
 		<>
+
+			{isLoading.delete || isLoading.save ?
+			<div className={modalStyles.backdrop} /> :
 			<div className={modalStyles.backdrop} onClick={() => props.setEditWindowIsOpen(false)} />
+			}
+
 			<div className={modalStyles.modalContainer}>
 				<div className={styles.editWindow}>
 					<form onSubmit={handleEditSubject}>

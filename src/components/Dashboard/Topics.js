@@ -43,6 +43,7 @@ const Topics = (props) => {
 					.concat(editedSubject)));
 
 			setIsLoadingNew(false);
+			setTopicTitle("");
 
             
         } catch (error) {
@@ -75,7 +76,7 @@ const Topics = (props) => {
 	return (
 		<>
 
-		{isLoadingNew ?
+		{isLoadingNew || isLoadingDelete ?
 			<div className={modalStyles.backdrop} /> :
 			<div className={modalStyles.backdrop} onClick={() => props.setTopicsWindowIsOpen(false)} />
 		}
@@ -83,14 +84,14 @@ const Topics = (props) => {
 		<div className={modalStyles.modalContainer}>
 			<div className={styles.editWindow}>
 			<h3>Topics</h3>
-				<div className={styles.inputBox}>
+				<div className={styles.topicBox}>
 					<ul>
 						{mappedTopics}
 					</ul>
 				</div>
 				<div>
 					<form onSubmit={handleNewTopic}>
-					<div className={styles.inputBox}>
+					<div className={styles.topicBox}>
 						<label>New: </label>
 						<input type="text" 
 							name="title" 

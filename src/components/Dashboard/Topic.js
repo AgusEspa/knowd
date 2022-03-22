@@ -91,21 +91,24 @@ const Topic = (props) => {
 
 	return (
 		<>
-			<input
+			<input className={styles.checkbox}
 				type="checkbox"
 				name="isDone"
 				checked={isDone}
 				onChange={(event) => handleCheckbox(event, props.topic.id, props.topic.title)}
 			/>
-			<label>{props.topic.title}</label>
+			<label>{props.topic.title === "" ? "empty" : props.topic.title}</label>
 
-			<div className={styles.deleteButtonContainer}>
-				{props.isLoadingDelete ?
-				<div className={resources.loadingSpinnerSmall}></div> :
-				<button onClick={(event) => handleDeleteTopic(event, props.topic.id)} className={styles.buttonIcon}>
-					<AiOutlineCloseCircle />
-				</button>}
-			</div>
+			{props.isLoadingDelete ?
+				<div className={styles.deleteSpinnerContainer}>
+					<div className={resources.loadingSpinnerSmall}></div>
+				</div> :
+				<div className={styles.deleteButtonContainer}>
+					<button onClick={(event) => handleDeleteTopic(event, props.topic.id)} className={styles.buttonIcon}>
+						<AiOutlineCloseCircle />
+					</button>
+				</div>
+			}
 		</>
 	)
 }

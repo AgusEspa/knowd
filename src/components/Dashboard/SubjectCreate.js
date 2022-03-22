@@ -94,7 +94,12 @@ const SubjectCreate = (props) => {
 
 	return (
 		<>
+
+			{isLoading ?
+			<div className={modalStyles.backdrop} /> :
 			<div className={modalStyles.backdrop} onClick={() => props.setNewSubjectsWindowIsOpen(false)} />
+			}
+
 			<div className={modalStyles.modalContainer}>
 				<div className={styles.editWindow}>
 					<form onSubmit={handleCreateSubject}>
