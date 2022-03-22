@@ -74,6 +74,7 @@ const Subjects = (props) => {
 				needsAttention={subject.needsAttention}
 				dueDate={subject.dueDate}
 				relations={subject.relations}
+				topics={subject.topics}
 				subjects={props.subjects}
 				setSubjects={props.setSubjects}
 				setNetworkErrorNotification={props.setNetworkErrorNotification}
@@ -97,6 +98,7 @@ const Subjects = (props) => {
 				needsAttention={subject.needsAttention}
 				dueDate={subject.dueDate}
 				relations={subject.relations}
+				topics={subject.topics}
 				subjects={props.subjects}
 				setSubjects={props.setSubjects}
 				setNetworkErrorNotification={props.setNetworkErrorNotification}
@@ -119,6 +121,7 @@ const Subjects = (props) => {
 				needsAttention={subject.needsAttention}
 				dueDate={subject.dueDate}
 				relations={subject.relations}
+				topics={subject.topics}
 				subjects={props.subjects}
 				setSubjects={props.setSubjects}
 				setNetworkErrorNotification={props.setNetworkErrorNotification}

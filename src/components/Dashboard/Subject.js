@@ -3,6 +3,7 @@ import { FiEdit3, FiLink, FiLayers } from "react-icons/fi";
 import styles from "../../styles/Subjects.module.scss";
 import SubjectEdit from "./SubjectEdit";
 import Relations from "./Relations";
+import Topics from "./Topics";
 
 const Subject = (props) => {
 
@@ -21,7 +22,7 @@ const Subject = (props) => {
 		else return styles.needsAttentionFalse;
 	}
 
-	const progressWidth = props.progress < 20 ? (props.progress < 10 ? 13 : 17) : props.progress;
+	const progressWidth = props.progress < 20 ? (props.progress < 10 ? 12 : 15) : props.progress;
 	const progressBarWidthStyle = {
 		width: `${progressWidth}%`};
 
@@ -64,7 +65,15 @@ const Subject = (props) => {
 			/>}
 
 			{topicsWindowIsOpen &&
-			<div></div>}
+			<Topics 
+				topics={props.topics}
+				subjects={props.subjects}
+				setSubjects={props.setSubjects}
+				subjectId={props.id}
+				setTopicsWindowIsOpen={setTopicsWindowIsOpen}
+				setNetworkErrorNotification={props.setNetworkErrorNotification}
+			/>
+			}
 
 			{relationsWindowIsOpen &&
 			<Relations 
