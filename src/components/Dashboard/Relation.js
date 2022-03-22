@@ -53,7 +53,7 @@ const Relation = (props) => {
 
 	return (
 		<>
-			<label>{props.relation.title === "" ? "empty" : props.relation.title}</label>
+			<label>{props.relation.title === "" ? "*empty*" : props.relation.title}</label>
 			{isLoadingDelete ?
 				<div className={styles.deleteSpinnerContainer}>
 					<div className={resources.loadingSpinnerSmall}></div>

@@ -104,7 +104,7 @@ const Topic = (props) => {
 				checked={isDone}
 				onChange={(event) => handleCheckbox(event, props.topic.id, props.topic.title)}
 			/>
-			<label>{props.topic.title === "" ? "empty" : props.topic.title}</label>
+			<label>{props.topic.title === "" ? "*empty*" : props.topic.title}</label>
 
 			{isLoadingDelete ?
 				<div className={styles.deleteSpinnerContainer}>

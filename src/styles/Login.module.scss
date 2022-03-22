@@ -231,4 +231,18 @@
 			opacity: 1;
 		}
 	}
+
+	.legalNotice {
+		width: 20rem;
+
+		h4 {
+			font-family: variables.$fonts;
+			font-size: 1rem;
+			color: variables.$deleteButton;
+			margin: 0 0 0 3rem;
+		}
+		p {
+			font-size: 0.9rem;
+		}
+	}
 }

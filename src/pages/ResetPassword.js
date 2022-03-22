@@ -103,7 +103,7 @@ const ResetPassword = () => {
                             onMouseLeave={() => setPasswordHelperDisplay(false)}>
                             <BsInfoCircle />
                         </div>
-                        {passwordHelperDisplay && <div className={styles.passwordHelper}><p>Password must have at least 8 characters</p></div>}
+                        {passwordHelperDisplay && <div className={styles.passwordHelper}><p>Password must be at least 8 characters long</p></div>}
                     </div>
                     {formValidationErrors.newPassword !== "" ?
                         <div> 

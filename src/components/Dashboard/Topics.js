@@ -44,7 +44,6 @@ const Topics = (props) => {
 
 			setIsLoadingNew(false);
 			setTopicTitle("");
-
             
         } catch (error) {
 			setIsLoadingNew(false);
@@ -58,7 +57,23 @@ const Topics = (props) => {
         }
 	}
 
-	const mappedTopics = props.topics.map(topic => 
+	const sortFunction = (a, b) => {
+		const fa = a.title.toLowerCase();
+		const fb = b.title.toLowerCase();
+        const ia = a.isDone;
+        const ib = b.isDone;
+        
+		if (ia > ib) return 1;
+        else if (ia < ib) return -1;
+        else if (ia === ib) {
+            if (fa < fb) return -1;
+            else if (fa > fb) return 1;
+			else return 0;
+        }
+		else return 0;
+	}
+
+	const mappedTopics = props.topics.sort(sortFunction).map(topic => 
 		<li key={topic.id}>
 				<Topic 
 					subjects={props.subjects}

@@ -148,7 +148,7 @@ const Register = () => {
         				    onMouseLeave={() => setPasswordHelperDisplay(false)}>
                             <BsInfoCircle />
                         </div>
-                        {passwordHelperDisplay && <div className={styles.passwordHelper}><p>Password must have at least 8 characters</p></div>}
+                        {passwordHelperDisplay && <div className={styles.passwordHelper}><p>Password must be at least 8 characters long</p></div>}
                     </div>
                     {formValidationErrors.password !== "" ?
                     <div> 
@@ -204,6 +204,10 @@ const Register = () => {
 
                 </form>
 
+                <div className={styles.legalNotice}>
+                    <h4>Legal Notice:</h4>
+                    <p>This version of the app is for demonstration purposes only. If you are interested in having a fully-fledged account, please contact us at knowd.help@gmail.com.</p>
+                </div>
                 
             </div>
         </main>

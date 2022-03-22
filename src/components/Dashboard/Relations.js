@@ -28,8 +28,6 @@ const Relations = (props) => {
 
 		event.preventDefault();
 
-		setRelationFormData({title: ""});
-
 		setIsLoadingNew(true);
 
 		try {
@@ -48,6 +46,8 @@ const Relations = (props) => {
 					.concat(editedSubject)));
 
 			setIsLoadingNew(false);
+			setRelationFormData({title: ""});
+
             
         } catch (error) {
 			setIsLoadingNew(false);
@@ -61,8 +61,16 @@ const Relations = (props) => {
         }
 	}
 
+	const sortFunction = (a, b) => {
+		const fa = a.title.toLowerCase();
+		const fb = b.title.toLowerCase();
+		
+		if (fa < fb) return -1;
+		else if (fa > fb) return 1;
+		else return 0;
+	}
 
-	const mappedRelations = props.relations.map(relation => 
+	const mappedRelations = props.relations.sort(sortFunction).map(relation => 
 		<li key={relation.id}>
 			<Relation 
 				subjects={props.subjects}

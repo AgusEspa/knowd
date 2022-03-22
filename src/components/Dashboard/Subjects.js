@@ -36,7 +36,8 @@ const Subjects = (props) => {
         else if (ia > ib) return -1;
         else if (ia === ib) {
             if (fa < fb) return -1;
-            if (fa > fb) return 1;
+            else if (fa > fb) return 1;
+			else return 0;
         }
 		else return 0;
 	}
