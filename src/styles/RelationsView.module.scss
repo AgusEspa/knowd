@@ -32,6 +32,13 @@
 			padding: 0;
 		}
 
+		p {
+			font-size: 0.8rem;
+			color: variables.$textLightGray;
+			font-family: variables.$fonts;
+			margin: 0;
+		}
+
 		.relationContainer {
 			display: flex;
 			justify-content: flex-start;

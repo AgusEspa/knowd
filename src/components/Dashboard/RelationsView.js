@@ -3,7 +3,6 @@ import styles from "../../styles/RelationsView.module.scss";
 
 const RelationsView = (props) => {
 
-
 	const filteredRelations = props.subjects.filter(subjectObject => subjectObject.relations.length > 0);
 
 	const mappedRelations = filteredRelations.map(subjectObject => 
@@ -22,6 +21,10 @@ const RelationsView = (props) => {
 
 	return (
 		<main className={styles.relationsContainer}>
+
+			{mappedRelations.length === 0 &&
+				<div className={styles.relationsBox}><p>You haven't added any relation between subjects yet.</p></div>
+			}
 		
 			{mappedRelations}
 
