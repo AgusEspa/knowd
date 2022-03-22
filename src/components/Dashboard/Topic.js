@@ -7,6 +7,7 @@ import resources from "../../styles/Resources.module.scss";
 const Topic = (props) => {
 
 	const [ isDone, setIsDone ] = useState(props.topic.isDone);
+	const [ isLoadingDelete, setIsLoadingDelete ] = useState(false);
 
 	const api = useAxios();
 
@@ -20,7 +21,8 @@ const Topic = (props) => {
 	
 		event.preventDefault();
 
-		props.setIsLoadingDelete(true);
+		setIsLoadingDelete(true);
+		props.setIsLoadingTopic(true);
 			
 		try {
 			await api.delete(`/subjects/topics/${topicId}`);
@@ -36,10 +38,12 @@ const Topic = (props) => {
 				prevState.filter(subject => subject.id !== props.subjectId)
 					.concat(editedSubject)));
 
-			props.setIsLoadingDelete(false);
+			setIsLoadingDelete(false);
+			props.setIsLoadingTopic(false);
 				
 		} catch (error) {
-			props.setIsLoadingDelete(false);
+			setIsLoadingDelete(false);
+			props.setIsLoadingTopic(false);
 	
 			if (!error.response || error.response.status >= 500) {
 				props.setNetworkErrorNotification({message: "Unable to contact the server. Please try again later.", type: "error"});
@@ -53,7 +57,8 @@ const Topic = (props) => {
 
 	const editTopic = async (topicId, title, checked) => {
 
-		props.setIsLoadingDelete(true);
+		setIsLoadingDelete(true);
+		props.setIsLoadingTopic(true);
 
 		const data = {title: title, isDone: checked};
 		
@@ -72,10 +77,12 @@ const Topic = (props) => {
 				prevState.filter(subject => subject.id !== props.subjectId)
 					.concat(editedSubject)));
 
-			props.setIsLoadingDelete(false);
+			setIsLoadingDelete(false);
+			props.setIsLoadingTopic(false);
             
         } catch (error) {
-			props.setIsLoadingDelete(false);
+			setIsLoadingDelete(false);
+			props.setIsLoadingTopic(false);
 
             if (!error.response || error.response.status >= 500) {
                 props.setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
@@ -99,7 +106,7 @@ const Topic = (props) => {
 			/>
 			<label>{props.topic.title === "" ? "empty" : props.topic.title}</label>
 
-			{props.isLoadingDelete ?
+			{isLoadingDelete ?
 				<div className={styles.deleteSpinnerContainer}>
 					<div className={resources.loadingSpinnerSmall}></div>
 				</div> :

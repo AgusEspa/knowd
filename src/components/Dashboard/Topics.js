@@ -10,7 +10,7 @@ const Topics = (props) => {
 
 	const [ topicTitle, setTopicTitle ] = useState("");
 	const [ isLoadingNew, setIsLoadingNew ] = useState(false);
-	const [ isLoadingDelete, setIsLoadingDelete ] = useState(false);
+	const [ isLoadingTopic, setIsLoadingTopic ] = useState(false);
 
 	const api = useAxios();
 
@@ -65,8 +65,7 @@ const Topics = (props) => {
 					setSubjects={props.setSubjects}
 					subjectId={props.subjectId}
 					topic={topic}
-					isLoadingDelete={isLoadingDelete}
-					setIsLoadingDelete={setIsLoadingDelete}
+					setIsLoadingTopic={setIsLoadingTopic}
 					setNetworkErrorNotification={props.setNetworkErrorNotification}
 				/>
 		</li>
@@ -76,7 +75,7 @@ const Topics = (props) => {
 	return (
 		<>
 
-		{isLoadingNew || isLoadingDelete ?
+		{isLoadingNew || isLoadingTopic ?
 			<div className={modalStyles.backdrop} /> :
 			<div className={modalStyles.backdrop} onClick={() => props.setTopicsWindowIsOpen(false)} />
 		}
