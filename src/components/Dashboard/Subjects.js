@@ -174,17 +174,19 @@ const Subjects = (props) => {
 			</main>
 
 			{props.newSubjectsWindowIsOpen && 
-			<SubjectCreate 
-				setNewSubjectsWindowIsOpen={props.setNewSubjectsWindowIsOpen}
-				setSubjects={props.setSubjects}
-				setNetworkErrorNotification={props.setNetworkErrorNotification}
-                setSuccessNotification={props.setSuccessNotification}
-				fields={props.fields}
-				activeField={activeField}
-			/>}
+				<SubjectCreate 
+					setNewSubjectsWindowIsOpen={props.setNewSubjectsWindowIsOpen}
+					setSubjects={props.setSubjects}
+					setNetworkErrorNotification={props.setNetworkErrorNotification}
+					setSuccessNotification={props.setSuccessNotification}
+					fields={props.fields}
+					activeField={activeField}
+				/>
+			}
 
 		</>
 	);
+
 }
 
 export default Subjects;

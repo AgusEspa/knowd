@@ -127,7 +127,7 @@ const Relations = (props) => {
 			</div>
 		</div>
 		</>
-	)
+	);
 }
 
 export default Relations;

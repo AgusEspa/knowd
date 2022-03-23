@@ -14,7 +14,6 @@ const Topic = (props) => {
 	const handleCheckbox = (event, topicId, title) => {
 		setIsDone(event.target.checked);
 		editTopic(topicId, title, event.target.checked);
-
 	}
 
 	const handleDeleteTopic = async (event, topicId) => {
@@ -117,7 +116,8 @@ const Topic = (props) => {
 				</div>
 			}
 		</>
-	)
+	);
+
 }
 
 export default Topic;

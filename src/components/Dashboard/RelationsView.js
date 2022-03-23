@@ -29,7 +29,7 @@ const RelationsView = (props) => {
 			{mappedRelations}
 
 		</main>
-	)
+	);
 }
 
 export default RelationsView;

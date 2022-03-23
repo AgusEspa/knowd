@@ -134,8 +134,8 @@ const SubjectEdit = (props) => {
 		<>
 
 			{isLoading.delete || isLoading.save ?
-			<div className={modalStyles.backdrop} /> :
-			<div className={modalStyles.backdrop} onClick={() => props.setEditWindowIsOpen(false)} />
+				<div className={modalStyles.backdrop} /> :
+				<div className={modalStyles.backdrop} onClick={() => props.setEditWindowIsOpen(false)} />
 			}
 
 			<div className={modalStyles.modalContainer}>
@@ -253,8 +253,9 @@ const SubjectEdit = (props) => {
 					
 				</div>
 			</div>
-			</>
-	)
+		</>
+	);
+
 }
 
 export default SubjectEdit;

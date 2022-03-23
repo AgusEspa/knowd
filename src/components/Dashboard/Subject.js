@@ -48,46 +48,49 @@ const Subject = (props) => {
 			</div>
 
 			{editWindowIsOpen && 
-			<SubjectEdit 
-				setEditWindowIsOpen={setEditWindowIsOpen}
-				setSubjects={props.setSubjects}
-				fields={props.fields}
-				id={props.id}
-				title={props.title}
-				field={props.field}
-				area={props.area}
-				relevance={props.relevance}
-				progress={props.progress}
-				status={props.status}
-				needsAttention={props.needsAttention}
-				dueDate={props.dueDate}
-				setNetworkErrorNotification={props.setNetworkErrorNotification}
-			/>}
+				<SubjectEdit 
+					setEditWindowIsOpen={setEditWindowIsOpen}
+					setSubjects={props.setSubjects}
+					fields={props.fields}
+					id={props.id}
+					title={props.title}
+					field={props.field}
+					area={props.area}
+					relevance={props.relevance}
+					progress={props.progress}
+					status={props.status}
+					needsAttention={props.needsAttention}
+					dueDate={props.dueDate}
+					setNetworkErrorNotification={props.setNetworkErrorNotification}
+				/>
+			}
 
 			{topicsWindowIsOpen &&
-			<Topics 
-				topics={props.topics}
-				subjects={props.subjects}
-				setSubjects={props.setSubjects}
-				subjectId={props.id}
-				setTopicsWindowIsOpen={setTopicsWindowIsOpen}
-				setNetworkErrorNotification={props.setNetworkErrorNotification}
-			/>
+				<Topics 
+					topics={props.topics}
+					subjects={props.subjects}
+					setSubjects={props.setSubjects}
+					subjectId={props.id}
+					setTopicsWindowIsOpen={setTopicsWindowIsOpen}
+					setNetworkErrorNotification={props.setNetworkErrorNotification}
+				/>
 			}
 
 			{relationsWindowIsOpen &&
-			<Relations 
-				relations={props.relations}
-				subjects={props.subjects}
-				setSubjects={props.setSubjects}
-				subjectId={props.id}
-				field={props.field}
-				setRelationsWindowIsOpen={setRelationsWindowIsOpen}
-				setNetworkErrorNotification={props.setNetworkErrorNotification}
-			/>}
+				<Relations 
+					relations={props.relations}
+					subjects={props.subjects}
+					setSubjects={props.setSubjects}
+					subjectId={props.id}
+					field={props.field}
+					setRelationsWindowIsOpen={setRelationsWindowIsOpen}
+					setNetworkErrorNotification={props.setNetworkErrorNotification}
+				/>
+			}
 
 		</>
-	)
+	);
+
 }
 
 export default Subject;

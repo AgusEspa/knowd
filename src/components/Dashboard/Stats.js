@@ -235,7 +235,7 @@ const Stats = (props) => {
 			{mappedSortedStatsByAreas}
 
 		</main>
-	)
+	);
 }
 
 export default Stats;

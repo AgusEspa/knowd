@@ -125,7 +125,7 @@ const Topics = (props) => {
 			</div>
 		</div>
 		</>
-	)
+	);
 
 }
 

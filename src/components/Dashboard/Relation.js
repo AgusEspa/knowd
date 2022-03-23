@@ -65,7 +65,7 @@ const Relation = (props) => {
 				</div>
 			}
 		</>
-	)
+	);
 }
 
 export default Relation;

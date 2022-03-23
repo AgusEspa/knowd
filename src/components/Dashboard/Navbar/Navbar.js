@@ -9,7 +9,7 @@ import styles from "../../../styles/Navbar.module.scss"
 const Navbar = (props) => {
 
 	const { userAuth, logout } = useContext(AuthContext);
-	const [responsiveNavDisplay, setResponsiveNavDisplay] = useState(false);
+	const [ responsiveNavDisplay, setResponsiveNavDisplay ] = useState(false);
 
 	const handleResponsiveNavToggle = (event) => {
 		event.preventDefault();

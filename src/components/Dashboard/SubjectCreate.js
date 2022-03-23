@@ -205,8 +205,9 @@ const SubjectCreate = (props) => {
 					
 				</div>
 			</div>
-			</>
-	)
+		</>
+	);
+
 }
 
 export default SubjectCreate;
