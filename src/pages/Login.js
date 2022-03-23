@@ -7,12 +7,14 @@ import resources from "../styles/Resources.module.scss";
 
 const Login = () => {
 
-    const [loginFormData, setLoginFormData] = useState({emailAddress: "", password: ""});
-    const [credentialsError, setCredentialsError] = useState("");
-    const [networkError, setNetworkError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [formValidationErrors, setFormValidationErrors] = useState({emailAddress: "", password: ""});
+    const [ loginFormData, setLoginFormData ] = useState({emailAddress: "", password: ""});
+    const [ credentialsError, setCredentialsError ] = useState("");
+    const [ networkError, setNetworkError ] = useState("");
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [ formValidationErrors, setFormValidationErrors ] = useState({emailAddress: "", password: ""});
+    
     const { setUserAuth } = useContext(AuthContext);
+    
     const navigate = useNavigate();
 
     const baseUrl = "http://localhost:8080";
@@ -159,7 +161,7 @@ const Login = () => {
                 <div className={styles.loginLink}><p>New to knowd? <Link to="/register">Create account</Link></p></div>
             </div>
         </main>
-	)
+	);
 
 }
 

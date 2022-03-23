@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
 
 	const navigate = useNavigate();
 
-	const [userAuth, setUserAuth] = useState({
+	const [ userAuth, setUserAuth ] = useState({
 		username: "",
 		displayName: "", 
 		emailAddress: "", 
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 
-	return(
+	return (
 		<AuthContext.Provider value={{ userAuth, setUserAuth, logout }} >
 			{children}
 		</AuthContext.Provider>

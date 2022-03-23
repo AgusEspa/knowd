@@ -13,6 +13,7 @@ import notificationStyles from "../styles/Notification.module.scss";
 const Dashboard = () => {
 
 	const { setUserAuth } = useContext(AuthContext);
+    
     const [ subjects, setSubjects ] = useState([]);
     const [ fields, setFields ] = useState([]); 
 	const [ searchTerm, setSearchTerm ] = useState("");
@@ -183,7 +184,7 @@ const Dashboard = () => {
                 />}
             </div>
         </>
-    )
+    );
 }
  
 export default Dashboard;

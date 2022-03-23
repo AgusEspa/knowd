@@ -5,7 +5,7 @@ import styles from "../../styles/Settings.module.scss";
 const DeleteModal = (props) => {
 
 	const handleCancelButton = () => {
-		props.setModalIsOpen(false)
+		props.setModalIsOpen(false);
 	}
 
 	return (
@@ -24,7 +24,7 @@ const DeleteModal = (props) => {
 			</div>
 		</div>
 		</>
-	)
+	);
 }
 
 export default DeleteModal;

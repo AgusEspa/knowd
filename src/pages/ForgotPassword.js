@@ -5,11 +5,11 @@ import resources from "../styles/Resources.module.scss";
 
 const ForgotPassword = () => {
 
-    const [formData, setFormData] = useState({emailAddress: ""});
-    const [formValidationErrors, setFormValidationErrors] = useState({emailAddress: ""});
-    const [networkError, setNetworkError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-	const [isSent, setIsSent] = useState(false);
+    const [ formData, setFormData ] = useState({emailAddress: ""});
+    const [ formValidationErrors, setFormValidationErrors ] = useState({emailAddress: ""});
+    const [ networkError, setNetworkError ] = useState("");
+    const [ isLoading, setIsLoading ] = useState(false);
+	const [ isSent, setIsSent ] = useState(false);
 
 	const baseUrl = "http://localhost:8080/api";
 
@@ -122,7 +122,7 @@ const ForgotPassword = () => {
                 
             </div>
         </main>
-	)
+	);
 }
 
 export default ForgotPassword;

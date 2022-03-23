@@ -7,12 +7,13 @@ import resources from "../styles/Resources.module.scss";
 
 const Register = () => {
 
-    const [formData, setFormData] = useState({emailAddress: "", username:"", password: "", passwordVerification:""});
-    const [formValidationErrors, setFormValidationErrors] = useState({emailAddress: "", username:"", password: "", passwordVerification:""});
-    const [networkError, setNetworkError] = useState("");
-    const [isRegistered, setIsRegistered] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-	const [passwordHelperDisplay, setPasswordHelperDisplay] = useState(false);
+    const [ formData, setFormData ] = useState({emailAddress: "", username:"", password: "", passwordVerification:""});
+    const [ formValidationErrors, setFormValidationErrors ] = useState({emailAddress: "", username:"",   password: "", passwordVerification:""});
+    const [ networkError, setNetworkError ] = useState("");
+    const [ isRegistered, setIsRegistered ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
+	const [ passwordHelperDisplay, setPasswordHelperDisplay ] = useState(false);
+
 	const navigate = useNavigate();
 
 	const baseUrl = "http://localhost:8080/api";
@@ -211,7 +212,7 @@ const Register = () => {
                 
             </div>
         </main>
-	)
+	);
 }
 
 export default Register;

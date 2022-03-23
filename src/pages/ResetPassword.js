@@ -7,12 +7,13 @@ import resources from "../styles/Resources.module.scss";
 
 const ResetPassword = () => {
 
-    const [formData, setFormData] = useState({newPassword: "", passwordVerification:""});
-    const [formValidationErrors, setFormValidationErrors] = useState({newPassword: "", passwordVerification:""});
-    const [networkError, setNetworkError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [isSubmited, setIsSubmited] = useState(false);
-	const [passwordHelperDisplay, setPasswordHelperDisplay] = useState(false);
+    const [ formData, setFormData ] = useState({newPassword: "", passwordVerification:""});
+    const [ formValidationErrors, setFormValidationErrors ] = useState({newPassword: "", passwordVerification:""});
+    const [ networkError, setNetworkError ] = useState("");
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [ isSubmited, setIsSubmited ] = useState(false);
+	const [ passwordHelperDisplay, setPasswordHelperDisplay ] = useState(false);
+
 	const navigate = useNavigate();
 
 	const baseUrl = "http://localhost:8080/api";
@@ -162,7 +163,7 @@ const ResetPassword = () => {
                 </form>
             </div>
         </main>
-	)
+	);
 }
 
 export default ResetPassword;

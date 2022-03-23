@@ -1,6 +1,7 @@
 import styles from '../../styles/Home.module.scss';
 
 const About = () => {
+	
 	return (
 		<main className={styles.aboutContainer}>
 			<h2>Welcome to knowd, a relational knowledge tracker</h2>

@@ -8,7 +8,7 @@ function ProtectedRoute({ children }) {
 
     const isAuthenticated = userAuth.refreshToken;
     
-    return (isAuthenticated) ? children : <Navigate to="/login" />;
+    return isAuthenticated ? children : <Navigate to="/login" />;
 }    
 
 export default ProtectedRoute;

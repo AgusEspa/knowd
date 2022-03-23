@@ -8,7 +8,7 @@ function PublicRoute({ children }) {
     
     const isAuthenticated = userAuth.refreshToken;
     
-    return (isAuthenticated) ? <Navigate to="/dashboard" /> : children;
+    return isAuthenticated ? <Navigate to="/dashboard" /> : children;
 }    
 
 export default PublicRoute;
