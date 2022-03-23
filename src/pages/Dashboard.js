@@ -29,11 +29,7 @@ const Dashboard = () => {
 
     const api = useAxios();
 
-    useEffect( () => {
-		getCredentials();
-    }, []);
-
-	const getCredentials = async () => {
+    const getCredentials = async () => {
 
         try {
             const response = await api.get("/users/authenticated");
@@ -49,6 +45,35 @@ const Dashboard = () => {
             setIdErrorNotification(prevState => ({message: "Unable to verify identity. Please try again later.", type: "error"}));
             await new Promise(resolve => setTimeout(resolve, 10000));
             setIdErrorNotification(prevState => ({message: "", type: ""}));
+        }
+    }
+    
+    useEffect( () => {
+		getCredentials();
+    }, []);
+
+	
+
+    const getSubjects = async () => {
+
+        setIsLoading(true);
+
+        try {
+            const response = await api.get("/subjects");
+			setSubjects(response.data);
+
+            setIsLoading(false);
+            
+        } catch (error) {
+            setIsLoading(false);
+
+            if (!error.response || error.response.status >= 500) {
+                setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
+                await new Promise(resolve => setTimeout(resolve, 6000));
+                setNetworkErrorNotification(prevState => ({message: "", type: ""}));
+            } else {
+                console.log(error.response.data);
+            }
         }
     }
 
@@ -96,28 +121,6 @@ const Dashboard = () => {
 
     }, [subjects]);
 
-    const getSubjects = async () => {
-
-        setIsLoading(true);
-
-        try {
-            const response = await api.get("/subjects");
-			setSubjects(response.data);
-
-            setIsLoading(false);
-            
-        } catch (error) {
-            setIsLoading(false);
-
-            if (!error.response || error.response.status >= 500) {
-                setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
-                await new Promise(resolve => setTimeout(resolve, 6000));
-                setNetworkErrorNotification(prevState => ({message: "", type: ""}));
-            } else {
-                console.log(error.response.data);
-            }
-        }
-    }
 
     return (
         <>
