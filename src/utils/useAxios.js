@@ -18,7 +18,6 @@ const useAxios = () => {
 		headers: { "Authorization": `Bearer ${userAuth.accessToken}`}
 	});
 
-
 	useEffect(() => {
 
 		const requestIntercept = axiosInstance.interceptors.request.use(async request => {
@@ -26,8 +25,8 @@ const useAxios = () => {
 			const decodedToken = jwt_decode(userAuth.accessToken);
 			const tokenExpirationDate = decodedToken.exp;
 			const currentTime = new Date().getTime() / 1000;
-		
-			const isValid = tokenExpirationDate > currentTime;
+
+			const isValid = tokenExpirationDate - 5 > currentTime;
 		
 			if (isValid) return request;
 
