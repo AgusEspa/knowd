@@ -65,7 +65,7 @@ const useAxios = () => {
             axiosInstance.interceptors.response.eject(responseIntercept);
         }
 
-    }, [ userAuth, refresh ])
+    }, [ userAuth, refresh, axiosInstance ])
     
     return axiosInstance;
 }

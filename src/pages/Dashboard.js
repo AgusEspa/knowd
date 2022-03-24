@@ -32,6 +32,7 @@ const Dashboard = () => {
     const getCredentials = async () => {
 
         try {
+
             const response = await api.get("/users/authenticated");
 			
             setUserAuth( prevState => ({
@@ -47,18 +48,18 @@ const Dashboard = () => {
             setIdErrorNotification(prevState => ({message: "", type: ""}));
         }
     }
-    
+
     useEffect( () => {
 		getCredentials();
     }, []);
 
-	
 
     const getSubjects = async () => {
 
         setIsLoading(true);
 
         try {
+
             const response = await api.get("/subjects");
 			setSubjects(response.data);
 
