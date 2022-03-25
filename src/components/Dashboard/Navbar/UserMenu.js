@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "../../../styles/Navbar.module.scss"
+import styles from "../../../styles/Navbar.module.scss";
 
 const UserMenu = (props) => {
-
-	return(
+	return (
 		<div className={styles.dropdownMenuContainer}>
 			<div className={styles.dropdownMenuBox}>
 				<ul>
@@ -16,9 +15,7 @@ const UserMenu = (props) => {
 				</ul>
 			</div>
 		</div>
-
 	);
-
-}
+};
 
 export default UserMenu;

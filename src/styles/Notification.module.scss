@@ -1,4 +1,4 @@
-@use './variables';
+@use "./variables";
 
 .notificationContainer {
 	display: block;
@@ -25,10 +25,10 @@
 		margin: 2rem;
 		padding: 1rem;
 		width: 14rem;
-		border-radius: 0 .3rem .3rem 0;
+		border-radius: 0 0.3rem 0.3rem 0;
 		animation: showMe 0.5s normal;
 	}
-	
+
 	.successNotification {
 		display: block;
 		border-left: 5px solid variables.$successDarkGreen;
@@ -39,17 +39,16 @@
 		margin: 2rem;
 		padding: 1rem;
 		width: 14rem;
-		border-radius: 0 .3rem .3rem 0;
+		border-radius: 0 0.3rem 0.3rem 0;
 		animation: showMe 0.5s normal;
 	}
-	
-	@keyframes showMe{
-		0%{
+
+	@keyframes showMe {
+		0% {
 			opacity: 0;
 		}
-		100%{
+		100% {
 			opacity: 1;
 		}
 	}
 }
-

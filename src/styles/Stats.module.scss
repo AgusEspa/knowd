@@ -1,4 +1,4 @@
-@use './variables';
+@use "./variables";
 
 .statsContainer {
 	display: flex;
@@ -23,7 +23,7 @@
 		.negativeCoef {
 			color: orange;
 		}
-  	}
+	}
 	@media screen and (max-width: 750px) {
 		h2 {
 			font-size: 1.1rem;
@@ -35,10 +35,10 @@
 		color: variables.$textLightGray;
 		font-family: variables.$fonts;
 		margin: 0;
-  	}
+	}
 	@media screen and (max-width: 750px) {
 		p {
-			font-size: .9rem;
+			font-size: 0.9rem;
 		}
 	}
 
@@ -51,5 +51,4 @@
 		margin: 0;
 		width: fit-content;
 	}
-
 }

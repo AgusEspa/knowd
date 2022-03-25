@@ -1,25 +1,23 @@
-@use './variables';
+@use "./variables";
 
 .backdrop {
-	background-color: rgba(0, 0, 0, 0.5);
-	width: 100vw;
-	height: 100vh;
-	z-index: 9;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	padding: 0;
-	margin: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    padding: 0;
+    margin: 0;
 }
 
 .modalContainer {
-	z-index: 10;
-	position: fixed;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	margin: 1rem 0 0 0;
+    z-index: 10;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 1rem 0 0 0;
 }
-
-

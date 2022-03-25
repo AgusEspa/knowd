@@ -1,4 +1,4 @@
-@use './variables';
+@use "./variables";
 
 .navbarContainer {
 	display: flex;
@@ -28,7 +28,7 @@
 		}
 		@media screen and (max-width: 750px) {
 			.navToggle {
-			  	display: block;
+				display: block;
 				position: relative;
 				margin-right: 2.5rem;
 				background-color: transparent;
@@ -42,7 +42,6 @@
 						fill: variables.$links;
 					}
 				}
-
 			}
 		}
 	}
@@ -52,24 +51,25 @@
 		.linksMenu {
 			display: none;
 		}
-		
+
 		.linksMenuActive {
 			display: flex;
 			position: absolute;
 			right: 0;
 			top: 2.5rem;
 			z-index: 9;
-			padding-top: .7rem;
-			border-radius: .5rem;
-			
+			padding-top: 0.7rem;
+			border-radius: 0.5rem;
+
 			ul {
 				margin: 0;
 				padding: 0;
 				display: block;
 				background-color: variables.$containerBackground;
 			}
-			
-			li, a {
+
+			li,
+			a {
 				cursor: pointer;
 				list-style-type: none;
 				color: variables.$buttonText;
@@ -81,12 +81,12 @@
 				border-radius: 0;
 				transition: none;
 			}
-			
+
 			.dropdownButton {
 				position: relative;
 				display: inline-block;
 				color: variables.$textLightGray;
-			
+
 				.buttonIcon {
 					display: flex;
 					align-items: center;
@@ -96,7 +96,7 @@
 					}
 				}
 			}
-			
+
 			.dropdownMenuContainer {
 				display: block;
 				position: relative;
@@ -107,7 +107,7 @@
 				.dropdownMenuBox {
 					margin: 0;
 					border-radius: 0.5rem;
-					
+
 					ul {
 						list-style-type: none;
 						display: block;
@@ -116,7 +116,9 @@
 						border-radius: 0;
 					}
 
-					li, button, a {
+					li,
+					button,
+					a {
 						color: variables.$buttonText;
 						height: 100%;
 						font-family: variables.$fonts;
@@ -129,10 +131,9 @@
 						border: none;
 						cursor: pointer;
 						background-color: transparent;
-						text-decoration: none;;
+						text-decoration: none;
 						border-radius: 0;
 					}
-					
 				}
 			}
 		}
@@ -140,13 +141,14 @@
 
 	.linksMenu {
 		height: 100%;
-	
-	  	ul {
+
+		ul {
 			display: flex;
 			align-items: center;
 			margin: 0 2.5rem 0 0;
-	  	}
-	  	li, a {
+		}
+		li,
+		a {
 			cursor: pointer;
 			list-style-type: none;
 			padding: 0.5rem;
@@ -160,8 +162,8 @@
 			&:hover {
 				color: variables.$links;
 			}
-	  	}
-		
+		}
+
 		.dropdownButton {
 			position: relative;
 			display: inline-block;
@@ -185,28 +187,30 @@
 			background-color: transparent;
 			right: 0;
 			z-index: 9;
-			padding-top: .7rem;
-			
+			padding-top: 0.7rem;
+
 			.dropdownMenuBox {
 				background-color: variables.$containerBackground;
 				margin: 0;
 				border-radius: 0.7rem;
 				border: 1px solid variables.$toolbarBorder;
-		  	
+
 				ul {
 					list-style-type: none;
 					display: block;
-					padding: .8rem 0 .8rem 0;
+					padding: 0.8rem 0 0.8rem 0;
 					border-radius: 0;
 					margin: 0;
-		  		}
-		  		
-				li, button, a {
+				}
+
+				li,
+				button,
+				a {
 					cursor: pointer;
 					background-color: transparent;
 					list-style-type: none;
 					margin: 0;
-					padding: .3rem .5rem .3rem .5rem;
+					padding: 0.3rem 0.5rem 0.3rem 0.5rem;
 					border: none;
 					color: variables.$buttonText;
 					font-family: variables.$fonts;
@@ -215,7 +219,7 @@
 					&:hover {
 						color: variables.$links;
 					}
-		  		}
+				}
 			}
 		}
 	}

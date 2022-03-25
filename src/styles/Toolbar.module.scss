@@ -1,4 +1,4 @@
-@use './variables';
+@use "./variables";
 
 .toolbarBox {
 	display: flex;
@@ -31,11 +31,13 @@
 			border-radius: 0.3rem;
 			padding: 0.2rem 0.5rem;
 			outline: 0;
-			&:active, &:focus, &:hover {
+			&:active,
+			&:focus,
+			&:hover {
 				border: 1px solid variables.$textLightGray;
 			}
 		}
-		
+
 		button {
 			cursor: pointer;
 			background-color: variables.$inputDarkBackground;
@@ -48,25 +50,29 @@
 			font-family: variables.$fonts;
 			font-size: 0.9rem;
 			transition: all 0.1s ease-out;
-			&:active, &:focus, &:hover {
+			&:active,
+			&:focus,
+			&:hover {
 				color: variables.$buttonText;
 				border: 1px solid variables.$textLightGray;
-		  	}
+			}
 		}
 
-		.activeButton{
+		.activeButton {
 			color: variables.$buttonText;
 			border: 1px solid variables.$textLightGray;
 		}
 
-		.disabledButton{
+		.disabledButton {
 			cursor: default;
 			color: variables.$disabledButton;
 
-			&:active, &:focus, &:hover {
+			&:active,
+			&:focus,
+			&:hover {
 				color: variables.$disabledButton;
 				border: 1px solid variables.$inputDarkBorder;
-		  	}
+			}
 		}
-  	}
+	}
 }

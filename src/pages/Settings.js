@@ -10,573 +10,880 @@ import resources from "../styles/Resources.module.scss";
 import notificationStyles from "../styles/Notification.module.scss";
 
 const Settings = () => {
+	const { userAuth, setUserAuth, logout } = useContext(AuthContext);
 
-    const { userAuth, setUserAuth, logout } = useContext(AuthContext);
-
-    const [ formData, setFormData ] = useState({username: userAuth.username, emailAddress: userAuth.emailAddress, oldPassword: "", newPassword: "", passwordVerification: ""});
-    const [ deleteFormData, setDeleteFormData ] = useState({emailAddress: "", oldPassword: ""});
-    const [ credentialsError, setCredentialsError ] = useState("");
-    const [ isLoading, setIsLoading ] = useState(false);
-    const [ formValidationErrors, setFormValidationErrors ] = useState({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
-    const [ toggleUsername, setToggleUsername ] = useState(false);
-    const [ togglePassword, setTogglePassword ] = useState(false);
-    const [ toggleDelete, setToggleDelete ] = useState(false);
-    const [ idErrorNotification, setIdErrorNotification ] = useState({message: "", type: ""});
-    const [ networkErrorNotification, setNetworkErrorNotification ] = useState({message: "", type: ""});
-    const [ successNotification, setSuccessNotification ] = useState({message: "", type: ""});
-    const [ modalIsOpen, setModalIsOpen ] = useState(false);
-
+	const [formData, setFormData] = useState({
+		username: userAuth.username,
+		emailAddress: userAuth.emailAddress,
+		oldPassword: "",
+		newPassword: "",
+		passwordVerification: "",
+	});
+	const [deleteFormData, setDeleteFormData] = useState({
+		emailAddress: "",
+		oldPassword: "",
+	});
+	const [credentialsError, setCredentialsError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
+	const [formValidationErrors, setFormValidationErrors] = useState({
+		username: "",
+		emailAddress: "",
+		oldPassword: "",
+		newPassword: "",
+		passwordVerification: "",
+	});
+	const [toggleUsername, setToggleUsername] = useState(false);
+	const [togglePassword, setTogglePassword] = useState(false);
+	const [toggleDelete, setToggleDelete] = useState(false);
+	const [idErrorNotification, setIdErrorNotification] = useState({
+		message: "",
+		type: "",
+	});
+	const [networkErrorNotification, setNetworkErrorNotification] = useState({
+		message: "",
+		type: "",
+	});
+	const [successNotification, setSuccessNotification] = useState({
+		message: "",
+		type: "",
+	});
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 
 	const api = useAxios();
 
-    useEffect( () => {
+	useEffect(() => {
 		getCredentials();
-    }, []);
+	}, []);
 
 	const getCredentials = async () => {
+		try {
+			const response = await api.get("/users/authenticated");
 
-        try {
-            const response = await api.get("/users/authenticated");
-			
-            setUserAuth( prevState => ({
-                ...prevState,
-                username: response.data.username,
-                displayName: response.data.username.split(' ')[0],
-                emailAddress: response.data.emailAddress}
-            ));
-            
-        } catch (error) {
-            setIdErrorNotification(prevState => ({message: "Unable to verify identity. Try again later.", type: "error"}));
-            await new Promise(resolve => setTimeout(resolve, 10000));
-            setIdErrorNotification(prevState => ({message: "", type: ""}));
-        }
-    };
+			setUserAuth((prevState) => ({
+				...prevState,
+				username: response.data.username,
+				displayName: response.data.username.split(" ")[0],
+				emailAddress: response.data.emailAddress,
+			}));
+		} catch (error) {
+			setIdErrorNotification((prevState) => ({
+				message: "Unable to verify identity. Try again later.",
+				type: "error",
+			}));
 
-    const handleFormChange = (event) => {
-        const {name, value} = event.target;
-        setFormData( prevState => ({
-            ...prevState,
-            [name]: value 
-        }));
-    }
+			await new Promise((resolve) => setTimeout(resolve, 10000));
 
-    const handleDeleteFormChange = (event) => {
-        const {name, value} = event.target;
-        setDeleteFormData( prevState => ({
-            ...prevState,
-            [name]: value 
-        }));
-    }
+			setIdErrorNotification((prevState) => ({ message: "", type: "" }));
+		}
+	};
 
-    const validateDetailsForm = (data) => {
-        const errors = {username:"", emailAddress: "", oldPassword: ""};
-        setFormValidationErrors(errors);
-    
-        const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    
-        if (!data.emailAddress) {
-            errors.emailAddress = "Email address is required";
-        } 
-        else if (!(emailPattern.test(data.emailAddress))) {
-            errors.emailAddress = "Please enter a valid email address";
-        }
+	const handleFormChange = (event) => {
+		const { name, value } = event.target;
 
-        if (!data.username) {
-            errors.username = "Username is required";
-        } 
-        else if (data.username.length < 3) {
-            errors.username = "Username must be at least 3 characters long";
-        }
+		setFormData((prevState) => ({
+			...prevState,
+			[name]: value,
+		}));
+	};
 
-        if (!data.oldPassword) {
-            errors.oldPassword = "Password is required";
-        } else if (data.oldPassword.length < 8) {
-            errors.oldPassword = "Password must be at least 8 characters long";
-        }
+	const handleDeleteFormChange = (event) => {
+		const { name, value } = event.target;
 
-        setFormValidationErrors(errors);
-        return errors;
-    }
+		setDeleteFormData((prevState) => ({
+			...prevState,
+			[name]: value,
+		}));
+	};
 
-    const handleEditUserDetails = async (event) => {
-        event.preventDefault();
+	const validateDetailsForm = (data) => {
+		const errors = { username: "", emailAddress: "", oldPassword: "" };
+		setFormValidationErrors(errors);
 
-        setCredentialsError("");
+		const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-        const validationErrors = validateDetailsForm(formData);
-        
-        if (validationErrors.emailAddress === "" && validationErrors.username === "" && validationErrors.oldPassword === "") {
+		if (!data.emailAddress) {
+			errors.emailAddress = "Email address is required";
+		} else if (!emailPattern.test(data.emailAddress)) {
+			errors.emailAddress = "Please enter a valid email address";
+		}
 
-            setIsLoading(true);
-            
-            try {
-                await api.put("/users", formData);
-                setIsLoading(false);
-                setSuccessNotification(prevState => ({message: "User details updated. Redirecting to login...", type: "ok"}));
-                await new Promise(resolve => setTimeout(resolve, 6000));
-                setSuccessNotification(prevState => ({message: "", type: ""}));
-                logout();
+		if (!data.username) {
+			errors.username = "Username is required";
+		} else if (data.username.length < 3) {
+			errors.username = "Username must be at least 3 characters long";
+		}
 
-            } catch (error) {
-                setIsLoading(false);
+		if (!data.oldPassword) {
+			errors.oldPassword = "Password is required";
+		} else if (data.oldPassword.length < 8) {
+			errors.oldPassword = "Password must be at least 8 characters long";
+		}
 
-                if (!error.response || error.response.status >= 500) {
-                    setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
-                    await new Promise(resolve => setTimeout(resolve, 5000));
-                    setNetworkErrorNotification(prevState => ({message: "", type: ""}));
-                } else if (error.response.status) {
-                    if (error.response.data.includes("mail"))
-                    setFormValidationErrors( prevState => ({
-                        ...prevState,
-                        emailAddress: error.response.data 
-                    }));
-                    if (error.response.data.includes("password"))
-                    setFormValidationErrors( prevState => ({
-                        ...prevState,
-                        oldPassword: error.response.data
-                    }));
-                } else setCredentialsError(error.response.data);     
-            }
-        }
-    }
+		setFormValidationErrors(errors);
+		return errors;
+	};
 
-    const validatePasswordForm = (data) => {
-        const errors = {oldPassword: "", newPassword: "", passwordVerification: ""};
+	const handleEditUserDetails = async (event) => {
+		event.preventDefault();
 
-        setFormValidationErrors(errors);
-    
-        if (!data.oldPassword) {
-            errors.oldPassword = "Password is required";
-        } else if (data.oldPassword.length < 8) {
-            errors.oldPassword = "Password must be at least 8 characters long";
-        }
+		setCredentialsError("");
 
-        if (!data.newPassword) {
-            errors.newPassword = "Password is required";
-        } else if (data.newPassword.length < 8) {
-            errors.newPassword = "Password must be at least 8 characters long";
-        }
+		const validationErrors = validateDetailsForm(formData);
 
-        if (!data.passwordVerification) {
-            errors.passwordVerification = "Plese re-enter the password";
-        } else if (data.newPassword !== data.passwordVerification) {
-            errors.passwordVerification = "Passwords don't match";
-        }
+		if (
+			validationErrors.emailAddress === "" &&
+			validationErrors.username === "" &&
+			validationErrors.oldPassword === ""
+		) {
+			setIsLoading(true);
 
-        setFormValidationErrors(errors);
-        return errors;
-    }
+			try {
+				await api.put("/users", formData);
+				setIsLoading(false);
+				setSuccessNotification((prevState) => ({
+					message: "User details updated. Redirecting to login...",
+					type: "ok",
+				}));
+				await new Promise((resolve) => setTimeout(resolve, 6000));
+				setSuccessNotification((prevState) => ({
+					message: "",
+					type: "",
+				}));
+				logout();
+			} catch (error) {
+				setIsLoading(false);
 
-    const handleEditUserPassword =  async (event) => {
-        event.preventDefault();
+				if (!error.response || error.response.status >= 500) {
+					setNetworkErrorNotification((prevState) => ({
+						message:
+							"Unable to contact the server. Please try again later.",
+						type: "error",
+					}));
+					await new Promise((resolve) => setTimeout(resolve, 5000));
+					setNetworkErrorNotification((prevState) => ({
+						message: "",
+						type: "",
+					}));
+				} else if (error.response.status) {
+					if (error.response.data.includes("mail"))
+						setFormValidationErrors((prevState) => ({
+							...prevState,
+							emailAddress: error.response.data,
+						}));
+					if (error.response.data.includes("password"))
+						setFormValidationErrors((prevState) => ({
+							...prevState,
+							oldPassword: error.response.data,
+						}));
+				} else setCredentialsError(error.response.data);
+			}
+		}
+	};
 
-        setCredentialsError("");
+	const validatePasswordForm = (data) => {
+		const errors = {
+			oldPassword: "",
+			newPassword: "",
+			passwordVerification: "",
+		};
 
-        const validationErrors = validatePasswordForm(formData);
-        
-        if (validationErrors.oldPassword === "" && validationErrors.newPassword === "" && validationErrors.passwordVerification === "" ) {
+		setFormValidationErrors(errors);
 
-            setIsLoading(true);
-            
-            try {
-                await api.put("/users", formData);
-                setIsLoading(false);
-                setSuccessNotification(prevState => ({message: "Password updated. Redirecting to login...", type: "ok"}));
-                await new Promise(resolve => setTimeout(resolve, 6000));
-                setSuccessNotification(prevState => ({message: "", type: ""}));
-                logout();
+		if (!data.oldPassword) {
+			errors.oldPassword = "Password is required";
+		} else if (data.oldPassword.length < 8) {
+			errors.oldPassword = "Password must be at least 8 characters long";
+		}
 
-            } catch (error) {
-                setIsLoading(false);
+		if (!data.newPassword) {
+			errors.newPassword = "Password is required";
+		} else if (data.newPassword.length < 8) {
+			errors.newPassword = "Password must be at least 8 characters long";
+		}
 
-                if (!error.response || error.response.status >= 500) {
-                    setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
-                    await new Promise(resolve => setTimeout(resolve, 5000));
-                    setNetworkErrorNotification(prevState => ({message: "", type: ""}));
-                } else if (error.response.status) {
-                    if (error.response.data.includes("mail"))
-                    setFormValidationErrors( prevState => ({
-                        ...prevState,
-                        emailAddress: error.response.data 
-                    }));
-                    if (error.response.data.includes("password"))
-                    setFormValidationErrors( prevState => ({
-                        ...prevState,
-                        oldPassword: error.response.data
-                    }));
-                } else setCredentialsError(error.response.data);     
-            }
-        }
-        
-    }
+		if (!data.passwordVerification) {
+			errors.passwordVerification = "Plese re-enter the password";
+		} else if (data.newPassword !== data.passwordVerification) {
+			errors.passwordVerification = "Passwords don't match";
+		}
 
-    const validateDeleteForm = (data) => {
-        const errors = {emailAddress: "", oldPassword: ""};
+		setFormValidationErrors(errors);
+		return errors;
+	};
 
-        setFormValidationErrors(errors);
-        
-        if (!data.emailAddress) {
-            errors.emailAddress = "Email address is required";
-        } 
-        else if (data.emailAddress !== userAuth.emailAddress) {
-            errors.emailAddress = "Please enter this account's email address";
-        }
+	const handleEditUserPassword = async (event) => {
+		event.preventDefault();
 
-        if (!data.oldPassword) {
-            errors.oldPassword = "Password is required";
-        } else if (data.oldPassword.length < 8) {
-            errors.oldPassword = "Password must be at least 8 characters long";
-        }
+		setCredentialsError("");
 
-        setFormValidationErrors(errors);
-        return errors;
-    }
+		const validationErrors = validatePasswordForm(formData);
 
-    const handleDeleteUser = async (event) => {
-        event.preventDefault();
+		if (
+			validationErrors.oldPassword === "" &&
+			validationErrors.newPassword === "" &&
+			validationErrors.passwordVerification === ""
+		) {
+			setIsLoading(true);
 
-        setModalIsOpen(false);
-        setIsLoading(true);
+			try {
+				await api.put("/users", formData);
+				setIsLoading(false);
+				setSuccessNotification((prevState) => ({
+					message: "Password updated. Redirecting to login...",
+					type: "ok",
+				}));
+				await new Promise((resolve) => setTimeout(resolve, 6000));
+				setSuccessNotification((prevState) => ({
+					message: "",
+					type: "",
+				}));
+				logout();
+			} catch (error) {
+				setIsLoading(false);
 
-            try {
-                await api.delete("/users", {data: deleteFormData});
-                setIsLoading(false);
-                setSuccessNotification(prevState => ({message: "Your account and all personal data were deleted successfully.", type: "ok"}));
-                await new Promise(resolve => setTimeout(resolve, 6000));
-                setSuccessNotification(prevState => ({message: "", type: ""}));
-                logout();
-            } catch (error) {
-                setIsLoading(false);
-                if (!error.response || error.response.status >= 500) {
-                    setNetworkErrorNotification(prevState => ({message: "Unable to contact the server. Please try again later.", type: "error"}));
-                    await new Promise(resolve => setTimeout(resolve, 5000));
-                    setNetworkErrorNotification(prevState => ({message: "", type: ""}));
-                } else if (error.response.status) {
-                    if (error.response.data.includes("mail"))
-                    setFormValidationErrors( prevState => ({
-                        ...prevState,
-                        emailAddress: error.response.data 
-                    }));
-                    if (error.response.data.includes("password"))
-                    setFormValidationErrors( prevState => ({
-                        ...prevState,
-                        oldPassword: error.response.data
-                    }));
-                } else setCredentialsError(error.response.data);     
-            }
-    }
+				if (!error.response || error.response.status >= 500) {
+					setNetworkErrorNotification((prevState) => ({
+						message:
+							"Unable to contact the server. Please try again later.",
+						type: "error",
+					}));
+					await new Promise((resolve) => setTimeout(resolve, 5000));
+					setNetworkErrorNotification((prevState) => ({
+						message: "",
+						type: "",
+					}));
+				} else if (error.response.status) {
+					if (error.response.data.includes("mail"))
+						setFormValidationErrors((prevState) => ({
+							...prevState,
+							emailAddress: error.response.data,
+						}));
+					if (error.response.data.includes("password"))
+						setFormValidationErrors((prevState) => ({
+							...prevState,
+							oldPassword: error.response.data,
+						}));
+				} else setCredentialsError(error.response.data);
+			}
+		}
+	};
 
-    const handleUsernameToggle = (event) => {
+	const validateDeleteForm = (data) => {
+		const errors = { emailAddress: "", oldPassword: "" };
 
-        setFormValidationErrors({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
-        setToggleUsername(prevState => !prevState);
-        setFormData( prevState => ({
-            ...prevState,
-            username: userAuth.username,
-            emailAddress: userAuth.emailAddress}
-        ));
-        setTogglePassword(false);
-        setToggleDelete(false);
-    }
+		setFormValidationErrors(errors);
 
-    const handlePasswordToggle = (event) => {
-        setFormValidationErrors({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
-        setTogglePassword(prevState => !prevState);
-        setToggleUsername(false);
-        setToggleDelete(false);
-    }
+		if (!data.emailAddress) {
+			errors.emailAddress = "Email address is required";
+		} else if (data.emailAddress !== userAuth.emailAddress) {
+			errors.emailAddress = "Please enter this account's email address";
+		}
 
-    const handleDeleteToggle = (event) => {
-        setFormValidationErrors({username: "", emailAddress: "", oldPassword: "", newPassword: "", passwordVerification: ""});
-        setToggleDelete(prevState => !prevState);
-        setFormData( prevState => ({
-            ...prevState,
-            emailAddress: ""}
-        ));
-        setToggleUsername(false);
-        setTogglePassword(false);
-    }
+		if (!data.oldPassword) {
+			errors.oldPassword = "Password is required";
+		} else if (data.oldPassword.length < 8) {
+			errors.oldPassword = "Password must be at least 8 characters long";
+		}
 
-    const handleDeleteButton = (event) => {
-        setCredentialsError("");
+		setFormValidationErrors(errors);
+		return errors;
+	};
 
-        const validationErrors = validateDeleteForm(deleteFormData);
+	const handleDeleteUser = async (event) => {
+		event.preventDefault();
 
-        if (validationErrors.emailAddress === "" && validationErrors.oldPassword === "") {
-            setModalIsOpen(true);
-        }
-    }
+		setModalIsOpen(false);
+		setIsLoading(true);
 
+		try {
+			await api.delete("/users", { data: deleteFormData });
+			setIsLoading(false);
+			setSuccessNotification((prevState) => ({
+				message:
+					"Your account and all personal data were deleted successfully.",
+				type: "ok",
+			}));
+			await new Promise((resolve) => setTimeout(resolve, 6000));
+			setSuccessNotification((prevState) => ({ message: "", type: "" }));
+			logout();
+		} catch (error) {
+			setIsLoading(false);
+			if (!error.response || error.response.status >= 500) {
+				setNetworkErrorNotification((prevState) => ({
+					message:
+						"Unable to contact the server. Please try again later.",
+					type: "error",
+				}));
+				await new Promise((resolve) => setTimeout(resolve, 5000));
+				setNetworkErrorNotification((prevState) => ({
+					message: "",
+					type: "",
+				}));
+			} else if (error.response.status) {
+				if (error.response.data.includes("mail"))
+					setFormValidationErrors((prevState) => ({
+						...prevState,
+						emailAddress: error.response.data,
+					}));
+				if (error.response.data.includes("password"))
+					setFormValidationErrors((prevState) => ({
+						...prevState,
+						oldPassword: error.response.data,
+					}));
+			} else setCredentialsError(error.response.data);
+		}
+	};
 
-    return (
-        <div>
-            <Navbar />
-            <main className={styles.settingsContainer}>
-                
-                <div className={styles.settingsBox}>
-                    <h2>Account Settings</h2>
-                    
-                    <div className={styles.settingsGrid}>
+	const handleUsernameToggle = (event) => {
+		setFormValidationErrors({
+			username: "",
+			emailAddress: "",
+			oldPassword: "",
+			newPassword: "",
+			passwordVerification: "",
+		});
+		setToggleUsername((prevState) => !prevState);
+		setFormData((prevState) => ({
+			...prevState,
+			username: userAuth.username,
+			emailAddress: userAuth.emailAddress,
+		}));
+		setTogglePassword(false);
+		setToggleDelete(false);
+	};
 
-                        <div className={styles.buttonsBox}>
-                            
-                            <div className={styles.labelBox}>
-                                <button onClick={handleUsernameToggle}>
-                                    <label>User details</label>
-                                    <BsChevronRight />
-                                </button>
-                            </div>
-                        
-                            <div className={styles.labelBox}>
-                                <button onClick={handlePasswordToggle}>
-                                    <label>Password</label>
-                                    <BsChevronRight />
-                                </button>
-                            </div>
+	const handlePasswordToggle = (event) => {
+		setFormValidationErrors({
+			username: "",
+			emailAddress: "",
+			oldPassword: "",
+			newPassword: "",
+			passwordVerification: "",
+		});
+		setTogglePassword((prevState) => !prevState);
+		setToggleUsername(false);
+		setToggleDelete(false);
+	};
 
-                            <div className={styles.labelBox}>
-                                <button onClick={handleDeleteToggle}>
-                                    <label className={styles.delete}>Delete Account</label>
-                                    <BsChevronRight />
-                                </button>
-                            </div>
-                        </div>
-                    
+	const handleDeleteToggle = (event) => {
+		setFormValidationErrors({
+			username: "",
+			emailAddress: "",
+			oldPassword: "",
+			newPassword: "",
+			passwordVerification: "",
+		});
+		setToggleDelete((prevState) => !prevState);
+		setFormData((prevState) => ({
+			...prevState,
+			emailAddress: "",
+		}));
+		setToggleUsername(false);
+		setTogglePassword(false);
+	};
 
-                        {toggleUsername &&
-                            <div className={styles.userBox}> 
-                                <h3>Edit username and email address</h3>
+	const handleDeleteButton = (event) => {
+		setCredentialsError("");
 
-                                <form onSubmit={handleEditUserDetails} noValidate>                              
-                                    <label>Username:</label>
-                                    {formValidationErrors.username !== "" ?
-                                        <div>
-                                        <input autoComplete="new-password" className={styles.validationError} type="text" 
-                                            name="username"
-                                            value={formData.username}
-                                            onChange={handleFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.username}</p>
-                                        </div> :
-                                        <input autoComplete="new-password" type="text"
-                                            name="username"
-                                            value={formData.username}
-                                            onChange={handleFormChange}
-                                            />
-                                    }
+		const validationErrors = validateDeleteForm(deleteFormData);
 
-                                    <label>Email address:</label>
-                                    {formValidationErrors.emailAddress !== "" ?
-                                        <div>
-                                            <input autoComplete="new-password" className={styles.validationError} type="email"
-                                            name="emailAddress"
-                                            value={formData.emailAddress}
-                                            onChange={handleFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.emailAddress}</p>
-                                        </div> :
-                                        <input autoComplete="new-password" type="email" 
-                                            name="emailAddress"
-                                            value={formData.emailAddress}
-                                            onChange={handleFormChange}
-                                            />
-                                    }
-                                        
-                                    <label>Current password:</label>
-                                    {formValidationErrors.oldPassword !== "" ?
-                                        <div> 
-                                            <input autoComplete="new-password" className={styles.validationError} type="password" 
-                                            name="oldPassword"
-                                            value={formData.oldPassword}
-                                            onChange={handleFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.oldPassword}</p>
-                                        </div> :
-                                        <input autoComplete="new-password" type="password" 
-                                        name="oldPassword"
-                                        value={formData.oldPassword}
-                                        onChange={handleFormChange}
-                                        />
-                                    }
+		if (
+			validationErrors.emailAddress === "" &&
+			validationErrors.oldPassword === ""
+		) {
+			setModalIsOpen(true);
+		}
+	};
 
-                                    {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}
+	return (
+		<div>
+			<Navbar />
+			<main className={styles.settingsContainer}>
+				<div className={styles.settingsBox}>
+					<h2>Account Settings</h2>
 
-                                    <div className={styles.submitButtonBox}>
-                                        {isLoading ? 
-                                            <button className={styles.disabledButton} disabled>
-                                                <div className={styles.loadingSpinnerButtonContainer}>
-                                                    <div className={resources.loadingBar}></div>
-                                                </div>
-                                            </button> :
-                                            <button>Save changes</button>
-                                        }
-                                    </div>
-                                </form>
-                            </div>
-                        }
+					<div className={styles.settingsGrid}>
+						<div className={styles.buttonsBox}>
+							<div className={styles.labelBox}>
+								<button onClick={handleUsernameToggle}>
+									<label>User details</label>
+									<BsChevronRight />
+								</button>
+							</div>
 
-                        {togglePassword &&
-                            <div className={styles.userBox}>
-                                <h3>Change password</h3>
+							<div className={styles.labelBox}>
+								<button onClick={handlePasswordToggle}>
+									<label>Password</label>
+									<BsChevronRight />
+								</button>
+							</div>
 
-                                <form onSubmit={handleEditUserPassword} autoComplete="off" noValidate>
-                                    <label>Current password:</label>
-                                    {formValidationErrors.oldPassword !== "" ?
-                                        <div> 
-                                            <input className={styles.validationError} type="password"
-                                            autoComplete="new-password" 
-                                            name="oldPassword"
-                                            value={formData.oldPassword}
-                                            onChange={handleFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.oldPassword}</p>
-                                        </div> :
-                                        <input type="password" 
-                                        autoComplete="new-password"
-                                        name="oldPassword"
-                                        value={formData.oldPassword}
-                                        onChange={handleFormChange}
-                                        />
-                                    }
-                                    
-                                    <label>New password:</label>
-                                    {formValidationErrors.newPassword !== "" ?
-                                        <div> 
-                                            <input className={styles.validationError} type="password"
-                                            autoComplete="new-password" 
-                                            name="newPassword"
-                                            value={formData.newPassword}
-                                            onChange={handleFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.newPassword}</p>
-                                        </div> :
-                                        <input type="password" 
-                                        autoComplete="new-password"
-                                        name="newPassword"
-                                        value={formData.newPassword}
-                                        onChange={handleFormChange}
-                                        />
-                                    }
+							<div className={styles.labelBox}>
+								<button onClick={handleDeleteToggle}>
+									<label className={styles.delete}>
+										Delete Account
+									</label>
+									<BsChevronRight />
+								</button>
+							</div>
+						</div>
 
-                                    <label>Re-enter password:</label>
-                                    {formValidationErrors.passwordVerification !== "" ?
-                                        <div> 
-                                            <input className={styles.validationError} type="password" 
-                                            autoComplete="new-password"
-                                            name="passwordVerification"
-                                            value={formData.passwordVerification}
-                                            onChange={handleFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.passwordVerification}</p>
-                                        </div> :
-                                        <input type="password" 
-                                        autoComplete="new-password"
-                                        name="passwordVerification"
-                                        value={formData.passwordVerification}
-                                        onChange={handleFormChange}
-                                        />
-                                    }
+						{toggleUsername && (
+							<div className={styles.userBox}>
+								<h3>Edit username and email address</h3>
 
-                                    {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}
-                                    <div className={styles.submitButtonBox}>
-                                        {isLoading ? 
-                                            <button className={styles.disabledButton} disabled>
-                                                <div className={styles.loadingSpinnerButtonContainer}>
-                                                    <div className={resources.loadingBar}></div>
-                                                </div>
-                                            </button> :
-                                            <button>Save changes</button>
-                                        }
-                                    </div>
-                                </form>
-                            </div>
-                        }
+								<form
+									onSubmit={handleEditUserDetails}
+									noValidate
+								>
+									<label>Username:</label>
+									{formValidationErrors.username !== "" ? (
+										<div>
+											<input
+												autoComplete="new-password"
+												className={
+													styles.validationError
+												}
+												type="text"
+												name="username"
+												value={formData.username}
+												onChange={handleFormChange}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{formValidationErrors.username}
+											</p>
+										</div>
+									) : (
+										<input
+											autoComplete="new-password"
+											type="text"
+											name="username"
+											value={formData.username}
+											onChange={handleFormChange}
+										/>
+									)}
 
-                        {toggleDelete &&
-                            <div className={styles.userBox}>
-                                <h3 className={styles.delete}>Permanently Delete Your Account</h3>
-                                
-                                <form onSubmit={handleDeleteUser} autoComplete="off" noValidate>
-                                    <label>Type your email address to confirm:</label>
-                                    {formValidationErrors.emailAddress !== "" ?
-                                        <div>
-                                            <input className={styles.validationError} type="email"
-                                            name="emailAddress"
-                                            value={deleteFormData.emailAddress}
-                                            onChange={handleDeleteFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.emailAddress}</p>
-                                        </div> :
-                                        <input type="email" 
-                                        name="emailAddress"
-                                        value={deleteFormData.emailAddress}
-                                        onChange={handleDeleteFormChange}
-                                        />
-                                    }
-                                    
-                                    <label>Current password:</label>
-                                    {formValidationErrors.oldPassword !== "" ?
-                                        <div> 
-                                            <input className={styles.validationError} autoComplete="new-password" type="password" 
-                                            name="oldPassword"
-                                            value={deleteFormData.oldPassword}
-                                            onChange={handleDeleteFormChange}
-                                            />
-                                            <p className={styles.validationErrorMessage}>{formValidationErrors.oldPassword}</p>
-                                        </div> :
-                                        <input type="password"
-                                        autoComplete="new-password"
-                                        name="oldPassword"
-                                        value={deleteFormData.oldPassword}
-                                        onChange={handleDeleteFormChange}
-                                        />
-                                    }
+									<label>Email address:</label>
+									{formValidationErrors.emailAddress !==
+									"" ? (
+										<div>
+											<input
+												autoComplete="new-password"
+												className={
+													styles.validationError
+												}
+												type="email"
+												name="emailAddress"
+												value={formData.emailAddress}
+												onChange={handleFormChange}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{
+													formValidationErrors.emailAddress
+												}
+											</p>
+										</div>
+									) : (
+										<input
+											autoComplete="new-password"
+											type="email"
+											name="emailAddress"
+											value={formData.emailAddress}
+											onChange={handleFormChange}
+										/>
+									)}
 
-                                    {credentialsError !== "" && <p className={styles.validationErrorMessage}>{credentialsError}</p>}
+									<label>Current password:</label>
+									{formValidationErrors.oldPassword !== "" ? (
+										<div>
+											<input
+												autoComplete="new-password"
+												className={
+													styles.validationError
+												}
+												type="password"
+												name="oldPassword"
+												value={formData.oldPassword}
+												onChange={handleFormChange}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{
+													formValidationErrors.oldPassword
+												}
+											</p>
+										</div>
+									) : (
+										<input
+											autoComplete="new-password"
+											type="password"
+											name="oldPassword"
+											value={formData.oldPassword}
+											onChange={handleFormChange}
+										/>
+									)}
 
-                                    <div className={styles.submitButtonBox}>
-                                        {isLoading ? 
-                                            <button className={styles.disabledButton} disabled>
-                                                <div className={styles.loadingSpinnerButtonContainer}>
-                                                    <div className={resources.loadingBar}></div>
-                                                </div>
-                                            </button> :
-                                            <button type="button" className={styles.deleteButton} onClick={handleDeleteButton}>Delete account</button>
-                                        }
-                                    </div>
-                                    {modalIsOpen &&
-                                        <DeleteModal setModalIsOpen={setModalIsOpen} />
-                                    }
-                                </form>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </main>
+									{credentialsError !== "" && (
+										<p
+											className={
+												styles.validationErrorMessage
+											}
+										>
+											{credentialsError}
+										</p>
+									)}
 
-            <div className={notificationStyles.notificationContainer}>
-                {(idErrorNotification.message !== "") &&
-                <Notification 
-                    message={idErrorNotification.message} 
-                    type={idErrorNotification.type}
-                />}
+									<div className={styles.submitButtonBox}>
+										{isLoading ? (
+											<button
+												className={
+													styles.disabledButton
+												}
+												disabled
+											>
+												<div
+													className={
+														styles.loadingSpinnerButtonContainer
+													}
+												>
+													<div
+														className={
+															resources.loadingBar
+														}
+													></div>
+												</div>
+											</button>
+										) : (
+											<button>Save changes</button>
+										)}
+									</div>
+								</form>
+							</div>
+						)}
 
-                {(networkErrorNotification.message !== "") &&
-                <Notification 
-                    message={networkErrorNotification.message} 
-                    type={networkErrorNotification.type}
-                />}
+						{togglePassword && (
+							<div className={styles.userBox}>
+								<h3>Change password</h3>
 
-                {(successNotification.message !== "") &&
-                <Notification 
-                    message={successNotification.message} 
-                    type={successNotification.type}
-                />}
-            </div>
+								<form
+									onSubmit={handleEditUserPassword}
+									autoComplete="off"
+									noValidate
+								>
+									<label>Current password:</label>
+									{formValidationErrors.oldPassword !== "" ? (
+										<div>
+											<input
+												className={
+													styles.validationError
+												}
+												type="password"
+												autoComplete="new-password"
+												name="oldPassword"
+												value={formData.oldPassword}
+												onChange={handleFormChange}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{
+													formValidationErrors.oldPassword
+												}
+											</p>
+										</div>
+									) : (
+										<input
+											type="password"
+											autoComplete="new-password"
+											name="oldPassword"
+											value={formData.oldPassword}
+											onChange={handleFormChange}
+										/>
+									)}
 
-        </div>
+									<label>New password:</label>
+									{formValidationErrors.newPassword !== "" ? (
+										<div>
+											<input
+												className={
+													styles.validationError
+												}
+												type="password"
+												autoComplete="new-password"
+												name="newPassword"
+												value={formData.newPassword}
+												onChange={handleFormChange}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{
+													formValidationErrors.newPassword
+												}
+											</p>
+										</div>
+									) : (
+										<input
+											type="password"
+											autoComplete="new-password"
+											name="newPassword"
+											value={formData.newPassword}
+											onChange={handleFormChange}
+										/>
+									)}
+
+									<label>Re-enter password:</label>
+									{formValidationErrors.passwordVerification !==
+									"" ? (
+										<div>
+											<input
+												className={
+													styles.validationError
+												}
+												type="password"
+												autoComplete="new-password"
+												name="passwordVerification"
+												value={
+													formData.passwordVerification
+												}
+												onChange={handleFormChange}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{
+													formValidationErrors.passwordVerification
+												}
+											</p>
+										</div>
+									) : (
+										<input
+											type="password"
+											autoComplete="new-password"
+											name="passwordVerification"
+											value={
+												formData.passwordVerification
+											}
+											onChange={handleFormChange}
+										/>
+									)}
+
+									{credentialsError !== "" && (
+										<p
+											className={
+												styles.validationErrorMessage
+											}
+										>
+											{credentialsError}
+										</p>
+									)}
+									<div className={styles.submitButtonBox}>
+										{isLoading ? (
+											<button
+												className={
+													styles.disabledButton
+												}
+												disabled
+											>
+												<div
+													className={
+														styles.loadingSpinnerButtonContainer
+													}
+												>
+													<div
+														className={
+															resources.loadingBar
+														}
+													></div>
+												</div>
+											</button>
+										) : (
+											<button>Save changes</button>
+										)}
+									</div>
+								</form>
+							</div>
+						)}
+
+						{toggleDelete && (
+							<div className={styles.userBox}>
+								<h3 className={styles.delete}>
+									Permanently Delete Your Account
+								</h3>
+
+								<form
+									onSubmit={handleDeleteUser}
+									autoComplete="off"
+									noValidate
+								>
+									<label>
+										Type your email address to confirm:
+									</label>
+									{formValidationErrors.emailAddress !==
+									"" ? (
+										<div>
+											<input
+												className={
+													styles.validationError
+												}
+												type="email"
+												name="emailAddress"
+												value={
+													deleteFormData.emailAddress
+												}
+												onChange={
+													handleDeleteFormChange
+												}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{
+													formValidationErrors.emailAddress
+												}
+											</p>
+										</div>
+									) : (
+										<input
+											type="email"
+											name="emailAddress"
+											value={deleteFormData.emailAddress}
+											onChange={handleDeleteFormChange}
+										/>
+									)}
+
+									<label>Current password:</label>
+									{formValidationErrors.oldPassword !== "" ? (
+										<div>
+											<input
+												className={
+													styles.validationError
+												}
+												autoComplete="new-password"
+												type="password"
+												name="oldPassword"
+												value={
+													deleteFormData.oldPassword
+												}
+												onChange={
+													handleDeleteFormChange
+												}
+											/>
+											<p
+												className={
+													styles.validationErrorMessage
+												}
+											>
+												{
+													formValidationErrors.oldPassword
+												}
+											</p>
+										</div>
+									) : (
+										<input
+											type="password"
+											autoComplete="new-password"
+											name="oldPassword"
+											value={deleteFormData.oldPassword}
+											onChange={handleDeleteFormChange}
+										/>
+									)}
+
+									{credentialsError !== "" && (
+										<p
+											className={
+												styles.validationErrorMessage
+											}
+										>
+											{credentialsError}
+										</p>
+									)}
+
+									<div className={styles.submitButtonBox}>
+										{isLoading ? (
+											<button
+												className={
+													styles.disabledButton
+												}
+												disabled
+											>
+												<div
+													className={
+														styles.loadingSpinnerButtonContainer
+													}
+												>
+													<div
+														className={
+															resources.loadingBar
+														}
+													></div>
+												</div>
+											</button>
+										) : (
+											<button
+												type="button"
+												className={styles.deleteButton}
+												onClick={handleDeleteButton}
+											>
+												Delete account
+											</button>
+										)}
+									</div>
+									{modalIsOpen && (
+										<DeleteModal
+											setModalIsOpen={setModalIsOpen}
+										/>
+									)}
+								</form>
+							</div>
+						)}
+					</div>
+				</div>
+			</main>
+
+			<div className={notificationStyles.notificationContainer}>
+				{idErrorNotification.message !== "" && (
+					<Notification
+						message={idErrorNotification.message}
+						type={idErrorNotification.type}
+					/>
+				)}
+
+				{networkErrorNotification.message !== "" && (
+					<Notification
+						message={networkErrorNotification.message}
+						type={networkErrorNotification.type}
+					/>
+				)}
+
+				{successNotification.message !== "" && (
+					<Notification
+						message={successNotification.message}
+						type={successNotification.type}
+					/>
+				)}
+			</div>
+		</div>
 	);
-
-}
+};
 
 export default Settings;

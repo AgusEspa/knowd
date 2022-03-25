@@ -1,13 +1,13 @@
-@use './variables';
+@use "./variables";
 
 .headerContainer {
 	display: flex;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    justify-content: space-between;
-    align-items: center;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	justify-content: space-between;
+	align-items: center;
 	background-color: variables.$containerBorder;
 
 	.headerLogoBox {
@@ -31,7 +31,7 @@
 		align-items: center;
 		margin: 1rem 4rem 1rem 0rem;
 		padding: 0;
-	
+
 		a {
 			cursor: pointer;
 			text-decoration: none;
@@ -42,9 +42,9 @@
 			background-color: #2f0075;
 			border-radius: 0.3rem;
 			transition: all 0.1s ease-out;
-			  &:hover {
+			&:hover {
 				background-color: #781dff;
-			  }
+			}
 		}
 		@media screen and (max-width: 750px) {
 			margin: 1.5rem;
@@ -57,7 +57,6 @@
 	}
 }
 
-  
 .aboutContainer {
 	padding: 2rem;
 	display: block;
@@ -71,14 +70,14 @@
 		margin: 7rem 1.5rem;
 	}
 
-  	h2 {
+	h2 {
 		font-family: variables.$fonts;
 		font-size: 1.4rem;
 		color: variables.$textLightGray;
 		margin: 0;
 		padding-top: 1rem;
 		padding-bottom: 1rem;
-  	}
+	}
 	@media screen and (max-width: 750px) {
 		h2 {
 			font-size: 1.2rem;
@@ -91,7 +90,7 @@
 		color: variables.$textLightGray;
 		padding-bottom: 1rem;
 		margin: 1.7rem 0 0 0;
-  	}
+	}
 	@media screen and (max-width: 750px) {
 		h3 {
 			font-size: 1.05rem;
@@ -103,15 +102,15 @@
 		color: white;
 		font-family: variables.$fonts;
 		margin: 0.3rem 0 0 0;
-  	}
+	}
 	@media screen and (max-width: 750px) {
 		p {
-			font-size: .9rem;
+			font-size: 0.9rem;
 		}
 	}
 
 	.imagesCaptions {
-		font-size: 1.05rem;
+		font-size: 1.1rem;
 		font-weight: 500;
 		color: #9068cc;
 		padding-bottom: 0.5rem;
@@ -123,7 +122,6 @@
 			}
 		}
 	}
-	
 
 	.bigImageContainer {
 		display: flex;
@@ -153,7 +151,7 @@
 		gap: 1rem;
 		padding: 0;
 		margin: 0.6rem 0rem;
-	
+
 		img {
 			width: 48%;
 			border: 3px solid variables.$disabledButton;
@@ -168,6 +166,3 @@
 		}
 	}
 }
-
-
-

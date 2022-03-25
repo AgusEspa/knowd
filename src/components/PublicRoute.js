@@ -3,12 +3,11 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 function PublicRoute({ children }) {
+	const { userAuth } = useContext(AuthContext);
 
-    const { userAuth } = useContext(AuthContext);
-    
-    const isAuthenticated = userAuth.refreshToken;
-    
-    return isAuthenticated ? <Navigate to="/dashboard" /> : children;
-}    
+	const isAuthenticated = userAuth.refreshToken;
+
+	return isAuthenticated ? <Navigate to="/dashboard" /> : children;
+}
 
 export default PublicRoute;
