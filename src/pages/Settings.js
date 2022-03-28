@@ -5,11 +5,12 @@ import { BsChevronRight } from "react-icons/bs";
 import Navbar from "../components/Dashboard/Navbar/Navbar";
 import Notification from "../components/Dashboard/Notification";
 import DeleteModal from "../components/Settings/DeleteModal";
+import OfflineNotice from "../components/OfflineNotice";
 import styles from "../styles/Settings.module.scss";
 import resources from "../styles/Resources.module.scss";
 import notificationStyles from "../styles/Notification.module.scss";
 
-const Settings = () => {
+const Settings = (props) => {
 	const { userAuth, setUserAuth, logout } = useContext(AuthContext);
 
 	const [formData, setFormData] = useState({
@@ -882,6 +883,8 @@ const Settings = () => {
 					/>
 				)}
 			</div>
+
+			{!props.online && <OfflineNotice />}
 		</div>
 	);
 };

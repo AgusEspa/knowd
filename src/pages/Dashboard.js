@@ -8,9 +8,10 @@ import Notification from "../components/Dashboard/Notification";
 import Subjects from "../components/Dashboard/Subjects";
 import Stats from "../components/Dashboard/Stats";
 import RelationsView from "../components/Dashboard/RelationsView";
+import OfflineNotice from "../components/OfflineNotice";
 import notificationStyles from "../styles/Notification.module.scss";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 	const { setUserAuth } = useContext(AuthContext);
 
 	const [subjects, setSubjects] = useState([]);
@@ -206,6 +207,8 @@ const Dashboard = () => {
 					/>
 				)}
 			</div>
+
+			{!props.online && <OfflineNotice />}
 		</>
 	);
 };
