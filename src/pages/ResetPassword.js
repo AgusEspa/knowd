@@ -76,10 +76,7 @@ const ResetPassword = () => {
 			setIsLoading(true);
 
 			try {
-				await axios.patch(
-					`${baseUrl}/users/reset_password`,
-					requestBody
-				);
+				await axios.patch(`${baseUrl}/users/password`, requestBody);
 				setIsLoading(false);
 				setIsSubmited(true);
 				await new Promise((resolve) => setTimeout(resolve, 4000));

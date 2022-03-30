@@ -52,7 +52,10 @@ const ForgotPassword = () => {
 			setIsLoading(true);
 
 			try {
-				await axios.post(`${baseUrl}/users/forgot_password`, formData);
+				await axios.post(
+					`${baseUrl}/users/sendPasswordReset`,
+					formData
+				);
 				setIsLoading(false);
 				setIsSent(true);
 			} catch (error) {
