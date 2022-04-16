@@ -25,7 +25,8 @@ const Register = () => {
 
 	const navigate = useNavigate();
 
-	const baseUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
+	const { REACT_APP_API_URL } = process.env;
+	const baseURL = REACT_APP_API_URL + "/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;
@@ -96,7 +97,7 @@ const Register = () => {
 			setIsLoading(true);
 
 			try {
-				await axios.post(`${baseUrl}/users/signup`, requestBody);
+				await axios.post(`${baseURL}/users/signup`, requestBody);
 				setIsLoading(false);
 				setIsRegistered(true);
 				await new Promise((resolve) => setTimeout(resolve, 4000));

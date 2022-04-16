@@ -9,7 +9,8 @@ const useAxios = () => {
 
 	const refresh = useRefreshToken();
 
-	const baseURL = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
+	const { REACT_APP_API_URL } = process.env;
+	const baseURL = REACT_APP_API_URL + "/api";
 
 	const axiosInstance = axios.create({
 		baseURL: baseURL,

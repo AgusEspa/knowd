@@ -22,7 +22,7 @@ const Login = () => {
 
 	const navigate = useNavigate();
 
-	const baseUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app";
+	const { REACT_APP_API_URL } = process.env;
 
 	const handleLoginFormChange = (event) => {
 		const { name, value } = event.target;
@@ -83,7 +83,7 @@ const Login = () => {
 
 		try {
 			const response = await axios.post(
-				`${baseUrl}/login`,
+				`${REACT_APP_API_URL}/login`,
 				credentials,
 				config
 			);

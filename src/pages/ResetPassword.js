@@ -21,7 +21,8 @@ const ResetPassword = () => {
 
 	const navigate = useNavigate();
 
-	const baseUrl = "http://localhost:8080/api";
+	const { REACT_APP_API_URL } = process.env;
+	const baseURL = REACT_APP_API_URL + "/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;
@@ -76,7 +77,7 @@ const ResetPassword = () => {
 			setIsLoading(true);
 
 			try {
-				await axios.patch(`${baseUrl}/users/password`, requestBody);
+				await axios.patch(`${baseURL}/users/password`, requestBody);
 				setIsLoading(false);
 				setIsSubmited(true);
 				await new Promise((resolve) => setTimeout(resolve, 4000));

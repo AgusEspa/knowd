@@ -12,7 +12,8 @@ const ForgotPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSent, setIsSent] = useState(false);
 
-	const baseUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
+	const { REACT_APP_API_URL } = process.env;
+	const baseURL = REACT_APP_API_URL + "/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;
@@ -53,7 +54,7 @@ const ForgotPassword = () => {
 
 			try {
 				await axios.post(
-					`${baseUrl}/users/sendPasswordReset`,
+					`${baseURL}/users/sendPasswordReset`,
 					formData
 				);
 				setIsLoading(false);

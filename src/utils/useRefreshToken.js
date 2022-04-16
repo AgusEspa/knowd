@@ -5,8 +5,8 @@ import { AuthContext } from "../context/AuthContext";
 const useRefreshToken = () => {
 	const { userAuth, setUserAuth } = useContext(AuthContext);
 
-	const baseURL = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
-	const refreshURL = `${baseURL}/users/token/refresh`;
+	const { REACT_APP_API_URL } = process.env;
+	const refreshURL = REACT_APP_API_URL + "/api/users/token/refresh";
 
 	const config = {
 		headers: {
