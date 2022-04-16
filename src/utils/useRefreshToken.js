@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 const useRefreshToken = () => {
 	const { userAuth, setUserAuth } = useContext(AuthContext);
 
-	const baseURL = "http://localhost:8080/api";
+	const baseURL = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
 	const refreshURL = `${baseURL}/users/token/refresh`;
 
 	const config = {

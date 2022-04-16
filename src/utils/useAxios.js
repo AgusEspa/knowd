@@ -9,7 +9,7 @@ const useAxios = () => {
 
 	const refresh = useRefreshToken();
 
-	const baseURL = "http://localhost:8080/api";
+	const baseURL = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
 
 	const axiosInstance = axios.create({
 		baseURL: baseURL,

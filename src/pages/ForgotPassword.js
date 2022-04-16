@@ -12,7 +12,7 @@ const ForgotPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSent, setIsSent] = useState(false);
 
-	const baseUrl = "http://localhost:8080/api";
+	const baseUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;

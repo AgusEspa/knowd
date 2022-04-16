@@ -25,7 +25,7 @@ const Register = () => {
 
 	const navigate = useNavigate();
 
-	const baseUrl = "http://localhost:8080/api";
+	const baseUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;

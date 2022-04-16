@@ -22,7 +22,7 @@ const Login = () => {
 
 	const navigate = useNavigate();
 
-	const baseUrl = "http://localhost:8080";
+	const baseUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app";
 
 	const handleLoginFormChange = (event) => {
 		const { name, value } = event.target;
