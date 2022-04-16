@@ -21,8 +21,7 @@ const ResetPassword = () => {
 
 	const navigate = useNavigate();
 
-	const { REACT_APP_API_URL } = process.env;
-	const baseURL = REACT_APP_API_URL + "/api";
+	const baseURL = process.env.REACT_APP_API_URL + "/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;
