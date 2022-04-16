@@ -85,7 +85,16 @@ const Dashboard = (props) => {
 					type: "",
 				}));
 			} else {
-				console.log(error.response.data);
+				setNetworkErrorNotification((prevState) => ({
+					message:
+						"Unable to load your data. Please try again later.",
+					type: "error",
+				}));
+				await new Promise((resolve) => setTimeout(resolve, 6000));
+				setNetworkErrorNotification((prevState) => ({
+					message: "",
+					type: "",
+				}));
 			}
 		}
 	};
