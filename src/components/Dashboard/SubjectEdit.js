@@ -53,13 +53,13 @@ const SubjectEdit = (props) => {
 				editSubjectFormData
 			);
 
+			props.setEditWindowIsOpen(false);
+
 			props.setSubjects((prevState) =>
 				prevState
 					.filter((subject) => subject.id !== props.id)
 					.concat(response.data)
 			);
-
-			props.setEditWindowIsOpen(false);
 		} catch (error) {
 			setIsLoading((prevState) => ({
 				...prevState,
