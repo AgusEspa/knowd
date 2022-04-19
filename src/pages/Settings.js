@@ -68,7 +68,7 @@ const Settings = (props) => {
 			}));
 		} catch (error) {
 			setIdErrorNotification((prevState) => ({
-				message: "Unable to verify identity. Try again later.",
+				message: "Unable to verify identity. Please try again.",
 				type: "error",
 			}));
 
@@ -157,10 +157,10 @@ const Settings = (props) => {
 				if (!error.response || error.response.status >= 500) {
 					setNetworkErrorNotification((prevState) => ({
 						message:
-							"Unable to contact the server. Please try again later.",
+							"Unable to contact the server. Please try again.",
 						type: "error",
 					}));
-					await new Promise((resolve) => setTimeout(resolve, 5000));
+					await new Promise((resolve) => setTimeout(resolve, 10000));
 					setNetworkErrorNotification((prevState) => ({
 						message: "",
 						type: "",
@@ -245,10 +245,10 @@ const Settings = (props) => {
 				if (!error.response || error.response.status >= 500) {
 					setNetworkErrorNotification((prevState) => ({
 						message:
-							"Unable to contact the server. Please try again later.",
+							"Unable to contact the server. Please try again.",
 						type: "error",
 					}));
-					await new Promise((resolve) => setTimeout(resolve, 5000));
+					await new Promise((resolve) => setTimeout(resolve, 10000));
 					setNetworkErrorNotification((prevState) => ({
 						message: "",
 						type: "",
@@ -311,11 +311,10 @@ const Settings = (props) => {
 			setIsLoading(false);
 			if (!error.response || error.response.status >= 500) {
 				setNetworkErrorNotification((prevState) => ({
-					message:
-						"Unable to contact the server. Please try again later.",
+					message: "Unable to contact the server. Please try again.",
 					type: "error",
 				}));
-				await new Promise((resolve) => setTimeout(resolve, 5000));
+				await new Promise((resolve) => setTimeout(resolve, 10000));
 				setNetworkErrorNotification((prevState) => ({
 					message: "",
 					type: "",
