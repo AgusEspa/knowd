@@ -50,7 +50,7 @@ const Dashboard = (props) => {
 			}));
 		} catch (error) {
 			setIdErrorNotification((prevState) => ({
-				message: "Unable to verify identity. Please try again later.",
+				message: "Unable to verify identity. Please try again.",
 				type: "error",
 			}));
 			await new Promise((resolve) => setTimeout(resolve, 10000));
@@ -73,29 +73,15 @@ const Dashboard = (props) => {
 		} catch (error) {
 			setIsLoading(false);
 
-			if (!error.response || error.response.status >= 500) {
-				setNetworkErrorNotification((prevState) => ({
-					message:
-						"Unable to contact the server. Please try again later.",
-					type: "error",
-				}));
-				await new Promise((resolve) => setTimeout(resolve, 6000));
-				setNetworkErrorNotification((prevState) => ({
-					message: "",
-					type: "",
-				}));
-			} else {
-				setNetworkErrorNotification((prevState) => ({
-					message:
-						"Unable to load your data. Please try again later.",
-					type: "error",
-				}));
-				await new Promise((resolve) => setTimeout(resolve, 6000));
-				setNetworkErrorNotification((prevState) => ({
-					message: "",
-					type: "",
-				}));
-			}
+			setNetworkErrorNotification((prevState) => ({
+				message: "Unable to load your data. Please try again.",
+				type: "error",
+			}));
+			await new Promise((resolve) => setTimeout(resolve, 10000));
+			setNetworkErrorNotification((prevState) => ({
+				message: "",
+				type: "",
+			}));
 		}
 	};
 
