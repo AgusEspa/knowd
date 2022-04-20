@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -23,6 +23,10 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	const baseURL = process.env.REACT_APP_API_URL;
+
+	useEffect(() => {
+		axios.get(`${baseURL}/api/users/token/refresh`);
+	}, []);
 
 	const handleLoginFormChange = (event) => {
 		const { name, value } = event.target;
