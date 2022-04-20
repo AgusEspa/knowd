@@ -25,7 +25,7 @@ const Login = () => {
 	const baseURL = process.env.REACT_APP_API_URL;
 
 	useEffect(() => {
-		axios.get(`${baseURL}/api/users/token/refresh`);
+		axios.get(`${baseURL}/api/status`);
 	}, []);
 
 	const handleLoginFormChange = (event) => {
