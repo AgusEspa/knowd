@@ -24,7 +24,7 @@ const useAxios = () => {
 				const tokenExpirationDate = decodedToken.exp;
 				const currentTime = new Date().getTime() / 1000;
 
-				const isValid = tokenExpirationDate - 5 > currentTime;
+				const isValid = tokenExpirationDate - 20 > currentTime;
 
 				if (isValid) return request;
 
