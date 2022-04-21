@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import { BsInfoCircle } from "react-icons/bs";
 import styles from "../styles/Login.module.scss";
 import resources from "../styles/Resources.module.scss";
@@ -67,6 +68,17 @@ const ResetPassword = () => {
 			const params = new URLSearchParams(window.location.search);
 			const token = params.get("token");
 
+			const decodedToken = jwt_decode(token);
+			const tokenExpirationDate = decodedToken.exp;
+			const currentTime = new Date().getTime() / 1000;
+
+			const isValid = tokenExpirationDate - 5 > currentTime;
+
+			if (!isValid) {
+				setNetworkError("Your token has expired.");
+				return;
+			}
+
 			const requestBody = {
 				newPassword: formData.newPassword,
 				passwordToken: token,
@@ -85,7 +97,7 @@ const ResetPassword = () => {
 				setIsLoading(false);
 				if (!error.response || error.response.status >= 500) {
 					setNetworkError(
-						"Unable to contact the server. Please try again later."
+						"Unable to contact the server. Please try again."
 					);
 				} else if (error.response.status) {
 					if (error.response.data.includes("email"))
