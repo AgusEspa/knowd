@@ -13,7 +13,6 @@ const useAxios = () => {
 
 	const axiosInstance = axios.create({
 		baseURL: baseURL,
-		timeout: 10000,
 		headers: { Authorization: `Bearer ${userAuth.accessToken}` },
 	});
 
