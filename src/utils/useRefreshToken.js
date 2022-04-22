@@ -1,9 +1,10 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const useRefreshToken = () => {
-	const { userAuth, setUserAuth } = useContext(AuthContext);
+	const { userAuth, setUserAuth, logout } = useContext(AuthContext);
 
 	const refreshURL =
 		process.env.REACT_APP_API_URL + "/api/users/token/refresh";
@@ -15,6 +16,12 @@ const useRefreshToken = () => {
 	};
 
 	const refresh = async () => {
+		const decodedToken = jwt_decode(userAuth.refreshToken);
+		const tokenExpirationDate = decodedToken.exp;
+		const currentTime = new Date().getTime() / 1000;
+		const isValid = tokenExpirationDate - 20 > currentTime;
+		if (!isValid) logout();
+
 		try {
 			const response = await axios.get(refreshURL, config);
 
