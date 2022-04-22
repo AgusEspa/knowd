@@ -62,7 +62,7 @@ const ForgotPassword = () => {
 				setIsLoading(false);
 				if (!error.response || error.response.status >= 500) {
 					setNetworkError(
-						"Unable to contact the server. Please try again later."
+						"Unable to contact the server. Please try again."
 					);
 				} else if (error.response.status) {
 					if (error.response.data.includes("email"))

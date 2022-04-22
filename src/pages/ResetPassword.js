@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { BsInfoCircle } from "react-icons/bs";
@@ -16,6 +16,7 @@ const ResetPassword = () => {
 		passwordVerification: "",
 	});
 	const [networkError, setNetworkError] = useState("");
+	const [tokenError, setTokenError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSubmited, setIsSubmited] = useState(false);
 	const [passwordHelperDisplay, setPasswordHelperDisplay] = useState(false);
@@ -75,7 +76,7 @@ const ResetPassword = () => {
 			const isValid = tokenExpirationDate - 20 > currentTime;
 
 			if (!isValid) {
-				setNetworkError("Your token has expired.");
+				setTokenError("Your token has expired.");
 				return;
 			}
 
@@ -197,6 +198,17 @@ const ResetPassword = () => {
 					{networkError !== "" && (
 						<div className={styles.loginErrorMessage}>
 							<p>{networkError}</p>
+						</div>
+					)}
+
+					{tokenError !== "" && (
+						<div className={styles.loginErrorMessage}>
+							<p>{tokenError}</p>
+							<p>
+								<Link to="/forgot_password">
+									Request new token
+								</Link>
+							</p>
 						</div>
 					)}
 

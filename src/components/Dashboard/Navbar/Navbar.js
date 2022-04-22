@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { BiUserCircle, BiMenu } from "react-icons/bi";
-
 import UserMenu from "./UserMenu";
 import styles from "../../../styles/Navbar.module.scss";
 
