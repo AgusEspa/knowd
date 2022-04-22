@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -24,6 +24,24 @@ const ResetPassword = () => {
 	const navigate = useNavigate();
 
 	const baseURL = process.env.REACT_APP_API_URL + "/api";
+
+	const params = new URLSearchParams(window.location.search);
+	const token = params.get("token");
+	const decodedToken = jwt_decode(token);
+	const tokenExpirationDate = decodedToken.exp;
+
+	const checkTokenIsValid = () => {
+		const currentTime = new Date().getTime() / 1000;
+		const isValid = tokenExpirationDate - 20 > currentTime;
+		if (!isValid) {
+			setTokenError("Your token has expired.");
+			return false;
+		} else return true;
+	};
+
+	useEffect(() => {
+		checkTokenIsValid();
+	}, []);
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;
@@ -66,19 +84,7 @@ const ResetPassword = () => {
 			validationErrors.newPassword === "" &&
 			validationErrors.passwordVerification === ""
 		) {
-			const params = new URLSearchParams(window.location.search);
-			const token = params.get("token");
-
-			const decodedToken = jwt_decode(token);
-			const tokenExpirationDate = decodedToken.exp;
-			const currentTime = new Date().getTime() / 1000;
-
-			const isValid = tokenExpirationDate - 20 > currentTime;
-
-			if (!isValid) {
-				setTokenError("Your token has expired.");
-				return;
-			}
+			if (!checkTokenIsValid()) return;
 
 			const requestBody = {
 				newPassword: formData.newPassword,
