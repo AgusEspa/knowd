@@ -7,7 +7,12 @@
     padding: 3rem;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+
+    @media screen and (max-width: 750px) {
+        background-image: none;
+        padding: 0rem;
+    }
 }
 
 .loginBox {
@@ -30,7 +35,6 @@
     }
 
     input {
-        display: block;
         width: 16rem;
         height: 1.5rem;
         border: 0;
@@ -244,5 +248,16 @@
         p {
             font-size: 0.9rem;
         }
+    }
+
+    @media screen and (max-width: 750px) {
+        border: none;
+        padding: 1rem 0 2rem 0;
+    
+    
+        .logoBox {
+            margin-bottom: 2rem;
+        }
+    
     }
 }
