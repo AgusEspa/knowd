@@ -2,7 +2,7 @@
   "name": "knowd-ui",
   "version": "1.0.0",
   "private": true,
-    "homepage": "https://agusespa.github.io/knowd-ui",
+  "homepage": "https://agusespa.github.io/knowd-ui",
   "dependencies": {
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
