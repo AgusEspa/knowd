@@ -24,10 +24,15 @@ const Login = () => {
 
 	const baseURL = process.env.REACT_APP_API_URL;
 
-	useEffect(() => {
+	const getStatus = async () => {
 		try {
-			axios.get(`${baseURL}/api/status`);
-		} catch (e) {}
+			await axios.get(`${baseURL}/api/status`);
+		} catch (e) {
+			console.log("Server error");
+		}
+	};
+	useEffect(() => {
+		getStatus();
 	}, []);
 
 	const handleLoginFormChange = (event) => {
