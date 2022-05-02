@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { BsInfoCircle } from "react-icons/bs";
 import styles from "../styles/Login.module.scss";
@@ -261,12 +261,11 @@ const Register = () => {
 					)}
 				</form>
 
-				<div className={styles.legalNotice}>
-					<h4>Legal Notice:</h4>
+				<div className={styles.loginLink}>
 					<p>
-						This version of the app is for demonstration purposes
-						only. If you are interested in having a fully-fledged
-						account, please contact us at knowd.help@gmail.com.
+						By creating an account, you agree to our{" "}
+						<Link to="/terms">terms of use</Link> and{" "}
+						<Link to="/privacy">privacy policy</Link>.
 					</p>
 				</div>
 			</div>

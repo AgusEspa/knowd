@@ -11,6 +11,12 @@ const Header = () => {
 					alt="self.OKRs logo"
 				/>
 			</div>
+
+			<div className={styles.navLinks}>
+				<a href="/#about">About</a>
+				<a href="/#news">News</a>
+			</div>
+
 			<div className={styles.getStartedLink}>
 				<Link to="/login">Get started!</Link>
 			</div>

@@ -26,9 +26,35 @@
 		}
 	}
 
+	.navLinks {
+		display: flex;
+		align-items: center;
+		margin: 1rem 3rem 1rem auto;
+		padding: 0;
+	
+		a {
+			cursor: pointer;
+			text-decoration: none;
+			padding: 0.8rem;
+			color: #dbc4fe;
+			font-family: variables.$fonts;
+			font-size: 1.1rem;
+			background-color: transparent;
+			transition: all 0.1s ease-out;
+			&:hover {
+				color: white;
+			}
+		}
+	
+		@media screen and (max-width: 750px) {
+			display: none;
+		}
+	}
+
 	.getStartedLink {
 		display: flex;
 		align-items: center;
+		justify-content:flex-end;
 		margin: 1rem 4rem 1rem 0rem;
 		padding: 0;
 
@@ -63,7 +89,7 @@
 	background-color: variables.$navbarBackground;
 	border-radius: 0.5rem;
 	border: 1px solid variables.$navbarBorder;
-	margin: 8rem 3rem;
+	margin: 8rem 3rem 3rem 3rem;
 
 	@media screen and (max-width: 750px) {
 		padding: 1.5rem;
@@ -93,7 +119,7 @@
 	}
 	@media screen and (max-width: 750px) {
 		h3 {
-			font-size: 1.05rem;
+			font-size: 1.1rem;
 		}
 	}
 	p {
@@ -110,7 +136,7 @@
 	}
 
 	.imagesCaptions {
-		font-size: 1.1rem;
+		font-size: 1.15rem;
 		font-weight: 500;
 		color: #9068cc;
 		padding-bottom: 0.5rem;
@@ -118,7 +144,7 @@
 
 		@media screen and (max-width: 750px) {
 			h3 {
-				font-size: 1rem;
+				font-size: 1.05rem;
 			}
 		}
 	}
@@ -164,5 +190,71 @@
 				border: 2px solid variables.$disabledButton;
 			}
 		}
+	}
+}
+
+.newsContainer {
+	padding: 2rem;
+	display: block;
+	background-color: variables.$navbarBackground;
+	border-radius: 0.5rem;
+	border: 1px solid variables.$attention;
+	margin: 4rem 3rem 3rem 3rem;
+
+	@media screen and (max-width: 750px) {
+		padding: 1.5rem;
+		margin: 7rem 1.5rem;
+	}
+
+	h2 {
+		font-family: variables.$fonts;
+		font-size: 1.4rem;
+		color: variables.$textLightGray;
+		margin: 0;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+
+	@media screen and (max-width: 750px) {
+		h2 {
+			font-size: 1.2rem;
+		}
+	}
+
+	h3 {
+		font-family: variables.$fonts;
+		font-size: 1.2rem;
+		color: variables.$textLightGray;
+		padding-bottom: 1rem;
+		margin: 1.7rem 0 0 0;
+	}
+
+	@media screen and (max-width: 750px) {
+		h3 {
+			font-size: 1.05rem;
+		}
+	}
+
+	p {
+		font-size: 1rem;
+		line-height: 1.8rem;
+		color: white;
+		font-family: variables.$fonts;
+		margin: 0.3rem 0 0 0;
+	}
+
+	span {
+		color: variables.$attention;
+	}
+
+	@media screen and (max-width: 750px) {
+		p {
+			font-size: 0.9rem;
+		}
+	}
+
+	.newsDivider {
+		margin: 2rem 0rem;
+		border-top: 1px;
 	}
 }

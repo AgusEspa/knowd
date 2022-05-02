@@ -2,7 +2,7 @@ import styles from "../../styles/Home.module.scss";
 
 const About = () => {
 	return (
-		<main className={styles.aboutContainer}>
+		<main className={styles.aboutContainer} id="about">
 			<h2>Welcome to knowd, a relational knowledge tracker</h2>
 
 			<p>
@@ -18,8 +18,8 @@ const About = () => {
 
 			<h3>Why knowd?</h3>
 			<p>
-				To be certain we are reaping all it's benefits and not falling
-				into it's traps, it's imperative to track all the steps and make
+				To be certain we are reaping all its benefits and not falling
+				into its traps, it's imperative to track all the steps and make
 				desitions accordingly.
 			</p>
 			<p>
