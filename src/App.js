@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -33,7 +33,7 @@ function App() {
 	};
 
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<AuthProvider>
 				<Routes>
 					<Route
@@ -70,7 +70,7 @@ function App() {
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</AuthProvider>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 
