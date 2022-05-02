@@ -2,14 +2,14 @@
 
 FROM node:14.17.5
 
-ENV NODE_ENV production
-
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./"]
+ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm install --production
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install
 
 COPY . .
 
-CMD [ "node", "server.js" ]
+CMD ["npm", "start"]
