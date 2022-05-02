@@ -22,7 +22,8 @@ const Login = () => {
 
 	const navigate = useNavigate();
 
-	const baseURL = process.env.REACT_APP_API_URL;
+	// const baseURL = process.env.REACT_APP_API_URL;
+	const baseURL = "https://knowd-api-vuepgx4sjq-uc.a.run.app";
 
 	const getStatus = async () => {
 		try {

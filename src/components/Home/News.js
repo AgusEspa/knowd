@@ -39,8 +39,10 @@ const News = () => {
 				The database implementation is now secured and backed up.
 			</p>
 			<p>
-				Upcoming features include a better visualization of the
-				relations between subjects, and more detailed stats charts.
+				Upcoming features include:
+				<br />
+				- a better visualization of the relations between subjects, and
+				<br />- more detailed stats charts.
 			</p>
 		</main>
 	);
