@@ -4,10 +4,10 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const useRefreshToken = () => {
-	const { userAuth, setUserAuth, logout } = useContext(AuthContext);
+	const { userAuth, setUserAuth, logout, baseApiUrl } =
+		useContext(AuthContext);
 
-	const refreshURL =
-		process.env.REACT_APP_API_URL + "/api/users/token/refresh";
+	const refreshURL = baseApiUrl + "/api/users/token/refresh";
 
 	const config = {
 		headers: {

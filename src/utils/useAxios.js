@@ -5,11 +5,11 @@ import { AuthContext } from "../context/AuthContext";
 import useRefreshToken from "./useRefreshToken";
 
 const useAxios = () => {
-	const { userAuth } = useContext(AuthContext);
+	const { userAuth, baseApiUrl } = useContext(AuthContext);
 
 	const refresh = useRefreshToken();
 
-	const baseURL = process.env.REACT_APP_API_URL + "/api";
+	const baseURL = baseApiUrl + "/api";
 
 	const axiosInstance = axios.create({
 		baseURL: baseURL,

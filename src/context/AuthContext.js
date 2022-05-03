@@ -20,8 +20,12 @@ export const AuthProvider = ({ children }) => {
 		navigate("/login");
 	};
 
+	const baseApiUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app";
+
 	return (
-		<AuthContext.Provider value={{ userAuth, setUserAuth, logout }}>
+		<AuthContext.Provider
+			value={{ userAuth, setUserAuth, logout, baseApiUrl }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

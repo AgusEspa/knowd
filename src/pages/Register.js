@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { BsInfoCircle } from "react-icons/bs";
@@ -6,6 +7,8 @@ import styles from "../styles/Login.module.scss";
 import resources from "../styles/Resources.module.scss";
 
 const Register = () => {
+	const { baseApiUrl } = useContext(AuthContext);
+
 	const [formData, setFormData] = useState({
 		emailAddress: "",
 		username: "",
@@ -25,7 +28,7 @@ const Register = () => {
 
 	const navigate = useNavigate();
 
-	const baseURL = process.env.REACT_APP_API_URL + "/api";
+	const baseURL = baseApiUrl + "/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;

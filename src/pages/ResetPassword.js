@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -7,6 +8,8 @@ import styles from "../styles/Login.module.scss";
 import resources from "../styles/Resources.module.scss";
 
 const ResetPassword = () => {
+	const { baseApiUrl } = useContext(AuthContext);
+
 	const [formData, setFormData] = useState({
 		newPassword: "",
 		passwordVerification: "",
@@ -23,7 +26,7 @@ const ResetPassword = () => {
 
 	const navigate = useNavigate();
 
-	const baseURL = process.env.REACT_APP_API_URL + "/api";
+	const baseURL = baseApiUrl + "/api";
 
 	const params = new URLSearchParams(window.location.search);
 	const token = params.get("token");

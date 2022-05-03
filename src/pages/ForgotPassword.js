@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import styles from "../styles/Login.module.scss";
 import resources from "../styles/Resources.module.scss";
 
 const ForgotPassword = () => {
+	const { baseApiUrl } = useContext(AuthContext);
+
 	const [formData, setFormData] = useState({ emailAddress: "" });
 	const [formValidationErrors, setFormValidationErrors] = useState({
 		emailAddress: "",
@@ -12,7 +15,7 @@ const ForgotPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSent, setIsSent] = useState(false);
 
-	const baseURL = process.env.REACT_APP_API_URL + "/api";
+	const baseURL = baseApiUrl + "/api";
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;

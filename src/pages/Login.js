@@ -18,16 +18,13 @@ const Login = () => {
 		password: "",
 	});
 
-	const { setUserAuth } = useContext(AuthContext);
+	const { setUserAuth, baseApiUrl } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 
-	// const baseURL = process.env.REACT_APP_API_URL;
-	const baseURL = "https://knowd-api-vuepgx4sjq-uc.a.run.app";
-
 	const getStatus = async () => {
 		try {
-			await axios.get(`${baseURL}/api/status`);
+			await axios.get(`${baseApiUrl}/api/status`);
 		} catch (e) {
 			console.log("Server error");
 		}
@@ -95,7 +92,7 @@ const Login = () => {
 
 		try {
 			const response = await axios.post(
-				`${baseURL}/login`,
+				`${baseApiUrl}/login`,
 				credentials,
 				config
 			);
