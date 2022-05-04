@@ -86,10 +86,9 @@
 .aboutContainer {
 	padding: 2rem;
 	display: block;
-	background-color: variables.$navbarBackground;
+	background-color: variables.$toolbarBackground;
 	border-radius: 0.5rem;
-	border: 1px solid variables.$navbarBorder;
-	margin: 8rem 3rem 3rem 3rem;
+	margin: 8rem 4rem 3rem 4rem;
 
 	@media screen and (max-width: 750px) {
 		padding: 1.5rem;
@@ -158,7 +157,7 @@
 
 		img {
 			width: 100%;
-			border: 3px solid variables.$disabledButton;
+			border: 2px solid variables.$disabledButton;
 			border-radius: 0.3rem;
 			padding: 0;
 			margin: 0;
@@ -171,23 +170,25 @@
 	}
 
 	.smallImagesContainer {
-		display: inline-flex;
+		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 1rem;
 		padding: 0;
 		margin: 0.6rem 0rem;
 
 		img {
-			width: 48%;
-			border: 3px solid variables.$disabledButton;
+			width: 32%;
+			border: 1px solid variables.$disabledButton;
 			border-radius: 0.3rem;
 			padding: 0;
 			margin: 0;
 		}
 		@media screen and (max-width: 750px) {
+			flex-direction: column;
 			img {
 				border: 2px solid variables.$disabledButton;
+				width: 70%;
+				margin-top: 1rem;
 			}
 		}
 	}
@@ -196,10 +197,10 @@
 .newsContainer {
 	padding: 2rem;
 	display: block;
-	background-color: variables.$navbarBackground;
+	background-color: variables.$toolbarBackground;
 	border-radius: 0.5rem;
 	border: 1px solid variables.$attention;
-	margin: 4rem 3rem 3rem 3rem;
+	margin: 4rem;
 
 	@media screen and (max-width: 750px) {
 		padding: 1.5rem;
@@ -256,5 +257,22 @@
 	.newsDivider {
 		margin: 2rem 0rem;
 		border-top: 1px;
+	}
+}
+
+footer {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	background-color: variables.$toolbarBackground;
+
+	.contactsBox {
+		padding: 0.2rem 2rem 0.1rem 2rem;
+		p {
+			font-size: 0.8rem;
+			color: variables.$textLightGray;
+			font-family: variables.$fonts;
+		}
 	}
 }

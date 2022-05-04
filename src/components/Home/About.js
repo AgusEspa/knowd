@@ -52,8 +52,6 @@ const About = () => {
 			<div className={styles.smallImagesContainer}>
 				<img src="screen2.png" alt="screen sample" />
 				<img src="screen3.png" alt="screen sample" />
-			</div>
-			<div className={styles.smallImagesContainer}>
 				<img src="screen4.png" alt="screen sample" />
 			</div>
 		</main>
