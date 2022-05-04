@@ -13,13 +13,14 @@
 	.headerLogoBox {
 		display: flex;
 		align-items: center;
-		margin: 1rem 0rem 1rem 4rem;
+		margin: 0.7rem 0rem 0.7rem 4rem;
 
 		.headerLogo {
 			width: 10rem;
 		}
+
 		@media screen and (max-width: 750px) {
-			margin: 1.5rem;
+			margin: 0.5rem 0rem 0.5rem 1rem;
 			.headerLogo {
 				width: 8rem;
 			}
@@ -55,7 +56,7 @@
 		display: flex;
 		align-items: center;
 		justify-content:flex-end;
-		margin: 1rem 4rem 1rem 0rem;
+		margin: 0.7rem 4rem 0.7rem 0rem;
 		padding: 0;
 
 		a {
@@ -72,8 +73,9 @@
 				background-color: #781dff;
 			}
 		}
+
 		@media screen and (max-width: 750px) {
-			margin: 1.5rem;
+			margin: 0.5rem 1rem 0.5rem 0rem;
 
 			a {
 				font-size: 1rem;
@@ -91,8 +93,8 @@
 	margin: 8rem 4rem 3rem 4rem;
 
 	@media screen and (max-width: 750px) {
-		padding: 1.5rem;
-		margin: 7rem 1.5rem;
+		padding: 1rem;
+		margin: 4.5rem 1rem;
 	}
 
 	h2 {
@@ -164,7 +166,7 @@
 		}
 		@media screen and (max-width: 750px) {
 			img {
-				border: 2px solid variables.$disabledButton;
+				border: 1px solid variables.$disabledButton;
 			}
 		}
 	}
@@ -186,8 +188,8 @@
 		@media screen and (max-width: 750px) {
 			flex-direction: column;
 			img {
-				border: 2px solid variables.$disabledButton;
-				width: 70%;
+				border: 1px solid variables.$disabledButton;
+				width: 100%;
 				margin-top: 1rem;
 			}
 		}
@@ -203,8 +205,8 @@
 	margin: 4rem;
 
 	@media screen and (max-width: 750px) {
-		padding: 1.5rem;
-		margin: 7rem 1.5rem;
+		padding: 1rem;
+		margin: 4.5rem 1rem;
 	}
 
 	h2 {
@@ -274,5 +276,12 @@ footer {
 			color: variables.$textLightGray;
 			font-family: variables.$fonts;
 		}
+		@media screen and (max-width: 750px) {
+			padding: 0.1rem 2rem 0.1rem 2rem;
+			p {
+				font-size: 0.75rem;
+			}
+		}
 	}
+
 }
