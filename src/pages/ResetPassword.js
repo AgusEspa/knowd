@@ -87,7 +87,7 @@ const ResetPassword = () => {
 			validationErrors.newPassword === "" &&
 			validationErrors.passwordVerification === ""
 		) {
-			if (!checkTokenIsValid()) return;
+			if (checkTokenIsValid() === false) return;
 
 			const requestBody = {
 				newPassword: formData.newPassword,
