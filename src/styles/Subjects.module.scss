@@ -9,7 +9,7 @@
 	cursor: default;
 	width: 11rem;
 	height: 4em;
-	overflow: scroll;
+	overflow: auto;
 	transition: all 0.1s ease-out;
 	&:hover {
 		background-color: variables.$navbarBorder;
@@ -31,7 +31,7 @@
 	padding: 0;
 	margin: 0;
 	height: 3rem;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .mainContainer {
@@ -140,7 +140,6 @@
 				border: 1px solid variables.$wish;
 				border-bottom: 2px solid variables.$wish;
 				height: 3rem;
-				overflow: auto;
 				h3 {
 					@include subjectTitle();
 				}
@@ -156,7 +155,6 @@
 				@include subjectDiv();
 				border: 1px solid variables.$learning;
 				border-bottom: 2px solid variables.$learning;
-				overflow: auto;
 				h3 {
 					@include subjectTitle();
 				}
@@ -172,7 +170,6 @@
 				@include subjectDiv();
 				border: 1px solid variables.$mastered;
 				border-bottom: 2px solid variables.$mastered;
-				overflow: auto;
 				h3 {
 					@include subjectTitle();
 				}
