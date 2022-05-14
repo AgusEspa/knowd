@@ -40,6 +40,7 @@
 	justify-items: start;
 	align-items: start;
 	float: left;
+	overflow: auto;
 
 	.explorerContainer {
 		grid-column: 1;
@@ -67,6 +68,7 @@
 
 		.fieldsContainer {
 			display: block;
+			overflow: auto;
 
 			.fieldBox {
 				display: block;
@@ -138,6 +140,7 @@
 				border: 1px solid variables.$wish;
 				border-bottom: 2px solid variables.$wish;
 				height: 3rem;
+				overflow: auto;
 				h3 {
 					@include subjectTitle();
 				}
@@ -153,6 +156,7 @@
 				@include subjectDiv();
 				border: 1px solid variables.$learning;
 				border-bottom: 2px solid variables.$learning;
+				overflow: auto;
 				h3 {
 					@include subjectTitle();
 				}
@@ -168,6 +172,7 @@
 				@include subjectDiv();
 				border: 1px solid variables.$mastered;
 				border-bottom: 2px solid variables.$mastered;
+				overflow: auto;
 				h3 {
 					@include subjectTitle();
 				}
@@ -262,7 +267,7 @@
 	padding: 1rem;
 	max-height: 70vh;
 	max-width: 20rem;
-	overflow: scroll;
+	overflow: auto;
 
 	h3 {
 		font-family: variables.$fonts;

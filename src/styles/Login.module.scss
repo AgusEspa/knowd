@@ -22,6 +22,7 @@
     padding: 3rem;
     margin: 1rem 0 0 0;
     max-width: 22rem;
+	overflow: auto;
     &::placeholder {
         color: variables.$placeholderGray;
     }
