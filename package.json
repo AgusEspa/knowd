@@ -25,8 +25,15 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:prettier/recommended",
+      "prettier/react"
     ]
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "useTabs": true,
+    "bracketSameLine": true
   },
   "browserslist": {
     "production": [
