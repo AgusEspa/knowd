@@ -25,8 +25,7 @@ const Subjects = (props) => {
 							activeField.area === ""
 								? styles.activeButton
 								: styles.inactiveButton
-						}
-					>
+						}>
 						All areas
 					</button>
 				</li>
@@ -46,8 +45,7 @@ const Subjects = (props) => {
 								activeField.area === areaItem.area
 									? styles.activeButton
 									: styles.inactiveButton
-							}
-						>
+							}>
 							{areaItem.area}
 						</button>
 					</li>
@@ -189,8 +187,7 @@ const Subjects = (props) => {
 									activeField.field === ""
 										? styles.activeButton
 										: styles.inactiveButton
-								}
-							>
+								}>
 								All fields
 							</button>
 						</div>
