@@ -20,8 +20,7 @@ export const AuthProvider = ({ children }) => {
 		navigate("/login");
 	};
 
-	// const baseApiUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app";
-	const baseApiUrl = "http://localhost:8001";
+	const baseApiUrl = "https://knowd-api-vuepgx4sjq-uc.a.run.app";
 
 	return (
 		<AuthContext.Provider
