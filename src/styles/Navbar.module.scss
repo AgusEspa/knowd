@@ -8,6 +8,7 @@
 	background-color: variables.$navbarBackground;
 	border-bottom: 1px solid variables.$navbarBorder;
 	border-top: 2px solid variables.$containerBorder;
+	z-index: 3;
 
 	.navLogoBox {
 		display: flex;

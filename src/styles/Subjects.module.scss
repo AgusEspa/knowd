@@ -35,23 +35,20 @@
 }
 
 .mainContainer {
-	display: grid;
-	columns: 2;
-	justify-items: start;
-	align-items: start;
-	float: left;
-	overflow: auto;
 
 	.explorerContainer {
-		grid-column: 1;
+		position: fixed;
 		background-color: variables.$toolbarBackground;
 		border-right: 1px solid variables.$toolbarBorder;
 		display: block;
+		z-index: 1;
 		margin: 0;
-		padding: 0.5rem 0 0.5rem 0.5rem;
-		max-width: 17rem;
-		min-width: 14rem;
-		height: 84vh;
+		top: 0;
+		left: 0;
+		overflow-x: hidden;
+		height: 100%;
+		padding: 0rem 0 0.5rem 0.5rem;
+		width: 17rem;
 		overflow: auto;
 
 		ul {
@@ -69,6 +66,7 @@
 		.fieldsContainer {
 			display: block;
 			overflow: auto;
+			padding-top: 6.7rem;
 
 			.fieldBox {
 				display: block;
@@ -120,13 +118,21 @@
 	}
 
 	.subjectsContainer {
-		grid-column: 2;
 		display: block;
 		padding: 1rem;
 		background-color: variables.$background;
-		margin: 0;
-		height: 82vh;
+		margin: 0; 
 		overflow: auto;
+		z-index: 0;
+		position: fixed;
+		height: 100%;
+		top: 0;
+		left: 17.5rem;
+		overflow-x: hidden;
+
+		.subjectsWrapper {
+			padding: 6.7rem 0 1rem 0;
+	
 
 		.subjectsBlocks {
 			display: flex;
@@ -248,6 +254,7 @@
 				}
 			}
 		}
+	}
 
 		.loadingSpinnerMainContainer {
 			margin: 1rem 0 0 2rem;

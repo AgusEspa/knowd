@@ -196,28 +196,33 @@ const Subjects = (props) => {
 				</div>
 
 				<div className={styles.subjectsContainer}>
-					{props.isLoading && (
-						<div className={styles.subjectsBlocks}>
-							<div className={styles.loadingSpinnerMainContainer}>
-								<div className={resources.loadingBar}></div>
+					<div className={styles.subjectsWrapper}>
+						{props.isLoading && (
+							<div className={styles.subjectsBlocks}>
+								<div
+									className={
+										styles.loadingSpinnerMainContainer
+									}>
+									<div className={resources.loadingBar}></div>
+								</div>
 							</div>
-						</div>
-					)}
-					{mappedSearchedLearningSubjects.length !== 0 && (
-						<div className={styles.subjectsBlocks}>
-							{mappedSearchedLearningSubjects}
-						</div>
-					)}
-					{mappedSearchedMasteredSubjects.length !== 0 && (
-						<div className={styles.subjectsBlocks}>
-							{mappedSearchedMasteredSubjects}
-						</div>
-					)}
-					{mappedSearchedWishSubjects.length !== 0 && (
-						<div className={styles.subjectsBlocks}>
-							{mappedSearchedWishSubjects}
-						</div>
-					)}
+						)}
+						{mappedSearchedLearningSubjects.length !== 0 && (
+							<div className={styles.subjectsBlocks}>
+								{mappedSearchedLearningSubjects}
+							</div>
+						)}
+						{mappedSearchedMasteredSubjects.length !== 0 && (
+							<div className={styles.subjectsBlocks}>
+								{mappedSearchedMasteredSubjects}
+							</div>
+						)}
+						{mappedSearchedWishSubjects.length !== 0 && (
+							<div className={styles.subjectsBlocks}>
+								{mappedSearchedWishSubjects}
+							</div>
+						)}
+					</div>
 				</div>
 			</main>
 
