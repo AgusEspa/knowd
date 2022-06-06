@@ -8,15 +8,11 @@ const UserMenu = () => {
     const { userAuth, logout } = useContext(AuthContext);
     const api = useAxios();
 
-    const revokeRefreshToken = async (token) => {
-        const body = `"tokenString": ${token}`;
-        await api.post("/users/token/revoke", body);
-    };
-
-    const handleSecureLogOut = () => {
+    const handleSecureLogOut = async () => {
+        // loading spinner
         try {
-            // loading spinner
-            revokeRefreshToken(userAuth.refreshToken);
+            const body = { tokenString: `${userAuth.refreshToken}` };
+            await api.post("/users/token/revoke", body);
             // loading spiner false
             logout();
         } catch (error) {}
