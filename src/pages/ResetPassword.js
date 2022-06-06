@@ -33,7 +33,6 @@ const ResetPassword = () => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
     const decodedToken = jwt_decode(token);
-    const tokenExpirationDate = decodedToken.exp;
 
     useEffect(() => {
         if (!verifyTokenExpiration(decodedToken)) {
